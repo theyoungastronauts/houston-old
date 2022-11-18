@@ -18,6 +18,13 @@ class User with _$User {
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
+  factory User.empty() => User(
+        id: 0,
+        uuid: "",
+        name: "",
+        createdAt: DateTime.now(),
+      );
+
   String get initials {
     return getInitials(name);
   }

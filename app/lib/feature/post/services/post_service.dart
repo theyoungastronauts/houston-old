@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:houston_app/core/services/base_service.dart';
 import 'package:houston_app/core/models/paginated_response.dart';
 import 'package:houston_app/core/utils/logging.dart';
@@ -50,5 +52,21 @@ class PostService extends BaseService {
     int limit = 10,
   }) async {
     return await _list(page: page, limit: limit);
+  }
+
+  Future<Post?> save(Post post) async {
+    return post.exists ? _update(post) : _create(post);
+  }
+
+  Future<Post?> _create(Post post) async {
+    final data = jsonEncode(post.toJson());
+    print(data);
+    final p = await postHttp(baseUrl, params: post.toJson());
+    return Post.fromJson(p);
+  }
+
+  Future<Post?> _update(Post post) async {
+    final p = await patchHttp("$baseUrl/${post.uuid}", params: post.toJson());
+    return Post.fromJson(p);
   }
 }
