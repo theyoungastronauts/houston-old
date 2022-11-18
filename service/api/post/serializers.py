@@ -11,7 +11,10 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = [
+            "id",
             "uuid",
+            "title",
+            "body",
             "owner",
             "num_assets",
             "assets",
@@ -19,6 +22,7 @@ class PostSerializer(serializers.ModelSerializer):
             "created_at",
         ]
         read_only_fields = [
+            "id",
             "uuid",
             "owner",
             "num_assets",

@@ -16,32 +16,35 @@ class Avatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: size,
-      height: size,
-      child: Container(
+    return GestureDetector(
+      onTap: interactive ? () {} : null,
+      child: SizedBox(
         width: size,
         height: size,
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.secondary,
-          border: Border.all(
-            width: 1,
-            color: Theme.of(context).colorScheme.primary,
+        child: Container(
+          width: size,
+          height: size,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.secondary,
+            border: Border.all(
+              width: 1,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            borderRadius: BorderRadius.circular(size / 2),
           ),
-          borderRadius: BorderRadius.circular(size / 2),
-        ),
-        child: user.image.isNotEmpty
-            ? CachedNetworkImage(imageUrl: user.image)
-            : Center(
-                child: Text(
-                  user.initials,
-                  style: TextStyle(
-                    fontSize: size / 2.2,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
+          child: user.image.isNotEmpty
+              ? CachedNetworkImage(imageUrl: user.image)
+              : Center(
+                  child: Text(
+                    user.initials,
+                    style: TextStyle(
+                      fontSize: size / 2.2,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ),
-              ),
+        ),
       ),
     );
   }

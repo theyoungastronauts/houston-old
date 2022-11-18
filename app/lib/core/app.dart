@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:houston_app/core/components/base_component.dart';
+import 'package:houston_app/core/components/centered_loader.dart';
+import 'package:houston_app/core/providers/session_provider.dart';
 import 'package:houston_app/feature/theme/providers/theme_provider.dart';
 import 'package:houston_app/feature/theme/theme.dart';
 import 'package:houston_app/feature/navigation/app_router.gr.dart';
@@ -19,6 +21,8 @@ class App extends BaseComponent {
   Widget build(BuildContext context, WidgetRef ref) {
     final appRouter = singleton<AppRouter>();
 
+    ref.read(sessionProvider);
+
     return MaterialApp.router(
       title: 'Houston',
       restorationScopeId: 'app',
@@ -34,6 +38,9 @@ class App extends BaseComponent {
       ),
       builder: (context, widget) {
         return Consumer(builder: (context, ref, child) {
+          if (!ref.watch(sessionProvider).ready) {
+            return const CenteredLoader();
+          }
           return Stack(
             children: [
               if (ref.watch(globalLoadingProvider))

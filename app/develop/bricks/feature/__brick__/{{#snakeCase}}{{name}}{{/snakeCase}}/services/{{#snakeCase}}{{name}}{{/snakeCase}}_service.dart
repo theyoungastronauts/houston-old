@@ -1,6 +1,8 @@
 import 'package:{{project}}/core/services/base_service.dart';
 import 'package:{{project}}/core/models/paginated_response.dart';
 import 'package:{{project}}/feature/{{#snakeCase}}{{name}}{{/snakeCase}}/models/{{#snakeCase}}{{name}}{{/snakeCase}}.dart';
+import 'package:{{project}}/core/utils/logging.dart';
+import 'package:{{project}}/core/utils/singletons.dart';
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}Service extends BaseService {
   static const baseUrl = "/{{#paramCase}}{{name}}{{/paramCase}}";
@@ -34,6 +36,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Service extends BaseService {
         results: results,
       );
     } catch (e) {
+      singleton<Log>().error("Problem fetching $url", e, stackTrace);
       return PaginatedResponse.empty();
     }
   }

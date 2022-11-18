@@ -16,7 +16,8 @@ class DashboardContainer extends BaseComponent {
 
   static const List<PageRouteInfo> routes = [
     HomeTabRouter(),
-    HomeTabRouter(),
+    PostTabRouter(),
+    MeTabRouter(),
   ];
 
   void onPressed(TabsRouter tabsRouter, index) {
@@ -46,8 +47,8 @@ class DashboardContainer extends BaseComponent {
               icon: Icon(Icons.home),
             ),
             BottomNavigationBarItem(
-              label: "Home",
-              icon: Icon(Icons.home),
+              label: "Posts",
+              icon: Icon(Icons.article),
             ),
           ],
         );
@@ -88,7 +89,7 @@ class DashboardContainer extends BaseComponent {
                           },
                         ),
                         AppButton(
-                          label: "Home",
+                          label: "Posts",
                           type: AppButtonType.Text,
                           variant: tabsRouter.activeIndex == 1 ? AppColorVariant.primary : AppColorVariant.light,
                           onPressed: () {
@@ -97,7 +98,9 @@ class DashboardContainer extends BaseComponent {
                         ),
                       ],
                     ),
-                    const AuthDropdown(),
+                    AuthDropdown(onProfilePressed: () {
+                      onPressed(tabsRouter, 2);
+                    }),
                   ],
                 ),
               ),

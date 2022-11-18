@@ -33,11 +33,16 @@ class SessionProvider extends StateNotifier<Session> {
           final refreshedToken = await refreshToken(token);
           if (refreshedToken != null) {
             await setToken(refreshedToken);
+            state = state.copyWith(ready: true);
+            singleton<AppRouter>().replace(const DashboardContainerRoute());
             return;
           }
         }
       } else {
         await setToken(token);
+        state = state.copyWith(ready: true);
+        singleton<AppRouter>().replace(const DashboardContainerRoute());
+
         return;
       }
     }

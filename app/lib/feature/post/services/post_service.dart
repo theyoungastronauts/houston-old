@@ -1,5 +1,7 @@
 import 'package:houston_app/core/services/base_service.dart';
 import 'package:houston_app/core/models/paginated_response.dart';
+import 'package:houston_app/core/utils/logging.dart';
+import 'package:houston_app/core/utils/singletons.dart';
 import 'package:houston_app/feature/post/models/post.dart';
 
 class PostService extends BaseService {
@@ -14,7 +16,12 @@ class PostService extends BaseService {
     }
   }
 
-  Future<PaginatedResponse<Post>> _list({int page = 1, int limit = 10, String url = baseUrl, Map<String, dynamic> params = const {},}) async {
+  Future<PaginatedResponse<Post>> _list({
+    int page = 1,
+    int limit = 10,
+    String url = baseUrl,
+    Map<String, dynamic> params = const {},
+  }) async {
     try {
       final _params = {
         ...buildPage(page),
@@ -24,8 +31,7 @@ class PostService extends BaseService {
 
       final response = await getHttp(url, params: _params);
 
-      List<Post> results =
-          response['results'].map<Post>((item) => Post.fromJson(item)).toList();
+      List<Post> results = response['results'].map<Post>((item) => Post.fromJson(item)).toList();
 
       return PaginatedResponse(
         count: response['count'],
@@ -33,13 +39,16 @@ class PostService extends BaseService {
         num_pages: response['num_pages'],
         results: results,
       );
-    } catch (e) {
+    } catch (e, stackTrace) {
+      singleton<Log>().error("Problem fetching $url", e, stackTrace);
       return PaginatedResponse.empty();
     }
   }
 
-  Future<PaginatedResponse<Post>> list({int page = 1, int limit = 10,}) async {
+  Future<PaginatedResponse<Post>> list({
+    int page = 1,
+    int limit = 10,
+  }) async {
     return await _list(page: page, limit: limit);
   }
-
 }
