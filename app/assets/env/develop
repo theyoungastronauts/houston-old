@@ -1,0 +1,6 @@
+ENVIRONMENT_NAME=develop
+STORAGE_PREFIX=develop
+API_BASE_URL=http://localhost:8000/v1
+MEDIA_BASE_URL=https://api.bitpack.app
+DEBUG=true
+APP_BASE_URL=https://domain.com
