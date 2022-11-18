@@ -54,7 +54,7 @@ class PostFormProvider extends StateNotifier<Post> {
     if (post != null) {
       state = post;
       ref.read(postListProvider.notifier).refresh();
-      ref.refresh(postDetailProvider(post.uuid));
+      ref.invalidate(postDetailProvider(post.uuid));
       clear();
       ref.read(globalLoadingProvider.notifier).complete();
       return true;
