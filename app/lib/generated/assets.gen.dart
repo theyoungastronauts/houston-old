@@ -12,8 +12,14 @@ import 'package:flutter/widgets.dart';
 class $AssetsEnvGen {
   const $AssetsEnvGen();
 
+  /// File path: assets/env/.gitignore
+  String get gitignore => 'assets/env/.gitignore';
+
   /// File path: assets/env/develop
   String get develop => 'assets/env/develop';
+
+  /// File path: assets/env/example
+  String get example => 'assets/env/example';
 
   /// File path: assets/env/production
   String get production => 'assets/env/production';
@@ -22,13 +28,30 @@ class $AssetsEnvGen {
   String get stage => 'assets/env/stage';
 
   /// List of all assets
-  List<String> get values => [develop, production, stage];
+  List<String> get values => [gitignore, develop, example, production, stage];
+}
+
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  $AssetsImagesIconsGen get icons => const $AssetsImagesIconsGen();
+}
+
+class $AssetsImagesIconsGen {
+  const $AssetsImagesIconsGen();
+
+  /// File path: assets/images/icons/.gitkeep
+  String get gitkeep => 'assets/images/icons/.gitkeep';
+
+  /// List of all assets
+  List<String> get values => [gitkeep];
 }
 
 class Assets {
   Assets._();
 
   static const $AssetsEnvGen env = $AssetsEnvGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
 class AssetGenImage {

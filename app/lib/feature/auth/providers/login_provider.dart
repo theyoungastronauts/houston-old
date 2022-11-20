@@ -5,6 +5,7 @@ import 'package:houston_app/core/providers/session_provider.dart';
 import 'package:houston_app/core/utils/singletons.dart';
 import 'package:houston_app/core/utils/toast.dart';
 import 'package:houston_app/core/utils/validation.dart';
+import 'package:houston_app/feature/auth/components/login_form.dart';
 import 'package:houston_app/feature/auth/services/auth_service.dart';
 import 'package:houston_app/feature/navigation/app_router.gr.dart';
 
@@ -78,6 +79,6 @@ class LoginFormProvider extends StateNotifier<LoginFormModel> {
   }
 }
 
-final loginFormProvider = StateNotifierProvider<LoginFormProvider, dynamic>((ref) {
+final loginFormProvider = StateNotifierProvider<LoginFormProvider, LoginFormModel>((ref) {
   return LoginFormProvider(ref, initialState);
 });

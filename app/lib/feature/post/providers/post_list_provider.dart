@@ -4,8 +4,7 @@ import 'package:houston_app/feature/post/services/post_service.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class PostListProvider extends StateNotifier<List<Post>> {
-  final PagingController<int, Post> pagingController =
-      PagingController(firstPageKey: 1);
+  final PagingController<int, Post> pagingController = PagingController(firstPageKey: 1);
 
   PostListProvider([List<Post> initialItems = const []]) : super(initialItems) {
     pagingController.addPageRequestListener((page) {

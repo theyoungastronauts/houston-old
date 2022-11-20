@@ -1,8 +1,6 @@
 # Houston Service
 
-## Development
-
-#### Setup
+### Setup
 
 - [ ] [Create environment](#create-environment)
 - [ ] [Docker Services (Optional)](#docker-services-optional)

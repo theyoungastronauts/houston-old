@@ -8,7 +8,7 @@ const _secondaryColor = Color(0xFF555555);
 const _successColor = Color(0xFF77b300);
 const _infoColor = Color(0xFF9933cc);
 const _warningColor = Color(0xFFff8800);
-const _dangerColor = Color(0xFFc00c00);
+const _dangerColor = Color.fromARGB(255, 223, 48, 36);
 const _light = Color(0xFFf8f9fa);
 const _dark = Color(0xFF060606);
 

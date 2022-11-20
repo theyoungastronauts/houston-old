@@ -22,6 +22,14 @@ Post _$PostFromJson(Map<String, dynamic> json) {
 mixin _$Post {
   int get id => throw _privateConstructorUsedError;
   String get uuid => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  User get owner => throw _privateConstructorUsedError;
+  String get body => throw _privateConstructorUsedError;
+  @JsonKey(name: 'num_assets')
+  int get numAssets => throw _privateConstructorUsedError;
+  List<String> get assets => throw _privateConstructorUsedError;
+  @JsonKey(name: "created_at")
+  DateTime get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +41,17 @@ abstract class $PostCopyWith<$Res> {
   factory $PostCopyWith(Post value, $Res Function(Post) then) =
       _$PostCopyWithImpl<$Res, Post>;
   @useResult
-  $Res call({int id, String uuid});
+  $Res call(
+      {int id,
+      String uuid,
+      String title,
+      User owner,
+      String body,
+      @JsonKey(name: 'num_assets') int numAssets,
+      List<String> assets,
+      @JsonKey(name: "created_at") DateTime createdAt});
+
+  $UserCopyWith<$Res> get owner;
 }
 
 /// @nodoc
@@ -51,6 +69,12 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
   $Res call({
     Object? id = null,
     Object? uuid = null,
+    Object? title = null,
+    Object? owner = null,
+    Object? body = null,
+    Object? numAssets = null,
+    Object? assets = null,
+    Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -61,7 +85,39 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      owner: null == owner
+          ? _value.owner
+          : owner // ignore: cast_nullable_to_non_nullable
+              as User,
+      body: null == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String,
+      numAssets: null == numAssets
+          ? _value.numAssets
+          : numAssets // ignore: cast_nullable_to_non_nullable
+              as int,
+      assets: null == assets
+          ? _value.assets
+          : assets // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get owner {
+    return $UserCopyWith<$Res>(_value.owner, (value) {
+      return _then(_value.copyWith(owner: value) as $Val);
+    });
   }
 }
 
@@ -71,7 +127,18 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       __$$_PostCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String uuid});
+  $Res call(
+      {int id,
+      String uuid,
+      String title,
+      User owner,
+      String body,
+      @JsonKey(name: 'num_assets') int numAssets,
+      List<String> assets,
+      @JsonKey(name: "created_at") DateTime createdAt});
+
+  @override
+  $UserCopyWith<$Res> get owner;
 }
 
 /// @nodoc
@@ -85,6 +152,12 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
   $Res call({
     Object? id = null,
     Object? uuid = null,
+    Object? title = null,
+    Object? owner = null,
+    Object? body = null,
+    Object? numAssets = null,
+    Object? assets = null,
+    Object? createdAt = null,
   }) {
     return _then(_$_Post(
       id: null == id
@@ -95,6 +168,30 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      owner: null == owner
+          ? _value.owner
+          : owner // ignore: cast_nullable_to_non_nullable
+              as User,
+      body: null == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String,
+      numAssets: null == numAssets
+          ? _value.numAssets
+          : numAssets // ignore: cast_nullable_to_non_nullable
+              as int,
+      assets: null == assets
+          ? _value._assets
+          : assets // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -102,7 +199,17 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
 /// @nodoc
 @JsonSerializable()
 class _$_Post extends _Post {
-  _$_Post({required this.id, required this.uuid}) : super._();
+  _$_Post(
+      {required this.id,
+      required this.uuid,
+      required this.title,
+      required this.owner,
+      this.body = "",
+      @JsonKey(name: 'num_assets') this.numAssets = 0,
+      final List<String> assets = const [],
+      @JsonKey(name: "created_at") required this.createdAt})
+      : _assets = assets,
+        super._();
 
   factory _$_Post.fromJson(Map<String, dynamic> json) => _$$_PostFromJson(json);
 
@@ -110,10 +217,31 @@ class _$_Post extends _Post {
   final int id;
   @override
   final String uuid;
+  @override
+  final String title;
+  @override
+  final User owner;
+  @override
+  @JsonKey()
+  final String body;
+  @override
+  @JsonKey(name: 'num_assets')
+  final int numAssets;
+  final List<String> _assets;
+  @override
+  @JsonKey()
+  List<String> get assets {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_assets);
+  }
+
+  @override
+  @JsonKey(name: "created_at")
+  final DateTime createdAt;
 
   @override
   String toString() {
-    return 'Post(id: $id, uuid: $uuid)';
+    return 'Post(id: $id, uuid: $uuid, title: $title, owner: $owner, body: $body, numAssets: $numAssets, assets: $assets, createdAt: $createdAt)';
   }
 
   @override
@@ -122,12 +250,21 @@ class _$_Post extends _Post {
         (other.runtimeType == runtimeType &&
             other is _$_Post &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.uuid, uuid) || other.uuid == uuid));
+            (identical(other.uuid, uuid) || other.uuid == uuid) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.owner, owner) || other.owner == owner) &&
+            (identical(other.body, body) || other.body == body) &&
+            (identical(other.numAssets, numAssets) ||
+                other.numAssets == numAssets) &&
+            const DeepCollectionEquality().equals(other._assets, _assets) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, uuid);
+  int get hashCode => Object.hash(runtimeType, id, uuid, title, owner, body,
+      numAssets, const DeepCollectionEquality().hash(_assets), createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -144,7 +281,16 @@ class _$_Post extends _Post {
 }
 
 abstract class _Post extends Post {
-  factory _Post({required final int id, required final String uuid}) = _$_Post;
+  factory _Post(
+          {required final int id,
+          required final String uuid,
+          required final String title,
+          required final User owner,
+          final String body,
+          @JsonKey(name: 'num_assets') final int numAssets,
+          final List<String> assets,
+          @JsonKey(name: "created_at") required final DateTime createdAt}) =
+      _$_Post;
   _Post._() : super._();
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
@@ -153,6 +299,20 @@ abstract class _Post extends Post {
   int get id;
   @override
   String get uuid;
+  @override
+  String get title;
+  @override
+  User get owner;
+  @override
+  String get body;
+  @override
+  @JsonKey(name: 'num_assets')
+  int get numAssets;
+  @override
+  List<String> get assets;
+  @override
+  @JsonKey(name: "created_at")
+  DateTime get createdAt;
   @override
   @JsonKey(ignore: true)
   _$$_PostCopyWith<_$_Post> get copyWith => throw _privateConstructorUsedError;

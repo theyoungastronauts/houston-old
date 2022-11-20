@@ -31,6 +31,9 @@ class LoginForm extends BaseComponent {
             ),
             obscureText: true,
             validator: provider.passwordValidator,
+            onFieldSubmitted: (_) {
+              provider.submit();
+            },
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12.0),
