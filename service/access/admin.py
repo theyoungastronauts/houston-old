@@ -11,15 +11,26 @@ from django.utils.translation import gettext_lazy as _
 from access.models import OneTimePassword
 from admin.mixins import OverridesMixin
 from admin.models import ModelAdmin
+from bitpack.widgets import BitpackUploadWidget
+
 
 User = get_user_model()
 
 admin.site.unregister(Group)
 
 
+class UserAdminForm(ModelForm):
+    class Meta:
+        model = User
+        widgets = {
+            "image": BitpackUploadWidget(),
+        }
+        fields = "__all__"
+
+
 @admin.register(User)
 class UserAdmin(OverridesMixin, BaseUserAdmin):
-    add_form = ModelForm
+    form = UserAdminForm
     save_on_top = True
 
     autocomplete_fields = []

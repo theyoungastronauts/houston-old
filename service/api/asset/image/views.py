@@ -1,36 +1,22 @@
-import requests
 from django.conf import settings
-from requests.exceptions import HTTPError
-from rest_framework import status
-from rest_framework.generics import GenericAPIView
-from rest_framework.response import Response
 
-from api import exceptions
-from api.asset.image.serializers import AssetImageCreateSerializer
-from api.permissions import IsAuthenticated
-from project.utils.uuid import get_uuid
+from api.asset.image.config import IMAGE_EXTENSION_MAP
+from api.asset.image.serializers import ImageCreateSerializer, ImageRetrieveSerializer
+from api.asset.views import AssetCreateRetrieveView
+from project.utils import bitpack
 
 
-class AssetImageCreateView(GenericAPIView):
-    permission_classes = [IsAuthenticated]
-    serializer_class = AssetImageCreateSerializer
+class ImageCreateRetrieveView(AssetCreateRetrieveView):
+    serializer_class_create = ImageCreateSerializer
+    serializer_class_retrieve = ImageRetrieveSerializer
 
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+    asset_extension_map = IMAGE_EXTENSION_MAP
+    asset_url_re = settings.BITPACK_IMAGE_URL_RE
 
-        headers = {"X-Api-Key": settings.BITPACK_TOKEN}
-        payload = {
-            "content_type": "image/jpeg",
-            "path": f"{request.user.uuid}/{get_uuid()}.jpg",
-        }
-        response = requests.post(
-            settings.BITPACK_IMAGE_URL, headers=headers, json=payload
-        )
+    @staticmethod
+    def create_resource_method(content_type, path):
+        return bitpack.create_image_resource(content_type, path)
 
-        try:
-            response.raise_for_status()
-        except HTTPError:
-            raise exceptions.ServerError()
-
-        return Response(response.json(), status=status.HTTP_201_CREATED)
+    @staticmethod
+    def retrieve_resource_method(path):
+        return bitpack.retrieve_image_resource(path)

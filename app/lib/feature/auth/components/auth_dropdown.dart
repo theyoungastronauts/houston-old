@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:houston_app/core/components/base_component.dart';
 import 'package:houston_app/core/providers/session_provider.dart';
+import 'package:houston_app/feature/navigation/app_router.gr.dart';
 import 'package:houston_app/feature/theme/theme.dart';
 import 'package:houston_app/feature/user/components/avatar.dart';
 
@@ -42,6 +44,12 @@ class AuthDropdown extends BaseComponent {
                 child: const Text("My Profile"),
                 onTap: onProfilePressed,
               ),
+              PopupMenuItem(
+                child: const Text("Settings"),
+                onTap: () {
+                  AutoRouter.of(context).push(const SettingsScreenRoute());
+                },
+              ),
               const PopupMenuDivider(),
               PopupMenuItem(
                 child: Text(
@@ -60,6 +68,6 @@ class AuthDropdown extends BaseComponent {
       );
     }
 
-    return SizedBox();
+    return const SizedBox.shrink();
   }
 }

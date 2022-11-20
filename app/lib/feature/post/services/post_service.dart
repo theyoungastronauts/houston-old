@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:houston_app/core/services/base_service.dart';
 import 'package:houston_app/core/models/paginated_response.dart';
 import 'package:houston_app/core/utils/logging.dart';
@@ -59,8 +57,6 @@ class PostService extends BaseService {
   }
 
   Future<Post?> _create(Post post) async {
-    final data = jsonEncode(post.toJson());
-    print(data);
     final p = await postHttp(baseUrl, params: post.toJson());
     return Post.fromJson(p);
   }

@@ -1,6 +1,6 @@
-import 'dart:convert';
-
 import 'package:houston_app/core/services/base_service.dart';
+import 'package:houston_app/core/utils/logging.dart';
+import 'package:houston_app/core/utils/singletons.dart';
 import 'package:houston_app/feature/auth/models/login_result.dart';
 import 'package:houston_app/feature/auth/models/token.dart';
 import 'package:houston_app/feature/user/models/user.dart';
@@ -193,8 +193,8 @@ class AuthService extends BaseService {
       final params = {'token': token};
       final data = await postHttp('$basePath/token/exchange/$backend', params: params);
       return LoginResult(token: Token.fromJson(data));
-    } catch (e) {
-      print(e);
+    } catch (e, st) {
+      singleton<Log>().error("socialLogin Error", e, st);
       return null;
     }
   }

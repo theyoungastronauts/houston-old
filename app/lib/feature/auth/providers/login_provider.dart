@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:houston_app/core/providers/session_provider.dart';
+import 'package:houston_app/core/utils/logging.dart';
 import 'package:houston_app/core/utils/singletons.dart';
 import 'package:houston_app/core/utils/toast.dart';
 import 'package:houston_app/core/utils/validation.dart';
-import 'package:houston_app/feature/auth/components/login_form.dart';
 import 'package:houston_app/feature/auth/services/auth_service.dart';
 import 'package:houston_app/feature/navigation/app_router.gr.dart';
 
@@ -62,7 +62,7 @@ class LoginFormProvider extends StateNotifier<LoginFormModel> {
 
     if (result.twoFa) {
       //TODO: handle two factor
-      print("two fa");
+      singleton<Log>().warn("2fa not implemented yet");
       state = state.copyWith(processing: false);
       return;
     }

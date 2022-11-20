@@ -1,12 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:houston_app/core/components/empty_placeholder.dart';
 import 'package:houston_app/core/screens/base_screen.dart';
-import 'package:houston_app/feature/user/components/authenticated_user_profile.dart';
-import 'package:houston_app/feature/user/providers/authenticated_user_detail_provider.dart';
+import 'package:houston_app/feature/navigation/app_router.gr.dart';
+import 'package:houston_app/feature/me/components/me_profile.dart';
+import 'package:houston_app/feature/me/providers/me_provider.dart';
 
-class AuthenticatedUserDetailScreen extends BaseScreen {
-  const AuthenticatedUserDetailScreen({
+class MeProfileDetailScreen extends BaseScreen {
+  const MeProfileDetailScreen({
     Key? key,
   }) : super(key: key);
 
@@ -21,7 +23,9 @@ class AuthenticatedUserDetailScreen extends BaseScreen {
         title: const Text("My Profile"),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                AutoRouter.of(context).push(const SettingsScreenRoute());
+              },
               icon: const Icon(
                 Icons.settings,
               ))
@@ -38,7 +42,7 @@ class AuthenticatedUserDetailScreen extends BaseScreen {
     final data = ref.watch(meProvider);
 
     return data.when(
-      data: (user) => user != null ? AuthenticatedUserProfile(user) : const EmptyPlaceholder(title: "You are not logged in."),
+      data: (user) => user != null ? MeProfile(user) : const EmptyPlaceholder(title: "You are not logged in."),
       error: (_, __) => const EmptyPlaceholder(title: "Error"),
       loading: () => const Center(
         child: CircularProgressIndicator(),

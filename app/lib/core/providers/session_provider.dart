@@ -11,7 +11,8 @@ import 'package:houston_app/core/utils/singletons.dart';
 import 'package:houston_app/core/utils/storage.dart';
 import 'package:houston_app/feature/auth/models/token.dart';
 import 'package:houston_app/feature/auth/services/auth_service.dart';
-import 'package:houston_app/feature/auth/services/me_service.dart';
+import 'package:houston_app/feature/me/models/me_user.dart';
+import 'package:houston_app/feature/me/services/me_service.dart';
 import 'package:houston_app/feature/navigation/app_router.gr.dart';
 
 class SessionProvider extends StateNotifier<Session> {
@@ -73,6 +74,10 @@ class SessionProvider extends StateNotifier<Session> {
         setToken(refreshedToken);
       }
     });
+  }
+
+  void setMe(MeUser me) {
+    state = state.copyWith(user: me);
   }
 
   Future<Token?> refreshToken(Token token) async {

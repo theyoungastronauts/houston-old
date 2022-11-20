@@ -1,3 +1,4 @@
+from django.conf import settings
 from rest_framework.permissions import BasePermission
 
 
@@ -54,3 +55,16 @@ class IsOwnerOrReadOnly(OrReadOnlyMixin, IsOwner):
         if self.is_safe(request):
             return True
         return super().has_object_permission(request, view, obj)
+
+
+class IsAuthenticatedOrSecretToken(APIPermission):
+    def has_permission(self, request, view):
+        print(request.headers)
+        if "X-Authorization" in request.headers:
+            if request.headers["X-Authorization"] == settings.BITPACK_ADMIN_TOKEN:
+                return True
+
+        if request.user and request.user.is_authenticated:
+            return True
+
+        return False

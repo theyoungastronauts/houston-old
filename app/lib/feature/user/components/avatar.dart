@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:houston_app/core/utils/image.dart';
 import 'package:houston_app/feature/user/models/user.dart';
 
 class Avatar extends StatelessWidget {
@@ -24,6 +25,7 @@ class Avatar extends StatelessWidget {
         child: Container(
           width: size,
           height: size,
+          clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.secondary,
             border: Border.all(
@@ -33,7 +35,12 @@ class Avatar extends StatelessWidget {
             borderRadius: BorderRadius.circular(size / 2),
           ),
           child: user.image.isNotEmpty
-              ? CachedNetworkImage(imageUrl: user.image)
+              ? CachedNetworkImage(
+                  imageUrl: ImageUrlBuilder.resize(user.image, width: size),
+                  width: size,
+                  height: size,
+                  fit: BoxFit.cover,
+                )
               : Center(
                   child: Text(
                     user.initials,

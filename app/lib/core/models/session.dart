@@ -1,7 +1,6 @@
 import 'package:houston_app/feature/auth/models/token.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:houston_app/feature/user/models/authenticated_user.dart';
-import 'package:houston_app/feature/user/models/user.dart';
+import 'package:houston_app/feature/me/models/me_user.dart';
 
 part 'session.freezed.dart';
 
@@ -11,7 +10,7 @@ class Session with _$Session {
 
   factory Session({
     Token? token,
-    AuthenticatedUser? user,
+    MeUser? user,
     @Default(false) ready,
   }) = _Session;
 }

@@ -78,8 +78,8 @@ class AssetService extends BaseService {
       await dio.post(newAsset.url, data: formData, options: options);
 
       return true;
-    } catch (e) {
-      print(e);
+    } catch (e, st) {
+      singleton<Log>().error("_uploadToS3 Error", e, st);
       return false;
     }
   }
@@ -115,7 +115,7 @@ class AssetService extends BaseService {
   }
 
   Future<Asset?> chooseImage() async {
-    final result = await FilePicker.platform.pickFiles(type: FileType.image);
+    final result = await FilePicker.platform.pickFiles(type: FileType.image, withData: true);
     if (result == null) return null;
     if (result.files.isEmpty) return null;
 

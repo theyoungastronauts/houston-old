@@ -20,5 +20,6 @@ INSTALLED_APPS = [
     "admin.apps.AdminConfig",
     "admin.apps.CacheConfig",
     "api.apps.ApiConfig",
+    "bitpack.apps.BitpackConfig",
     "content.apps.ContentConfig",
 ]
