@@ -3,31 +3,40 @@ import 'package:cli/models/blueprint.dart';
 import 'package:yaml/yaml.dart';
 import 'package:dcli/dcli.dart';
 
+const isCompiled = String.fromEnvironment('COMPILED') == 'true';
+
 String appName() {
   final yaml = parseYaml("${appDir()}/pubspec.yaml");
 
   return yaml['name'];
 }
 
-String cliBaseDir() {
-  return pwd;
+String houstonRoot() {
+  if (isCompiled) {
+    return pwd;
+  }
+
+  return (Directory(pwd).parent).path;
 }
 
-String blueprintsDir() {
-  return Directory("${cliBaseDir()}/blueprints").path;
-}
-
-String bricksDir() {
-  return Directory("${cliBaseDir()}/bricks").path;
-}
-
-String baseDir() {
-  final dir = pwd;
-  return (Directory(dir).parent).path;
+String cliDir() {
+  return Directory("${houstonRoot()}/cli").path;
 }
 
 String appDir() {
-  return Directory("${baseDir()}/app").path;
+  return Directory("${houstonRoot()}/app").path;
+}
+
+String serviceDir() {
+  return Directory("${houstonRoot()}/service").path;
+}
+
+String blueprintsDir() {
+  return Directory("${cliDir()}/blueprints").path;
+}
+
+String bricksDir() {
+  return Directory("${cliDir()}/bricks").path;
 }
 
 String appFeatureDir() {

@@ -6,8 +6,8 @@ import 'package:dcli/dcli.dart';
 // import 'package:dcli/src/shell/'
 
 void main(List<String> args) {
-  generateFeature("video");
-  return;
+  // generateFeature("video");
+  // return;
 
   // Loop, asking for user input and evaluating it
   for (;;) {
