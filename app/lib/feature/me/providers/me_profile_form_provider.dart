@@ -4,7 +4,6 @@ import 'package:houston_app/core/providers/global_loading_provider.dart';
 import 'package:houston_app/core/providers/session_provider.dart';
 import 'package:houston_app/core/utils/image.dart';
 import 'package:houston_app/core/utils/validation.dart';
-import 'package:houston_app/feature/asset/models/asset.dart';
 import 'package:houston_app/feature/me/models/me_user.dart';
 import 'package:houston_app/feature/me/providers/me_provider.dart';
 import 'package:houston_app/feature/me/services/me_service.dart';

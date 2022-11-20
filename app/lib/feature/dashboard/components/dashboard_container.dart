@@ -5,11 +5,9 @@ import 'package:houston_app/core/components/base_component.dart';
 import 'package:houston_app/core/components/buttons.dart';
 import 'package:houston_app/core/components/centered_loader.dart';
 import 'package:houston_app/core/providers/global_loading_provider.dart';
-import 'package:houston_app/core/providers/session_provider.dart';
 import 'package:houston_app/feature/auth/components/auth_dropdown.dart';
 import 'package:houston_app/feature/navigation/app_router.gr.dart';
 import 'package:houston_app/feature/theme/theme.dart';
-import 'package:houston_app/feature/user/components/avatar.dart';
 
 class DashboardContainer extends BaseComponent {
   const DashboardContainer({Key? key}) : super(key: key);

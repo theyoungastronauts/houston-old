@@ -14,7 +14,7 @@ class SettingsForm extends BaseComponent {
   @override
   Widget body(BuildContext context, WidgetRef ref) {
     final provider = ref.read(settingsFormProvider.notifier);
-    final model = ref.watch(settingsFormProvider);
+    // final model = ref.watch(settingsFormProvider);
 
     return Form(
       key: provider.formKey,

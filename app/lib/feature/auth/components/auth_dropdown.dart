@@ -68,6 +68,6 @@ class AuthDropdown extends BaseComponent {
       );
     }
 
-    return SizedBox();
+    return const SizedBox.shrink();
   }
 }

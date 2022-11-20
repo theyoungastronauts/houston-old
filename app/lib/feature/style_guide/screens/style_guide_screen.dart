@@ -267,13 +267,12 @@ class _Heading extends StatelessWidget {
 }
 
 class _Spacer extends StatelessWidget {
-  final double size;
   final bool horizontal;
-  const _Spacer({Key? key, this.size = 12.0, this.horizontal = false}) : super(key: key);
+  const _Spacer({Key? key, this.horizontal = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return horizontal ? SizedBox(width: size) : SizedBox(height: size);
+    return horizontal ? const SizedBox(width: 12.0) : const SizedBox(height: 12.0);
   }
 }
 

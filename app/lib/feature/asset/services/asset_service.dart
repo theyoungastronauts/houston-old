@@ -78,8 +78,8 @@ class AssetService extends BaseService {
       await dio.post(newAsset.url, data: formData, options: options);
 
       return true;
-    } catch (e) {
-      print(e);
+    } catch (e, st) {
+      singleton<Log>().error("_uploadToS3 Error", e, st);
       return false;
     }
   }

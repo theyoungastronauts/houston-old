@@ -8,7 +8,6 @@ import 'package:houston_app/feature/navigation/app_router.gr.dart';
 import 'package:houston_app/feature/post/components/post_detail.dart';
 import 'package:houston_app/feature/post/providers/post_detail_provider.dart';
 import 'package:houston_app/feature/post/providers/post_form_provider.dart';
-import 'package:houston_app/feature/post/screens/post_edit_screen.dart';
 
 class PostDetailScreen extends BaseScreen {
   final String uuid;

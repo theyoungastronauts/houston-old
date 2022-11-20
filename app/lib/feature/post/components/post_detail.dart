@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:houston_app/core/components/base_component.dart';
-import 'package:houston_app/feature/post/components/post_card.dart';
 import 'package:houston_app/feature/post/models/post.dart';
 
 class PostDetail extends BaseComponent {

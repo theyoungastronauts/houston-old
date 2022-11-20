@@ -7,6 +7,11 @@ class HomeScreen extends BaseScreen {
 
   @override
   Widget body(BuildContext context, WidgetRef ref) {
-    return Text("hi");
+    return Center(
+      child: Text(
+        "Welcome to Houston",
+        style: Theme.of(context).textTheme.headline2,
+      ),
+    );
   }
 }

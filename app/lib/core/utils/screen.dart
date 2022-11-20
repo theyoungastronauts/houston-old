@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:houston_app/core/app.dart';
 
 enum ScreenSize {
   sm,

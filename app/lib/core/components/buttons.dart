@@ -31,7 +31,7 @@ class AppButton extends StatelessWidget {
   }) : super(key: key);
 
   ButtonStyle _styleElevated(BuildContext context) {
-    final isMobile = ScreenUtils.size == ScreenSize.sm;
+    final isMobile = ScreenUtils.size(context) == ScreenSize.sm;
     switch (variant) {
       case AppColorVariant.primary:
         return ElevatedButton.styleFrom(
