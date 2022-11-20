@@ -1,13 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'authenticated_user.dart';
+part of 'me_user.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AuthenticatedUser _$$_AuthenticatedUserFromJson(Map<String, dynamic> json) =>
-    _$_AuthenticatedUser(
+_$_MeUser _$$_MeUserFromJson(Map<String, dynamic> json) => _$_MeUser(
       id: json['id'] as int,
       uuid: json['uuid'] as String,
       name: json['name'] as String? ?? "",
@@ -15,9 +14,7 @@ _$_AuthenticatedUser _$$_AuthenticatedUserFromJson(Map<String, dynamic> json) =>
       createdAt: DateTime.parse(json['created_at'] as String),
     );
 
-Map<String, dynamic> _$$_AuthenticatedUserToJson(
-        _$_AuthenticatedUser instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$$_MeUserToJson(_$_MeUser instance) => <String, dynamic>{
       'id': instance.id,
       'uuid': instance.uuid,
       'name': instance.name,

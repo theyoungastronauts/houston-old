@@ -72,6 +72,7 @@ extension CustomColorScheme on ColorScheme {
   Color get darkButtonFg => const Color(0xFFFFFFFF);
 
   Color get drawerBackground => brightness == Brightness.light ? Colors.white70 : Colors.black87;
+  Color get bottomSheetBackground => brightness == Brightness.light ? Colors.white70 : Colors.black87;
 }
 
 class AppTheme {

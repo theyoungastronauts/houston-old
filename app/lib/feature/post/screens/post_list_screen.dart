@@ -20,7 +20,7 @@ class PostListScreen extends BaseScreen {
   FloatingActionButton? floatingActionButton(BuildContext context, WidgetRef ref) {
     return FloatingActionButton(
       onPressed: () {
-        AutoRouter.of(context).push(const PostCreateScreenRoute());
+        AutoRouter.of(context).push(const PostEditScreenRoute());
       },
       child: const Icon(Icons.add),
     );

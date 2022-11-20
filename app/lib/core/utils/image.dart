@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:houston_app/core/utils/env.dart';
 import 'package:http/http.dart' as http;
 
-const MIN_RESIZE_SIZE = 16;
+const MIN_RESIZE_SIZE = 64;
 
 class ImageUrlBuilder {
   static String resize(String url, {required double width, double? height}) {
@@ -20,6 +20,13 @@ class ImageUrlBuilder {
       }
 
       return "$url?width=$w&height=$h&fill=cover";
+    }
+    return url;
+  }
+
+  static String stripTransforms(String url) {
+    if (url.contains("?")) {
+      return url.split("?").first;
     }
     return url;
   }

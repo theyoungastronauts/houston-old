@@ -33,7 +33,7 @@ class PostDetailScreen extends BaseScreen {
             type: AppButtonType.Text,
             onPressed: () {
               ref.read(postFormProvider.notifier).load(post);
-              AutoRouter.of(context).push(const PostCreateScreenRoute());
+              AutoRouter.of(context).push(const PostEditScreenRoute());
             },
           )
         ],

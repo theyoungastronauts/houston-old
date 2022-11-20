@@ -1,0 +1,156 @@
+<div class="bitpack-container">
+    <div style="">
+        <input type="url" style="display:none" id="{{widget.name}}_input" name="{{ widget.name }}"{% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %}{% include "django/forms/widgets/attrs.html" %}>
+        <img src="{{widget.value}}?width=64" {% if widget.value == None %}style="display:none;"{% endif %} width="64" height="64" id="{{widget.name}}_preview" {% if widget.value != none %} onclick="window.open('{{widget.value}}')" style="cursor:pointer;" {% endif %}/></a>
+        <input type="button" value="{% if widget.value == None %}Upload{% else %}Replace{%endif%}" id="{{widget.name}}_btn" />
+        <input type="button" {% if widget.value == None %}style="display:none;"{% endif %} value="Remove" id="{{widget.name}}_btn_remove" />
+        <span id="{{widget.name}}_progress"></span>
+    </div>
+
+</div>
+
+<h1>{{apiKey}}</h1>
+
+<style type="text/css">
+.bitpack-container {
+}
+
+.bitpack-container img {
+    object-fit:cover;
+}
+
+.bitpack-container input[type="button"] {
+ 
+}
+</style>
+
+<script>
+
+    var hiddenInput = document.createElement('input');
+    hiddenInput.type = 'file';
+    hiddenInput.accept = "image/*"
+
+    const btn = document.getElementById('{{widget.name}}_btn');
+    const btnRemove = document.getElementById('{{widget.name}}_btn_remove');
+    const input = document.getElementById('{{widget.name}}_input');
+    const preview = document.getElementById('{{widget.name}}_preview');
+    const progress = document.getElementById('{{widget.name}}_progress');
+
+    btn.addEventListener('click', () => {
+        hiddenInput.click()
+    });
+
+    btnRemove.addEventListener('click', () => {
+        input.value = "";
+        preview.style.display = "none";
+        btnRemove.style.display = "none";
+        btn.value = "Upload";
+    })
+
+    hiddenInput.onchange = e => {
+        btn.disabled = true
+        var files = e.target.files;
+        if (files.length < 1) return;
+        var file = files[0];
+
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        progress.innerHTML = ""
+
+        reader.onload = readerEvent => {
+            var content = readerEvent.target.result;
+            preview.src = content;
+            preview.style.display = "inline"
+
+            upload(file)
+        }
+    }
+
+
+    const upload = file => {
+
+        var url = null;
+
+        const body = {
+            'content_type': file.type,
+        }
+
+        fetch("/v1/asset/image/", {
+            method: "POST",
+            headers: {
+                'X-Authorization': '{{bitpack_admin_token}}',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body),
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+
+            const formData = new FormData();
+            formData.append('key', data.fields['key'])
+
+            url = `https://api.bitpack.app/${data.fields['key']}`
+
+            for (var [key, value] of Object.entries(data.fields)) {
+                if (key == 'key') continue;
+                formData.append(key, value);
+            }
+            formData.append('file', file)
+
+            var xhr = new XMLHttpRequest();
+            xhr.upload.addEventListener("progress", uploadProgress, false);
+            xhr.addEventListener("load", uploadComplete, false);
+            xhr.addEventListener("error", uploadFailed, false);
+            xhr.addEventListener("abort", uploadCanceled, false);
+            xhr.open('POST', data.url, true);
+            xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+            xhr.send(formData);
+
+        });
+
+        function uploadProgress(evt) {
+            if (evt.lengthComputable) {
+                var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+                handleProgress(percentComplete);
+            }
+        }
+
+        function uploadComplete(evt) {
+            if (evt.target.responseText == "") {
+                handleSuccess();
+            } else {
+                handleError(evt.target.responseText);
+            }
+        }
+
+        function uploadCanceled(evt) {
+            progress.innerHTML = "";
+        }
+
+        function handleProgress(percentComplete) {
+            progress.innerHTML = " Uploading (" + percentComplete.toString() + '%)';
+        }
+
+        function handleSuccess() {
+            input.value = url;
+            btnRemove.style.display = "inline";
+            btn.value = "Replace"
+            progress.innerHTML = "Uploaded.";
+            btn.disabled = false
+
+        }
+
+        function handleError(message) {
+            progress.innerHTML = "Error.";
+            console.log(message);
+        }
+
+        function uploadFailed(evt) {
+            console.log(evt);
+            progress.innerHTML = "Error.";
+        }
+
+    }
+
+</script>

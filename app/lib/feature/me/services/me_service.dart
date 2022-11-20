@@ -1,24 +1,24 @@
 import 'package:houston_app/core/services/base_service.dart';
+import 'package:houston_app/feature/me/models/me_user.dart';
 import 'package:houston_app/feature/post/models/post.dart';
-import 'package:houston_app/feature/user/models/authenticated_user.dart';
 import 'package:houston_app/feature/user/models/user.dart';
 
 class MeService extends BaseService {
   static const basePath = '/user';
 
-  Future<AuthenticatedUser> retrieve() async {
+  Future<MeUser> retrieve() async {
     try {
       final response = await getHttp('$basePath/me');
-      return AuthenticatedUser.fromJson(response);
+      return MeUser.fromJson(response);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<AuthenticatedUser?> update(Map<String, dynamic> params) async {
+  Future<MeUser?> update(Map<String, dynamic> params) async {
     try {
       final response = await patchHttp('$basePath/me', params: params);
-      return AuthenticatedUser.fromJson(response);
+      return MeUser.fromJson(response);
     } catch (e) {
       return null;
     }

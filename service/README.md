@@ -53,6 +53,7 @@ AWS_STORAGE_BUCKET_NAME=
 BITPACK_URL=
 BITPACK_APPLICATION=
 BITPACK_TOKEN=
+BITPACK_ADMIN_TOKEN=
 SECRET_KEY=
 TWILIO_ACCOUNT_SID=
 TWILIO_AUTH_TOKEN=
@@ -143,6 +144,7 @@ make worker
 | bitPack               | BITPACK_URL                                  | str           |                                       |
 | bitPack               | BITPACK_TOKEN                                | str           |                                       |
 | bitPack               | BITPACK_APPLICATION                          | str           |                                       |
+| bitPack               | BITPACK_ADMIN_TOKEN                          | str           |                                       |
 | Cache                 | REDIS_URL                                    | str           |                                       |
 | Cache                 | CACHE_ENABLED                                | bool          | True                                  |
 | Cache                 | CACHE_KEY_PREFIX                             | str           | ""                                    |

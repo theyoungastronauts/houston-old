@@ -1,22 +1,22 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:houston_app/feature/user/models/user.dart';
 
-part 'authenticated_user.freezed.dart';
-part 'authenticated_user.g.dart';
+part 'me_user.freezed.dart';
+part 'me_user.g.dart';
 
 @freezed
-class AuthenticatedUser with _$AuthenticatedUser {
-  const AuthenticatedUser._();
+class MeUser with _$MeUser {
+  const MeUser._();
 
-  factory AuthenticatedUser({
+  factory MeUser({
     required int id,
     required String uuid,
     @Default("") String name,
     @Default("") String image,
     @JsonKey(name: "created_at") required DateTime createdAt,
-  }) = _AuthenticatedUser;
+  }) = _MeUser;
 
-  factory AuthenticatedUser.fromJson(Map<String, dynamic> json) => _$AuthenticatedUserFromJson(json);
+  factory MeUser.fromJson(Map<String, dynamic> json) => _$MeUserFromJson(json);
 
   User asUser() {
     return User(
