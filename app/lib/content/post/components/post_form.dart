@@ -5,6 +5,7 @@ import 'package:houston_app/core/components/base_component.dart';
 import 'package:houston_app/core/components/buttons.dart';
 import 'package:houston_app/core/utils/toast.dart';
 import 'package:houston_app/content/post/providers/post_form_provider.dart';
+import 'package:houston_app/media/asset/components/replace_image.dart';
 
 class PostForm extends BaseComponent {
   const PostForm({Key? key}) : super(key: key);
@@ -42,10 +43,37 @@ class PostForm extends BaseComponent {
                   maxLines: 3,
                   decoration: const InputDecoration(label: Text("Body")),
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Container(
+                    constraints:
+                        BoxConstraints(minHeight: MediaQuery.of(context).size.height * 0.3, maxHeight: MediaQuery.of(context).size.height * 0.8),
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: [
+                        for (int i = 0; i <= post.assets.length; i++)
+                          SizedBox(
+                            child: ReplaceImage(
+                              initialUrl: i == post.assets.length ? null : post.assets[i],
+                              title: i == post.assets.length ? 'Add a new image' : 'Image #${i + 1}',
+                              onChange: (change) {
+                                if (change!.isEmpty) {
+                                  provider.removeImage(i);
+                                  return;
+                                }
+                                provider.changeImage(change, index: i < post.assets.length ? i : -1);
+                              },
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                )
               ],
             ),
           ),
           Container(
+            constraints: const BoxConstraints(minHeight: 30, maxHeight: 100),
             color: Colors.black38,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
