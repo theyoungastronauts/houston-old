@@ -14,3 +14,9 @@ String pascalCase(String string) {
   ReCase rc = ReCase(string);
   return rc.pascalCase;
 }
+
+String titleCase(String string) {
+  ReCase rc = ReCase(string);
+
+  return rc.titleCase;
+}

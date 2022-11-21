@@ -43,8 +43,8 @@ String appFeatureDir() {
   return Directory("${appDir()}/lib/feature").path;
 }
 
-String formatWithUnderbars(String val) {
-  return val.replaceAll(" ", "_").toLowerCase();
+String serviceApiDir() {
+  return Directory("${serviceDir()}/api").path;
 }
 
 YamlMap parseYaml(String path) {
@@ -57,4 +57,25 @@ YamlMap parseYaml(String path) {
 BluePrint parseBlueprint(String path) {
   final yaml = parseYaml(path);
   return BluePrint.fromYaml(yaml);
+}
+
+Future<void> insertTextInFile({
+  required String path,
+  required String token,
+  required String value,
+  bool preventDuplicates = true,
+}) async {
+  final f = File(path);
+  String text = await f.readAsString();
+
+  if (preventDuplicates && text.contains(value)) {
+    print(orange("text already exists in file"));
+    return;
+  }
+
+  final newLine = '''$value
+    $token''';
+
+  text = text.replaceAll(token, newLine);
+  await f.writeAsString(text);
 }

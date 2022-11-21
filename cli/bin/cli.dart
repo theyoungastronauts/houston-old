@@ -2,10 +2,12 @@
 
 import 'dart:io';
 import 'package:cli/new_feature.dart';
+import 'package:cli/new_module.dart';
 import 'package:dcli/dcli.dart';
 // import 'package:dcli/src/shell/'
 
 void main(List<String> args) {
+  // newModule('media');
   // generateFeature("video");
   // return;
 
@@ -21,6 +23,9 @@ void main(List<String> args) {
 void evaluate(String command) {
   final parts = command.split(' ');
   switch (parts[0]) {
+    case 'new_module':
+      newModule();
+      break;
     case 'new_feature':
       newFeature();
       break;

@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-{{#modelImports}}{{{.}}}
-{{/modelImports}}
+{{#appModelImports}}{{{.}}}
+{{/appModelImports}}
 part '{{#snakeCase}}{{name}}{{/snakeCase}}.freezed.dart';
 part '{{#snakeCase}}{{name}}{{/snakeCase}}.g.dart';
 

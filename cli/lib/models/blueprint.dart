@@ -2,17 +2,28 @@ import 'package:cli/strings.dart';
 import 'package:cli/utils.dart';
 import 'package:dcli/dcli.dart';
 import 'package:yaml/yaml.dart';
+import 'package:collection/collection.dart';
 
 class BluePrint {
   final String name;
   final String module;
   final List<BlueprintProperty> properties;
+  late String namePlural;
+  late String label;
+  late String labelPlural;
 
-  const BluePrint({
+  BluePrint({
     required this.name,
     required this.module,
     required this.properties,
-  });
+    String? namePlural,
+    String? label,
+    String? labelPlural,
+  }) {
+    this.namePlural = namePlural ?? "${name}s";
+    this.label = label ?? titleCase(name);
+    this.labelPlural = labelPlural ?? "${titleCase(name)}s";
+  }
 
   factory BluePrint.fromYaml(YamlMap data) {
     final properties = data['properties'].map<BlueprintProperty>((p) => BlueprintProperty.fromYaml(p)).toList();
@@ -24,7 +35,7 @@ class BluePrint {
     );
   }
 
-  List<String> get modelImports {
+  List<String> get appModelImports {
     final List<String> importStrings = [];
     for (final p in properties) {
       if (!PRIMITIVE_TYPES.contains(p.type)) {
@@ -39,12 +50,39 @@ class BluePrint {
     return importStrings;
   }
 
+  List<String> get serviceModelImports {
+    final List<String> importStrings = [];
+    for (final p in properties) {
+      if (!PRIMITIVE_TYPES.contains(p.type)) {
+        if (p.type == "user") {
+          importStrings.add("from django.contrib.auth import get_user_model");
+        } else {
+          if (p.module != null) {
+            importStrings.add("from ${snakeCase(p.module!)}.models import ${pascalCase(p.type)}");
+          }
+        }
+      }
+    }
+
+    return importStrings;
+  }
+
+  bool get shouldRegisterUser {
+    return properties.firstWhereOrNull((p) => p.module == 'access' && p.type == 'user') != null;
+  }
+
   Map<String, dynamic> serialize() {
     return {
       'project': appName(),
+      'module': module,
       'name': name,
+      'namePlural': namePlural,
+      'label': label,
+      'labelPlural': labelPlural,
       'properties': properties.map<Map<String, dynamic>>((p) => p.serialize()).toList(),
-      'modelImports': modelImports,
+      'appModelImports': appModelImports,
+      'serviceModelImports': serviceModelImports,
+      'shouldRegisterUser': shouldRegisterUser,
     };
   }
 }
@@ -66,7 +104,7 @@ class BlueprintProperty {
   final dynamic defaultValue;
   final bool allowBlank;
   final bool allowNull;
-  final String? module;
+  final String module;
 
   const BlueprintProperty({
     required this.name,
@@ -75,7 +113,7 @@ class BlueprintProperty {
     required this.allowBlank,
     required this.allowNull,
     this.defaultValue,
-    this.module,
+    required this.module,
   });
 
   factory BlueprintProperty.fromYaml(YamlMap data) {
@@ -86,12 +124,12 @@ class BlueprintProperty {
       throw Exception(red("type required"));
     }
 
-    String? module;
+    String module = 'root';
 
-    if (type.contains('/')) {
-      final parts = type.split('/');
+    if (type.contains('.')) {
+      final parts = type.split('.');
       module = parts.first;
-      type = type.split('/').last;
+      type = type.split('.').last;
     }
 
     // if (!PROPERTY_TYPES.contains(data['type'])) {
@@ -109,7 +147,7 @@ class BlueprintProperty {
     );
   }
 
-  List<Map<String, dynamic>> get _annotations {
+  List<Map<String, dynamic>> get _appAnnotations {
     final List<Map<String, dynamic>> values = [];
     if (snakeCase(name) != camelCase(name)) {
       values.add({'name': snakeCase(name)});
@@ -122,7 +160,7 @@ class BlueprintProperty {
     return values;
   }
 
-  String _annotationValueToString(Map<String, dynamic> kv) {
+  String _appAnnotationValueToString(Map<String, dynamic> kv) {
     final v = kv[kv.keys.first];
     if (v.runtimeType == String) {
       return '${kv.keys.first}: "$v"';
@@ -130,17 +168,17 @@ class BlueprintProperty {
     return '${kv.keys.first}: $v';
   }
 
-  String get _annotation {
-    final values = _annotations;
+  String get _appAnnotation {
+    final values = _appAnnotations;
 
-    if (_annotations.isNotEmpty) {
-      return '@JsonKey(${values.map((item) => _annotationValueToString(item)).toList().join(", ")}) ';
+    if (_appAnnotations.isNotEmpty) {
+      return '@JsonKey(${values.map((item) => _appAnnotationValueToString(item)).toList().join(", ")}) ';
     }
 
     return '';
   }
 
-  String get _variableType {
+  String get _appVariableType {
     switch (type) {
       case "char":
       case "text":
@@ -159,8 +197,39 @@ class BlueprintProperty {
 
   String get appModelEntry {
     final value =
-        "$_annotation${allowNull == true && defaultValue == null ? '' : 'required '}$_variableType${allowNull ? '?' : ''} ${camelCase(name)},";
+        "$_appAnnotation${allowNull == true && defaultValue == null ? '' : 'required '}$_appVariableType${allowNull ? '?' : ''} ${camelCase(name)},";
     return value;
+  }
+
+  String get _serviceVariableType {
+    switch (type) {
+      case "char":
+        return 'models.CharField';
+      case "text":
+        return 'models.TextField';
+      case "url":
+        return 'models.URLField';
+      case "bool":
+        return 'models.BooleanField';
+      case "int":
+        return 'models.IntegerField';
+      case "double":
+        return 'models.DecimalField';
+      default:
+        return "models.ForeignKey";
+    }
+  }
+
+  String get serviceModelEntry {
+    if (PRIMITIVE_TYPES.contains(type)) {
+      return '${snakeCase(name)} = $_serviceVariableType(_("${titleCase(name)}"))';
+    }
+
+    return '''${snakeCase(name)} = models.ForeignKey(
+      '${snakeCase(module!)}.${pascalCase(type)}', 
+      verbose_name=_("${titleCase(name)}"),
+      on_delete=models.CASCADE,
+    )''';
   }
 
   Map<String, dynamic> serialize() {
@@ -172,6 +241,7 @@ class BlueprintProperty {
       'allowBlank': allowBlank,
       'allowNull': allowNull,
       'appModelEntry': appModelEntry,
+      'serviceModelEntry': serviceModelEntry,
     };
   }
 }
