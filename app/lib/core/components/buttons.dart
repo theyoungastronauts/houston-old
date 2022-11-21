@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:houston_app/core/utils/screen.dart';
-import 'package:houston_app/feature/theme/theme.dart';
+import 'package:houston_app/core/theme/theme.dart';
 
 enum AppButtonType { Elevated, Outlined, Text }
 

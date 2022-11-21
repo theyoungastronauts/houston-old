@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:houston_app/feature/auth/models/token.dart';
+import 'package:houston_app/access/auth/models/token.dart';
 import 'package:houston_app/core/utils/env.dart';
 import 'package:dio/dio.dart';
 

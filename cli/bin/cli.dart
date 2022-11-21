@@ -6,7 +6,7 @@ import 'package:cli/new_module.dart';
 import 'package:dcli/dcli.dart';
 // import 'package:dcli/src/shell/'
 
-void main(List<String> args) {
+Future<void> main(List<String> args) async {
   // newModule('media');
   // generateFeature("video");
   // return;
@@ -15,22 +15,22 @@ void main(List<String> args) {
   for (;;) {
     final line = ask('${green('houston')}${blue('::')}');
     if (line.isNotEmpty) {
-      evaluate(line);
+      await evaluate(line);
     }
   }
 }
 
-void evaluate(String command) {
+Future<void> evaluate(String command) async {
   final parts = command.split(' ');
   switch (parts[0]) {
     case 'new_module':
-      newModule();
+      await newModule();
       break;
     case 'new_feature':
-      newFeature();
+      await newFeature();
       break;
     case 'generate_feature':
-      generateFeature();
+      await generateFeature();
       break;
     case 'cd':
       Directory.current = join(pwd, parts[1]);

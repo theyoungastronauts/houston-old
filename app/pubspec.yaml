@@ -50,4 +50,4 @@ flutter:
   - assets/env/
 
 flutter_gen:
-  output: lib/generated
+  output: lib/core/generated

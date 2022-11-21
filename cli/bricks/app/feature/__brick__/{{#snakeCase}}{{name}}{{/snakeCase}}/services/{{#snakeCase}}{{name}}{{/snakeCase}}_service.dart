@@ -1,6 +1,6 @@
 import 'package:{{project}}/core/services/base_service.dart';
 import 'package:{{project}}/core/models/paginated_response.dart';
-import 'package:{{project}}/feature/{{#snakeCase}}{{name}}{{/snakeCase}}/models/{{#snakeCase}}{{name}}{{/snakeCase}}.dart';
+import 'package:{{project}}/{{#snakeCase}}{{module}}{{/snakeCase}}/{{#snakeCase}}{{name}}{{/snakeCase}}/models/{{#snakeCase}}{{name}}{{/snakeCase}}.dart';
 import 'package:{{project}}/core/utils/logging.dart';
 import 'package:{{project}}/core/utils/singletons.dart';
 

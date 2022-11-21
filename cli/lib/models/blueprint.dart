@@ -28,9 +28,13 @@ class BluePrint {
   factory BluePrint.fromYaml(YamlMap data) {
     final properties = data['properties'].map<BlueprintProperty>((p) => BlueprintProperty.fromYaml(p)).toList();
 
+    if (data['module'] == null) {
+      throw Exception(red("Module Name required"));
+    }
+
     return BluePrint(
       name: data['name'],
-      module: data['module'] ?? 'root',
+      module: data['module'],
       properties: properties,
     );
   }
@@ -39,11 +43,7 @@ class BluePrint {
     final List<String> importStrings = [];
     for (final p in properties) {
       if (!PRIMITIVE_TYPES.contains(p.type)) {
-        if (p.module != null && p.module != 'root') {
-          importStrings.add("import 'package:${appName()}/feature/${snakeCase(p.module!)}/${snakeCase(p.type)}/models/${snakeCase(p.type)}.dart';");
-        } else {
-          importStrings.add("import 'package:${appName()}/feature/${snakeCase(p.type)}/models/${snakeCase(p.type)}.dart';");
-        }
+        importStrings.add("import 'package:${appName()}/${snakeCase(p.module)}/${snakeCase(p.type)}/models/${snakeCase(p.type)}.dart';");
       }
     }
 
@@ -57,9 +57,7 @@ class BluePrint {
         if (p.type == "user") {
           importStrings.add("from django.contrib.auth import get_user_model");
         } else {
-          if (p.module != null) {
-            importStrings.add("from ${snakeCase(p.module!)}.models import ${pascalCase(p.type)}");
-          }
+          importStrings.add("from ${snakeCase(p.module)}.models import ${pascalCase(p.type)}");
         }
       }
     }
@@ -226,7 +224,7 @@ class BlueprintProperty {
     }
 
     return '''${snakeCase(name)} = models.ForeignKey(
-      '${snakeCase(module!)}.${pascalCase(type)}', 
+      '${snakeCase(module)}.${pascalCase(type)}', 
       verbose_name=_("${titleCase(name)}"),
       on_delete=models.CASCADE,
     )''';
