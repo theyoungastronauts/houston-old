@@ -7,7 +7,13 @@ import 'package:cli/validators.dart';
 import 'package:dcli/dcli.dart';
 import 'package:mason/mason.dart' as mason;
 
-void newFeature() {
+Future<void> newFeature() async {
+  String moduleName = ask(
+    "Module Name:",
+    required: true,
+    validator: FeatureNameValidator(),
+  );
+
   String name = ask(
     "Feature Name:",
     required: true,
@@ -50,6 +56,11 @@ Future<void> generateFeature([String? name]) async {
   print(white("Generating Service Feature"));
 
   String serviceModuleDirectory = "${serviceDir()}/${snakeCase(blueprint.module)}";
+
+  if (!Directory(serviceModuleDirectory).existsSync()) {
+    throw Exception(red("Module ${blueprint.module} doesn't exist yet."));
+  }
+
   final serviceFeatureBrick = mason.Brick.path("${bricksDir()}/service/feature");
   final serviceFeatureGenerator = await mason.MasonGenerator.fromBrick(serviceFeatureBrick);
   final serviceFeatureTarget = mason.DirectoryGeneratorTarget(Directory(serviceModuleDirectory));
@@ -80,13 +91,10 @@ Future<void> generateFeature([String? name]) async {
   // APP
 
   print(white("Generating App Feature"));
-  String appParentDir = appFeatureDir();
 
-  if (blueprint.module != 'root') {
-    appParentDir = "${appFeatureDir()}/${snakeCase(blueprint.module)}";
-    if (!Directory(appParentDir).existsSync()) {
-      Directory(appParentDir).createSync();
-    }
+  final appParentDir = "${appModuleDirectory()}/${snakeCase(blueprint.module)}";
+  if (!Directory(appParentDir).existsSync()) {
+    Directory(appParentDir).createSync();
   }
 
   final appGeneratedPath = "$appParentDir/$name";

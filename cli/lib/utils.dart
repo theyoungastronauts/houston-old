@@ -39,8 +39,8 @@ String bricksDir() {
   return Directory("${cliDir()}/bricks").path;
 }
 
-String appFeatureDir() {
-  return Directory("${appDir()}/lib/feature").path;
+String appModuleDirectory() {
+  return Directory("${appDir()}/lib").path;
 }
 
 String serviceApiDir() {

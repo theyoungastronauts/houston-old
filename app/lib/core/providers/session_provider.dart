@@ -9,11 +9,11 @@ import 'package:houston_app/core/models/session.dart';
 import 'package:houston_app/core/utils/dialogs.dart';
 import 'package:houston_app/core/utils/singletons.dart';
 import 'package:houston_app/core/utils/storage.dart';
-import 'package:houston_app/feature/auth/models/token.dart';
-import 'package:houston_app/feature/auth/services/auth_service.dart';
-import 'package:houston_app/feature/me/models/me_user.dart';
-import 'package:houston_app/feature/me/services/me_service.dart';
-import 'package:houston_app/feature/navigation/app_router.gr.dart';
+import 'package:houston_app/access/auth/models/token.dart';
+import 'package:houston_app/access/auth/services/auth_service.dart';
+import 'package:houston_app/access/me/models/me_user.dart';
+import 'package:houston_app/access/me/services/me_service.dart';
+import 'package:houston_app/navigation/app_router.gr.dart';
 
 class SessionProvider extends StateNotifier<Session> {
   final Ref ref;
