@@ -13,6 +13,7 @@ class PostFormProvider extends StateNotifier<Post> {
 
   final GlobalKey<FormState> formKey = GlobalKey();
   final TextEditingController titleController = TextEditingController();
+  final TextEditingController bodyController = TextEditingController();
 
   PostFormProvider(this.ref, Post model) : super(model) {
     init();
@@ -25,15 +26,15 @@ class PostFormProvider extends StateNotifier<Post> {
   void load(Post post) {
     state = post;
     titleController.text = post.title;
+    bodyController.text = post.body;
   }
 
   void updateModel() {
-    state = state.copyWith(
-      title: titleController.text,
-    );
+    state = state.copyWith(title: titleController.text, body: bodyController.text);
   }
 
   String? titleValidator(String? value) => formValidatorNotEmpty(value, "Title");
+  String? bodyValidator(String? value) => formValidatorNotEmpty(value, "Body");
 
   void clear() {
     state = Post.empty(ref.read(sessionProvider).user?.asUser());

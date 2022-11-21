@@ -32,6 +32,14 @@ class PostForm extends BaseComponent {
                   },
                   decoration: const InputDecoration(label: Text("Title")),
                 ),
+                TextFormField(
+                  controller: provider.bodyController,
+                  validator: provider.bodyValidator,
+                  onChanged: (_) {
+                    provider.updateModel();
+                  },
+                  decoration: const InputDecoration(label: Text("Body")),
+                ),
               ],
             ),
           ),
@@ -46,6 +54,7 @@ class PostForm extends BaseComponent {
                     label: "Discard",
                     type: AppButtonType.Text,
                     onPressed: () {
+                      provider.clear();
                       AutoRouter.of(context).pop();
                     },
                   ),
