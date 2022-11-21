@@ -38,6 +38,8 @@ class PostForm extends BaseComponent {
                   onChanged: (_) {
                     provider.updateModel();
                   },
+                  minLines: 3,
+                  maxLines: 3,
                   decoration: const InputDecoration(label: Text("Body")),
                 ),
               ],

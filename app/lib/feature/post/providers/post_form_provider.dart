@@ -30,7 +30,10 @@ class PostFormProvider extends StateNotifier<Post> {
   }
 
   void updateModel() {
-    state = state.copyWith(title: titleController.text, body: bodyController.text);
+    state = state.copyWith(
+      title: titleController.text,
+      body: bodyController.text,
+    );
   }
 
   String? titleValidator(String? value) => formValidatorNotEmpty(value, "Title");
