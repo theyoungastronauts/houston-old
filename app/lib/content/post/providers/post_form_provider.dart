@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:houston_app/core/providers/global_loading_provider.dart';
 import 'package:houston_app/core/providers/session_provider.dart';
+import 'package:houston_app/core/utils/dialogs.dart';
 import 'package:houston_app/core/utils/validation.dart';
 import 'package:houston_app/content/post/models/post.dart';
 import 'package:houston_app/content/post/providers/post_detail_provider.dart';
@@ -14,6 +15,7 @@ class PostFormProvider extends StateNotifier<Post> {
   final GlobalKey<FormState> formKey = GlobalKey();
   final TextEditingController titleController = TextEditingController();
   final TextEditingController bodyController = TextEditingController();
+  bool changesMade = false;
 
   PostFormProvider(this.ref, Post model) : super(model) {
     init();
@@ -24,6 +26,7 @@ class PostFormProvider extends StateNotifier<Post> {
   }
 
   void changeImage(String url, {int index = -1}) {
+    changesMade = true;
     if (index == -1) {
       final newAssets = state.assets + [url];
       state = state.copyWith(assets: newAssets);
@@ -35,6 +38,7 @@ class PostFormProvider extends StateNotifier<Post> {
   }
 
   void removeImage(int index) {
+    changesMade = true;
     var newAssets = [...state.assets];
     newAssets.removeAt(index);
     state = state.copyWith(assets: newAssets);
@@ -42,11 +46,13 @@ class PostFormProvider extends StateNotifier<Post> {
 
   void load(Post post) {
     state = post;
+    changesMade = false;
     titleController.text = post.title;
     bodyController.text = post.body;
   }
 
   void updateModel() {
+    changesMade = true;
     state = state.copyWith(
       title: titleController.text,
       body: bodyController.text,
@@ -56,9 +62,18 @@ class PostFormProvider extends StateNotifier<Post> {
   String? titleValidator(String? value) => formValidatorNotEmpty(value, "Title");
   String? bodyValidator(String? value) => formValidatorNotEmpty(value, "Body");
 
-  void clear() {
-    state = Post.empty(ref.read(sessionProvider).user?.asUser());
-    init();
+  Future<bool> clear() async {
+    if (changesMade) {
+      final confirmed = await ConfirmDialog.show(title: 'Sure you want to discard the changes you\'ve made?');
+      if (confirmed) {
+        state = Post.empty(ref.read(sessionProvider).user?.asUser());
+        init();
+        return true;
+      } else {
+        return false;
+      }
+    }
+    return true;
   }
 
   Future<bool?> submit() async {
