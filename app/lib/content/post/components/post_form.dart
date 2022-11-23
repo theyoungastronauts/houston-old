@@ -51,7 +51,7 @@ class PostForm extends BaseComponent {
                       child: Container(
                         constraints: BoxConstraints(
                             minHeight: MediaQuery.of(context).size.height * 0.3,
-                            maxHeight: ScreenUtils.useMobileLayout(context)
+                            maxHeight: MediaQuery.of(context).size.width <= ScreenUtils.breakpointSm
                                 ? MediaQuery.of(context).size.height * 0.45
                                 : MediaQuery.of(context).size.height * 0.55),
                         child: ListView(
@@ -83,7 +83,9 @@ class PostForm extends BaseComponent {
           Column(
             children: [
               SizedBox(
-                height: ScreenUtils.useMobileLayout(context) ? MediaQuery.of(context).size.height * 0.65 : MediaQuery.of(context).size.height * 0.785,
+                height: MediaQuery.of(context).size.width <= ScreenUtils.breakpointSm
+                    ? MediaQuery.of(context).size.height * 0.65
+                    : MediaQuery.of(context).size.height * 0.785,
               ),
               Container(
                 constraints: const BoxConstraints(minHeight: 30, maxHeight: 100),

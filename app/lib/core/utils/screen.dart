@@ -8,13 +8,8 @@ enum ScreenSize {
 }
 
 class ScreenUtils {
-  static const double breakpointMobile = 580;
   static const breakpointSm = 576.0;
   static const breakpointMd = 992.0;
-
-  static bool useMobileLayout(BuildContext context) {
-    return MediaQuery.of(context).size.width <= breakpointMobile;
-  }
 
   static const bool isWeb = kIsWeb;
 

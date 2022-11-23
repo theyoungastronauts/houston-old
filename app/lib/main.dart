@@ -18,7 +18,6 @@ void main() async {
   if (!kIsWeb && Platform.isMacOS) {
     await DesktopWindow.setWindowSize(const Size(MIN_WIDTH, MIN_HEIGHT));
     await DesktopWindow.setMinWindowSize(const Size(MIN_WIDTH, MIN_HEIGHT));
-    await DesktopWindow.setMaxWindowSize(const Size(MIN_WIDTH, MIN_HEIGHT));
   }
 
   runApp(
