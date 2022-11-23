@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +13,8 @@ enum ScreenSize {
 class ScreenUtils {
   static const breakpointSm = 576.0;
   static const breakpointMd = 992.0;
+  static const minWindowWidthDesktop = 1200.0;
+  static const minWindowHeightDesktop = 800.0;
 
   static const bool isWeb = kIsWeb;
 
@@ -52,6 +57,19 @@ class ScreenUtils {
         return s == ScreenSize.md || s == ScreenSize.sm;
       case ScreenSize.sm:
         return s == ScreenSize.sm;
+    }
+  }
+
+  static setWindowConstraints() async {
+    if (!kIsWeb && (Platform.isMacOS || Platform.isWindows || Platform.isLinux)) {
+      await DesktopWindow.setWindowSize(const Size(
+        minWindowWidthDesktop,
+        minWindowHeightDesktop,
+      ));
+      await DesktopWindow.setMinWindowSize(const Size(
+        minWindowWidthDesktop,
+        minWindowHeightDesktop,
+      ));
     }
   }
 }
