@@ -25,23 +25,25 @@ class PostFormProvider extends StateNotifier<Post> {
     load(state);
   }
 
-  void changeImage(String url, {int index = -1}) {
+  void addImage(String url) {
     changesMade = true;
-    if (index == -1) {
-      final newAssets = state.assets + [url];
-      state = state.copyWith(assets: newAssets);
-      return;
-    }
-    var newAssets = [...state.assets];
-    newAssets[index] = url;
-    state = state.copyWith(assets: newAssets);
+
+    state = state.copyWith(assets: [...state.assets, url]);
+  }
+
+  void updateImage(int index, String url) {
+    changesMade = true;
+
+    state = state.copyWith(
+      assets: [...state.assets]
+        ..removeAt(index)
+        ..insert(index, url),
+    );
   }
 
   void removeImage(int index) {
     changesMade = true;
-    var newAssets = [...state.assets];
-    newAssets.removeAt(index);
-    state = state.copyWith(assets: newAssets);
+    state = state.copyWith(assets: [...state.assets]..removeAt(index));
   }
 
   void load(Post post) {

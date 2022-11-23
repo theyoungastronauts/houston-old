@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:houston_app/content/post/components/post_form_actions.dart';
 import 'package:houston_app/core/screens/base_screen.dart';
 import 'package:houston_app/content/post/components/post_form.dart';
 import 'package:houston_app/content/post/providers/post_form_provider.dart';
@@ -24,6 +25,11 @@ class PostEditScreen extends BaseScreen {
                 : post.title,
       ),
     );
+  }
+
+  @override
+  Widget? bottomNavigationBar(BuildContext context, WidgetRef ref) {
+    return const PostFormActions();
   }
 
   @override

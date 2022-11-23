@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:houston_app/core/utils/image.dart';
 import 'package:houston_app/core/utils/strings.dart';
 import 'package:houston_app/access/user/models/user.dart';
 
@@ -32,7 +33,7 @@ class Post with _$Post {
 
   String thumbnail({double width = 300, double height = 300}) {
     if (assets.isNotEmpty) {
-      return assets.first;
+      return ImageUrlBuilder.resize(assets.first, width: width, height: height);
     }
 
     return "https://placekitten.com/${width.round()}/${height.round()}";

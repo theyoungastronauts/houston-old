@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:houston_app/core/components/list_mode_toggle.dart';
 import 'package:houston_app/core/screens/base_screen.dart';
 import 'package:houston_app/navigation/app_router.gr.dart';
 import 'package:houston_app/content/post/components/post_list.dart';
@@ -11,8 +12,10 @@ class PostListScreen extends BaseScreen {
   @override
   AppBar? appBar(BuildContext context, WidgetRef ref) {
     return AppBar(
-      title: const Text("Post List"),
-      actions: const [],
+      title: const Text("Posts"),
+      actions: const [
+        ListModeToggle(providerFamily: "post"),
+      ],
     );
   }
 

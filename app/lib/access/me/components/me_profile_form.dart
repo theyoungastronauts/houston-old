@@ -38,6 +38,9 @@ class MeProfileForm extends BaseComponent {
                   onChange: (url) {
                     provider.setImage(url);
                   },
+                  onRemove: () {
+                    provider.setImage(null);
+                  },
                 )
               ],
             ),

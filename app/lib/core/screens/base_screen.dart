@@ -25,6 +25,7 @@ abstract class BaseScreen extends ConsumerWidget {
               : appBar(context, ref),
       drawer: includeMainDrawer ? const MainDrawer() : null,
       floatingActionButton: floatingActionButton(context, ref),
+      bottomNavigationBar: bottomNavigationBar(context, ref),
       body: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: horizontalPadding,
@@ -59,6 +60,10 @@ abstract class BaseScreen extends ConsumerWidget {
   }
 
   FloatingActionButton? floatingActionButton(BuildContext context, WidgetRef ref) {
+    return null;
+  }
+
+  Widget? bottomNavigationBar(BuildContext context, WidgetRef ref) {
     return null;
   }
 
