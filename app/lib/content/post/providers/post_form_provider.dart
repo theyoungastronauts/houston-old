@@ -64,18 +64,22 @@ class PostFormProvider extends StateNotifier<Post> {
   String? titleValidator(String? value) => formValidatorNotEmpty(value, "Title");
   String? bodyValidator(String? value) => formValidatorNotEmpty(value, "Body");
 
-  Future<bool> clear() async {
+  Future<bool> discard() async {
     if (changesMade) {
       final confirmed = await ConfirmDialog.show(title: 'Sure you want to discard the changes you\'ve made?');
       if (confirmed) {
-        state = Post.empty(ref.read(sessionProvider).user?.asUser());
-        init();
+        clear();
         return true;
       } else {
         return false;
       }
     }
     return true;
+  }
+
+  void clear() {
+    state = Post.empty(ref.read(sessionProvider).user?.asUser());
+    init();
   }
 
   Future<bool?> submit() async {
