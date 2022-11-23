@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:houston_app/core/components/base_component.dart';
 import 'package:houston_app/core/components/buttons.dart';
 import 'package:houston_app/core/utils/toast.dart';
-import 'package:houston_app/media/asset/components/replace_image.dart';
+import 'package:houston_app/media/asset/components/replace_asset.dart';
 import 'package:houston_app/access/me/providers/me_profile_form_provider.dart';
 
 class MeProfileForm extends BaseComponent {
@@ -33,7 +33,7 @@ class MeProfileForm extends BaseComponent {
                   },
                   decoration: const InputDecoration(label: Text("Title")),
                 ),
-                ReplaceImage(
+                ReplaceAsset(
                   initialUrl: me.image,
                   onChange: (url) {
                     provider.setImage(url);

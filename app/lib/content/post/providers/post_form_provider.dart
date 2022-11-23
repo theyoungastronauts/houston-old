@@ -25,13 +25,13 @@ class PostFormProvider extends StateNotifier<Post> {
     load(state);
   }
 
-  void addImage(String url) {
+  void addAsset(String url) {
     changesMade = true;
 
     state = state.copyWith(assets: [...state.assets, url]);
   }
 
-  void updateImage(int index, String url) {
+  void updateAsset(int index, String url) {
     changesMade = true;
 
     state = state.copyWith(
@@ -41,7 +41,7 @@ class PostFormProvider extends StateNotifier<Post> {
     );
   }
 
-  void removeImage(int index) {
+  void removeAsset(int index) {
     changesMade = true;
     state = state.copyWith(assets: [...state.assets]..removeAt(index));
   }
