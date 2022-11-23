@@ -48,6 +48,10 @@ class DashboardContainer extends BaseComponent {
               label: "Posts",
               icon: Icon(Icons.article),
             ),
+            BottomNavigationBarItem(
+              label: "Profile",
+              icon: Icon(Icons.person),
+            ),
           ],
         );
       },
