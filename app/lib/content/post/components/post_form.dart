@@ -84,8 +84,11 @@ class PostForm extends BaseComponent {
                     label: "Discard",
                     type: AppButtonType.Text,
                     onPressed: () {
-                      provider.clear();
-                      AutoRouter.of(context).pop();
+                      provider.clear().then((pop) {
+                        if (pop) {
+                          AutoRouter.of(context).pop();
+                        }
+                      });
                     },
                   ),
                   AppButton(
