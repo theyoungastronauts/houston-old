@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:houston_app/media/asset/components/replace_asset.dart';
+import 'replace_asset.dart';
 
 class MultiAssetManager extends StatelessWidget {
   final List<String> assets;

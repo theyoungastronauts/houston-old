@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/utils/screen.dart';
+import '../utils/screen.dart';
 
 abstract class BaseStatefulComponent extends ConsumerStatefulWidget {
   const BaseStatefulComponent({

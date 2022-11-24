@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:houston_app/access/user/models/user.dart';
-import 'package:houston_app/content/post/models/post.dart';
-import 'package:houston_app/core/providers/session_provider.dart';
+import '../../../access/user/models/user.dart';
+import '../../post/models/post.dart';
+import '../../../core/providers/session_provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 part 'comment.freezed.dart';
 part 'comment.g.dart';

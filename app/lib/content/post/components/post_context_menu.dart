@@ -2,9 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:houston_app/content/comment/providers/comment_form_provider.dart';
-import 'package:houston_app/content/post/models/post.dart';
-import 'package:houston_app/navigation/app_router.gr.dart';
+import '../../comment/providers/comment_form_provider.dart';
+import '../models/post.dart';
+import '../../../navigation/app_router.gr.dart';
 
 import '../../../core/components/base_component.dart';
 import '../providers/post_form_provider.dart';

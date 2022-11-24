@@ -1,14 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/content/post/providers/post_list_provider.dart';
-import 'package:houston_app/content/post/screens/me_post_list_screen.dart';
-import 'package:houston_app/core/components/buttons.dart';
-import 'package:houston_app/core/components/list_mode_toggle.dart';
-import 'package:houston_app/core/providers/session_provider.dart';
-import 'package:houston_app/core/screens/base_screen.dart';
-import 'package:houston_app/navigation/app_router.gr.dart';
-import 'package:houston_app/content/post/components/post_list.dart';
+import '../providers/post_list_provider.dart';
+import '../../../core/components/buttons.dart';
+import '../../../core/components/list_mode_toggle.dart';
+import '../../../core/providers/session_provider.dart';
+import '../../../core/screens/base_screen.dart';
+import '../../../navigation/app_router.gr.dart';
+import '../components/post_list.dart';
 
 class PostListScreen extends BaseScreen {
   const PostListScreen({Key? key}) : super(key: key);

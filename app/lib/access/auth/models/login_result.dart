@@ -1,4 +1,4 @@
-import 'package:houston_app/access/auth/models/token.dart';
+import 'token.dart';
 
 class LoginResult {
   final Token? token;

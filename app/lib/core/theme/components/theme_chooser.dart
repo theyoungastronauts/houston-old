@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/components/base_component.dart';
-import 'package:houston_app/core/theme/providers/theme_provider.dart';
+import '../../components/base_component.dart';
+import '../providers/theme_provider.dart';
 
 class ThemeChooser extends BaseComponent {
   final bool inListTile;

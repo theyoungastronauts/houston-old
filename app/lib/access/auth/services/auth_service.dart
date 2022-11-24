@@ -1,9 +1,9 @@
-import 'package:houston_app/core/services/base_service.dart';
-import 'package:houston_app/core/utils/logging.dart';
-import 'package:houston_app/core/utils/singletons.dart';
-import 'package:houston_app/access/auth/models/login_result.dart';
-import 'package:houston_app/access/auth/models/token.dart';
-import 'package:houston_app/access/user/models/user.dart';
+import '../../../core/services/base_service.dart';
+import '../../../core/utils/logging.dart';
+import '../../../core/utils/singletons.dart';
+import '../models/login_result.dart';
+import '../models/token.dart';
+import '../../user/models/user.dart';
 
 class AuthService extends BaseService {
   static const basePath = '/auth';

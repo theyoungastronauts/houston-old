@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:houston_app/access/auth/models/token.dart';
-import 'package:houston_app/core/utils/env.dart';
+import '../../access/auth/models/token.dart';
+import '../utils/env.dart';
 import 'package:dio/dio.dart';
 
 class BaseService {

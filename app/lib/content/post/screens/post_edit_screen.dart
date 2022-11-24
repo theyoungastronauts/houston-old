@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/content/post/components/post_form_actions.dart';
-import 'package:houston_app/core/components/buttons.dart';
-import 'package:houston_app/core/screens/base_screen.dart';
-import 'package:houston_app/content/post/components/post_form.dart';
-import 'package:houston_app/content/post/providers/post_form_provider.dart';
-import 'package:houston_app/core/theme/theme.dart';
+import '../components/post_form_actions.dart';
+import '../../../core/components/buttons.dart';
+import '../../../core/screens/base_screen.dart';
+import '../components/post_form.dart';
+import '../providers/post_form_provider.dart';
+import '../../../core/theme/theme.dart';
 
 class PostEditScreen extends BaseScreen {
   const PostEditScreen({Key? key})

@@ -1,11 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/media/video/models/video.dart';
-import 'package:houston_app/media/video/services/video_service.dart';
+import '../models/video.dart';
+import '../services/video_service.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class VideoListProvider extends StateNotifier<List<Video>> {
-  final PagingController<int, Video> pagingController =
-      PagingController(firstPageKey: 1);
+  final PagingController<int, Video> pagingController = PagingController(firstPageKey: 1);
 
   VideoListProvider([List<Video> initialItems = const []]) : super(initialItems) {
     pagingController.addPageRequestListener((page) {

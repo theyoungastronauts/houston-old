@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/content/comment/models/comment.dart';
-import 'package:houston_app/content/comment/models/new_comment.dart';
-import 'package:houston_app/content/comment/providers/comment_list_provider.dart';
-import 'package:houston_app/content/comment/services/comment_service.dart';
-import 'package:houston_app/core/utils/toast.dart';
-import 'package:houston_app/core/utils/validation.dart';
+import '../models/comment.dart';
+import '../models/new_comment.dart';
+import 'comment_list_provider.dart';
+import '../services/comment_service.dart';
+import '../../../core/utils/toast.dart';
+import '../../../core/utils/validation.dart';
 
 class CommentFormProvider extends StateNotifier<NewComment> {
   final Ref ref;

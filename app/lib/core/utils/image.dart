@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:houston_app/core/utils/env.dart';
-import 'package:houston_app/media/asset/constants.dart';
+import 'env.dart';
+import '../../media/asset/constants.dart';
 import 'package:http/http.dart' as http;
 
 class ImageUrlBuilder {

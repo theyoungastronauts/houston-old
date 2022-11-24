@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/providers/global_loading_provider.dart';
-import 'package:houston_app/core/providers/session_provider.dart';
-import 'package:houston_app/core/utils/dialogs.dart';
-import 'package:houston_app/core/utils/validation.dart';
-import 'package:houston_app/content/post/models/post.dart';
-import 'package:houston_app/content/post/providers/post_detail_provider.dart';
-import 'package:houston_app/content/post/providers/post_list_provider.dart';
-import 'package:houston_app/content/post/services/post_service.dart';
+import '../../../core/providers/global_loading_provider.dart';
+import '../../../core/providers/session_provider.dart';
+import '../../../core/utils/dialogs.dart';
+import '../../../core/utils/validation.dart';
+import '../models/post.dart';
+import 'post_detail_provider.dart';
+import 'post_list_provider.dart';
+import '../services/post_service.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../core/utils/env.dart';

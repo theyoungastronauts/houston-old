@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/screens/base_screen.dart';
-import 'package:houston_app/access/me/components/me_profile_form.dart';
+import '../../../core/screens/base_screen.dart';
+import '../components/me_profile_form.dart';
 
 class MeProfileEditScreen extends BaseScreen {
   const MeProfileEditScreen({Key? key})

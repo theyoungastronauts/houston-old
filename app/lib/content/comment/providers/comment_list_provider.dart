@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/content/comment/models/comment.dart';
-import 'package:houston_app/content/comment/services/comment_service.dart';
+import '../models/comment.dart';
+import '../services/comment_service.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class CommentListProvider extends StateNotifier<List<Comment>> {

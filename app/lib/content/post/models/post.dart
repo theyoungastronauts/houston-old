@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:houston_app/core/providers/session_provider.dart';
-import 'package:houston_app/core/utils/image.dart';
-import 'package:houston_app/core/utils/strings.dart';
-import 'package:houston_app/access/user/models/user.dart';
+import '../../../core/providers/session_provider.dart';
+import '../../../core/utils/image.dart';
+import '../../../core/utils/strings.dart';
+import '../../../access/user/models/user.dart';
 
 part 'post.freezed.dart';
 part 'post.g.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/components/base_component.dart';
-import 'package:houston_app/core/providers/list_mode_provider.dart';
+import 'base_component.dart';
+import '../providers/list_mode_provider.dart';
 
 class ListModeToggle extends BaseComponent {
   final String providerFamily;

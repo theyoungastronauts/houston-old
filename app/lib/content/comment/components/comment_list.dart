@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/content/post/models/post.dart';
-import 'package:houston_app/content/post/providers/post_detail_provider.dart';
-import 'package:houston_app/core/components/base_component.dart';
-import 'package:houston_app/core/components/infinite_list.dart';
-import 'package:houston_app/content/comment/components/comment_card.dart';
-import 'package:houston_app/content/comment/models/comment.dart';
-import 'package:houston_app/content/comment/providers/comment_list_provider.dart';
+import '../../post/models/post.dart';
+import '../../../core/components/base_component.dart';
+import '../../../core/components/infinite_list.dart';
+import 'comment_card.dart';
+import '../models/comment.dart';
+import '../providers/comment_list_provider.dart';
 
 class CommentList extends BaseComponent {
   final Post post;

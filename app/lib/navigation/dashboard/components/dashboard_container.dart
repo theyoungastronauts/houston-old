@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/components/base_component.dart';
-import 'package:houston_app/core/components/buttons.dart';
-import 'package:houston_app/core/components/centered_loader.dart';
-import 'package:houston_app/core/providers/global_loading_provider.dart';
-import 'package:houston_app/access/auth/components/auth_dropdown.dart';
-import 'package:houston_app/navigation/app_router.gr.dart';
-import 'package:houston_app/core/theme/theme.dart';
+import '../../../core/components/base_component.dart';
+import '../../../core/components/buttons.dart';
+import '../../../core/components/centered_loader.dart';
+import '../../../core/providers/global_loading_provider.dart';
+import '../../../access/auth/components/auth_dropdown.dart';
+import '../../app_router.gr.dart';
+import '../../../core/theme/theme.dart';
 
 class DashboardContainer extends BaseComponent {
   const DashboardContainer({Key? key}) : super(key: key);

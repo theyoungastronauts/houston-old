@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:houston_app/core/utils/image.dart';
-import 'package:houston_app/access/user/models/user.dart';
+import '../../../core/utils/image.dart';
+import '../models/user.dart';
 
 class Avatar extends StatelessWidget {
   final double size;

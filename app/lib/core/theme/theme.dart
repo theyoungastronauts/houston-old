@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:houston_app/core/utils/color.dart';
-import 'package:houston_app/core/utils/html/html_helpers.dart';
+import '../utils/color.dart';
+import '../utils/html/html_helpers.dart';
 
 const _primaryColor = Color(0xFF2a9fd6);
 const _secondaryColor = Color(0xFF555555);

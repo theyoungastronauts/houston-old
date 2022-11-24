@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/utils/screen.dart';
-import 'package:houston_app/navigation/global/components/main_drawer.dart';
+import '../utils/screen.dart';
+import '../../navigation/global/components/main_drawer.dart';
 
 abstract class BaseScreen extends ConsumerWidget {
   const BaseScreen({

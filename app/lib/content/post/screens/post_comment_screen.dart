@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/content/comment/components/comment_form.dart';
-import 'package:houston_app/content/comment/components/comment_list.dart';
-import 'package:houston_app/content/post/providers/post_detail_provider.dart';
-import 'package:houston_app/core/components/centered_loader.dart';
-import 'package:houston_app/core/screens/base_screen.dart';
+import '../../comment/components/comment_form.dart';
+import '../../comment/components/comment_list.dart';
+import '../providers/post_detail_provider.dart';
+import '../../../core/components/centered_loader.dart';
+import '../../../core/screens/base_screen.dart';
 
 class PostCommentsScreen extends BaseScreen {
   final String postUuid;

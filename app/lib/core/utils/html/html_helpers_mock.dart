@@ -1,6 +1,6 @@
-import 'package:houston_app/core/utils/html/html_helpers_interface.dart';
-import 'package:houston_app/core/utils/logging.dart';
-import 'package:houston_app/core/utils/singletons.dart';
+import 'html_helpers_interface.dart';
+import '../logging.dart';
+import '../singletons.dart';
 
 class HtmlUtilsImplementation extends HtmlUtilsInterface {
   @override

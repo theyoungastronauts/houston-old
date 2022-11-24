@@ -1,6 +1,6 @@
-import 'package:houston_app/core/models/paginated_response.dart';
-import 'package:houston_app/core/services/base_service.dart';
-import 'package:houston_app/access/user/models/user.dart';
+import '../../../core/models/paginated_response.dart';
+import '../../../core/services/base_service.dart';
+import '../models/user.dart';
 
 class UserService extends BaseService {
   static const baseUrl = "/user";

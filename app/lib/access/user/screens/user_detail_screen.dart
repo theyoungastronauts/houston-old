@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/components/empty_placeholder.dart';
-import 'package:houston_app/core/screens/base_screen.dart';
-import 'package:houston_app/access/user/providers/user_detail_provider.dart';
+import '../../../core/components/empty_placeholder.dart';
+import '../../../core/screens/base_screen.dart';
+import '../providers/user_detail_provider.dart';
 
 class UserDetailScreen extends BaseScreen {
   final String uuid;

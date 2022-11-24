@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/providers/global_loading_provider.dart';
-import 'package:houston_app/core/providers/session_provider.dart';
-import 'package:houston_app/core/utils/image.dart';
-import 'package:houston_app/core/utils/validation.dart';
-import 'package:houston_app/access/me/models/me_user.dart';
-import 'package:houston_app/access/me/providers/me_provider.dart';
-import 'package:houston_app/access/me/services/me_service.dart';
+import '../../../core/providers/global_loading_provider.dart';
+import '../../../core/providers/session_provider.dart';
+import '../../../core/utils/image.dart';
+import '../../../core/utils/validation.dart';
+import '../models/me_user.dart';
+import 'me_provider.dart';
+import '../services/me_service.dart';
 
 class MeProfileFormProvider extends StateNotifier<MeUser> {
   final Ref ref;

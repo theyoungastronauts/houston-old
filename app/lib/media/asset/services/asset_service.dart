@@ -2,14 +2,14 @@ import 'dart:typed_data';
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:houston_app/core/services/base_service.dart';
-import 'package:houston_app/core/utils/env.dart';
-import 'package:houston_app/core/utils/image.dart';
-import 'package:houston_app/core/utils/logging.dart';
-import 'package:houston_app/core/utils/singletons.dart';
-import 'package:houston_app/media/asset/models/asset.dart';
-import 'package:houston_app/media/asset/models/asset_type.dart';
-import 'package:houston_app/media/asset/models/new_asset.dart';
+import '../../../core/services/base_service.dart';
+import '../../../core/utils/env.dart';
+import '../../../core/utils/image.dart';
+import '../../../core/utils/logging.dart';
+import '../../../core/utils/singletons.dart';
+import '../models/asset.dart';
+import '../models/asset_type.dart';
+import '../models/new_asset.dart';
 
 class AssetService extends BaseService {
   static const basePath = '/asset';

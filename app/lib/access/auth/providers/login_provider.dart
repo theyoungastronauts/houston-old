@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:houston_app/core/providers/session_provider.dart';
-import 'package:houston_app/core/utils/logging.dart';
-import 'package:houston_app/core/utils/singletons.dart';
-import 'package:houston_app/core/utils/toast.dart';
-import 'package:houston_app/core/utils/validation.dart';
-import 'package:houston_app/access/auth/services/auth_service.dart';
-import 'package:houston_app/navigation/app_router.gr.dart';
+import '../../../core/providers/session_provider.dart';
+import '../../../core/utils/logging.dart';
+import '../../../core/utils/singletons.dart';
+import '../../../core/utils/toast.dart';
+import '../../../core/utils/validation.dart';
+import '../services/auth_service.dart';
+import '../../../navigation/app_router.gr.dart';
 
 part 'login_provider.freezed.dart';
 

@@ -1,14 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:houston_app/core/components/bottom_sheet_container.dart';
-import 'package:houston_app/core/components/buttons.dart';
-import 'package:houston_app/core/components/centered_loader.dart';
-import 'package:houston_app/core/utils/image.dart';
-import 'package:houston_app/core/utils/logging.dart';
-import 'package:houston_app/core/utils/singletons.dart';
-import 'package:houston_app/core/utils/toast.dart';
-import 'package:houston_app/media/asset/models/asset.dart';
-import 'package:houston_app/media/asset/services/asset_service.dart';
+import '../../../core/components/bottom_sheet_container.dart';
+import '../../../core/components/buttons.dart';
+import '../../../core/components/centered_loader.dart';
+import '../../../core/utils/image.dart';
+import '../../../core/utils/logging.dart';
+import '../../../core/utils/singletons.dart';
+import '../../../core/utils/toast.dart';
+import '../models/asset.dart';
+import '../services/asset_service.dart';
 
 class ReplaceAsset extends StatefulWidget {
   final String? initialUrl;

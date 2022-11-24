@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:houston_app/content/post/models/post.dart';
+import '../models/post.dart';
 
 class PostThumbnail extends StatelessWidget {
   const PostThumbnail(

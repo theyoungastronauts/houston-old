@@ -4,16 +4,16 @@ import 'dart:convert';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/app.dart';
-import 'package:houston_app/core/models/session.dart';
-import 'package:houston_app/core/utils/dialogs.dart';
-import 'package:houston_app/core/utils/singletons.dart';
-import 'package:houston_app/core/utils/storage.dart';
-import 'package:houston_app/access/auth/models/token.dart';
-import 'package:houston_app/access/auth/services/auth_service.dart';
-import 'package:houston_app/access/me/models/me_user.dart';
-import 'package:houston_app/access/me/services/me_service.dart';
-import 'package:houston_app/navigation/app_router.gr.dart';
+import '../app.dart';
+import '../models/session.dart';
+import '../utils/dialogs.dart';
+import '../utils/singletons.dart';
+import '../utils/storage.dart';
+import '../../access/auth/models/token.dart';
+import '../../access/auth/services/auth_service.dart';
+import '../../access/me/models/me_user.dart';
+import '../../access/me/services/me_service.dart';
+import '../../navigation/app_router.gr.dart';
 
 class SessionProvider extends StateNotifier<Session> {
   final Ref ref;

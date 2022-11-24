@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/content/comment/providers/comment_form_provider.dart';
-import 'package:houston_app/core/components/base_component.dart';
-import 'package:houston_app/core/components/buttons.dart';
+import '../providers/comment_form_provider.dart';
+import '../../../core/components/base_component.dart';
 
 class CommentForm extends BaseComponent {
   final String postUuid;

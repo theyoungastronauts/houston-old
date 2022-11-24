@@ -2,8 +2,8 @@
 
 import 'dart:convert';
 
-import 'package:houston_app/core/utils/singletons.dart';
-import 'package:houston_app/core/utils/storage.dart';
+import '../../../core/utils/singletons.dart';
+import '../../../core/utils/storage.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 class Token {

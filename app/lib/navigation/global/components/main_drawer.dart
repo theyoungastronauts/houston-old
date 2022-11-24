@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/components/base_component.dart';
-import 'package:houston_app/navigation/app_router.gr.dart';
-import 'package:houston_app/core/theme/components/theme_chooser.dart';
-import 'package:houston_app/core/theme/theme.dart';
+import '../../../core/components/base_component.dart';
+import '../../app_router.gr.dart';
+import '../../../core/theme/components/theme_chooser.dart';
+import '../../../core/theme/theme.dart';
 
 class MainDrawer extends BaseComponent {
   const MainDrawer({Key? key}) : super(key: key);

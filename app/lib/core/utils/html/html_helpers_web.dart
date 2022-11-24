@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
 
 import 'dart:html' as html;
-import 'package:houston_app/core/utils/html/html_helpers_interface.dart';
+import 'html_helpers_interface.dart';
 import 'dart:ui' as ui;
 
 class HtmlUtilsImplementation extends HtmlUtilsInterface {

@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/content/post/models/post.dart';
-import 'package:houston_app/content/post/services/post_service.dart';
-import 'package:houston_app/core/models/paginated_response.dart';
+import '../models/post.dart';
+import '../services/post_service.dart';
+import '../../../core/models/paginated_response.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 enum PostListType {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/components/base_component.dart';
-import 'package:houston_app/core/components/infinite_list.dart';
-import 'package:houston_app/access/user/components/user_card.dart';
-import 'package:houston_app/access/user/models/user.dart';
-import 'package:houston_app/access/user/providers/user_list_provider.dart';
+import '../../../core/components/base_component.dart';
+import '../../../core/components/infinite_list.dart';
+import 'user_card.dart';
+import '../models/user.dart';
+import '../providers/user_list_provider.dart';
 
 class UserList extends BaseComponent {
   const UserList({Key? key}) : super(key: key);

@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:houston_app/core/components/base_component.dart';
-import 'package:houston_app/core/components/centered_loader.dart';
-import 'package:houston_app/core/providers/session_provider.dart';
-import 'package:houston_app/core/theme/providers/theme_provider.dart';
-import 'package:houston_app/core/theme/theme.dart';
-import 'package:houston_app/navigation/app_router.gr.dart';
-import 'package:houston_app/core/providers/global_loading_provider.dart';
-import 'package:houston_app/core/utils/singletons.dart';
+import 'components/base_component.dart';
+import 'components/centered_loader.dart';
+import 'providers/session_provider.dart';
+import 'theme/providers/theme_provider.dart';
+import 'theme/theme.dart';
+import '../navigation/app_router.gr.dart';
+import 'providers/global_loading_provider.dart';
+import 'utils/singletons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/components/base_component.dart';
-import 'package:houston_app/content/post/providers/post_form_provider.dart';
-import 'package:houston_app/media/asset/components/multi_asset_manager.dart';
+import '../../../core/components/base_component.dart';
+import '../providers/post_form_provider.dart';
+import '../../../media/asset/components/multi_asset_manager.dart';
 
 class PostForm extends BaseComponent {
   const PostForm({Key? key}) : super(key: key);

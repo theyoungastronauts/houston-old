@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/components/base_component.dart';
+import 'base_component.dart';
 
 class EmptyPlaceholder extends BaseComponent {
   final String title;

@@ -1,9 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/components/buttons.dart';
-import 'package:houston_app/core/screens/base_screen.dart';
-import 'package:houston_app/navigation/app_router.gr.dart';
+
+import '../../../core/components/buttons.dart';
+import '../../../core/screens/base_screen.dart';
+import '../../app_router.gr.dart';
 
 class LandingScreen extends BaseScreen {
   const LandingScreen({Key? key})

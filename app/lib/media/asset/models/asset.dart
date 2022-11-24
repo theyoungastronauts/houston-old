@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:houston_app/core/utils/env.dart';
+import '../../../core/utils/env.dart';
 
 part 'asset.freezed.dart';
 part 'asset.g.dart';

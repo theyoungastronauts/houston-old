@@ -1,8 +1,8 @@
-import 'package:houston_app/core/services/base_service.dart';
-import 'package:houston_app/core/models/paginated_response.dart';
-import 'package:houston_app/core/utils/logging.dart';
-import 'package:houston_app/core/utils/singletons.dart';
-import 'package:houston_app/content/post/models/post.dart';
+import '../../../core/services/base_service.dart';
+import '../../../core/models/paginated_response.dart';
+import '../../../core/utils/logging.dart';
+import '../../../core/utils/singletons.dart';
+import '../models/post.dart';
 
 class PostService extends BaseService {
   static const baseUrl = "/post";

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:houston_app/access/user/models/user.dart';
+import '../../../access/user/models/user.dart';
 
 part 'video.freezed.dart';
 part 'video.g.dart';
@@ -16,10 +16,7 @@ class Video with _$Video {
     @JsonKey(defaultValue: "https://google.com") required String? url,
     @JsonKey(name: "view_count", defaultValue: 0) required int viewCount,
     User? owner,
-    
   }) = _Video;
 
   factory Video.fromJson(Map<String, dynamic> json) => _$VideoFromJson(json);
-  
 }
-

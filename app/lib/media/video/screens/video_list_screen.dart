@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/screens/base_screen.dart';
-import 'package:houston_app/media/video/components/video_list.dart';
+import '../../../core/screens/base_screen.dart';
+import '../components/video_list.dart';
 
 class VideoListScreen extends BaseScreen {
-  const VideoListScreen({Key? key})
-      : super(key: key);
+  const VideoListScreen({Key? key}) : super(key: key);
 
   @override
   AppBar? appBar(BuildContext context, WidgetRef ref) {

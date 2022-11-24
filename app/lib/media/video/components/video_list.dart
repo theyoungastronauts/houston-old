@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/components/base_component.dart';
-import 'package:houston_app/core/components/infinite_list.dart';
-import 'package:houston_app/media/video/components/video_card.dart';
-import 'package:houston_app/media/video/models/video.dart';
-import 'package:houston_app/media/video/providers/video_list_provider.dart';
+import '../../../core/components/base_component.dart';
+import '../../../core/components/infinite_list.dart';
+import 'video_card.dart';
+import '../models/video.dart';
+import '../providers/video_list_provider.dart';
 
 class VideoList extends BaseComponent {
   const VideoList({Key? key}) : super(key: key);

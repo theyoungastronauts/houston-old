@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:houston_app/core/app.dart';
-import 'package:houston_app/core/theme/theme.dart';
+import '../app.dart';
+import '../theme/theme.dart';
 
 import '../components/buttons.dart';
 

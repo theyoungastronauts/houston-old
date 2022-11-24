@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:houston_app/core/utils/strings.dart';
+import '../../../core/utils/strings.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';

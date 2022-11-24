@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/components/base_component.dart';
-import 'package:houston_app/core/components/buttons.dart';
-import 'package:houston_app/core/utils/toast.dart';
-import 'package:houston_app/media/asset/components/replace_asset.dart';
-import 'package:houston_app/access/me/providers/me_profile_form_provider.dart';
+import '../../../core/components/base_component.dart';
+import '../../../core/components/buttons.dart';
+import '../../../core/utils/toast.dart';
+import '../../../media/asset/components/replace_asset.dart';
+import '../providers/me_profile_form_provider.dart';
 
 class MeProfileForm extends BaseComponent {
   const MeProfileForm({Key? key}) : super(key: key);

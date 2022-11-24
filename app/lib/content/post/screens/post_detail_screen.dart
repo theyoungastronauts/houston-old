@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/components/buttons.dart';
-import 'package:houston_app/core/screens/base_screen.dart';
-import 'package:houston_app/core/components/empty_placeholder.dart';
-import 'package:houston_app/navigation/app_router.gr.dart';
-import 'package:houston_app/content/post/components/post_detail.dart';
-import 'package:houston_app/content/post/providers/post_detail_provider.dart';
-import 'package:houston_app/content/post/providers/post_form_provider.dart';
+import '../../../core/components/buttons.dart';
+import '../../../core/screens/base_screen.dart';
+import '../../../core/components/empty_placeholder.dart';
+import '../../../navigation/app_router.gr.dart';
+import '../components/post_detail.dart';
+import '../providers/post_detail_provider.dart';
+import '../providers/post_form_provider.dart';
 
 class PostDetailScreen extends BaseScreen {
   final String uuid;

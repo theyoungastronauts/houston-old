@@ -1,18 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/screens/base_screen.dart';
-import 'package:houston_app/core/components/empty_placeholder.dart';
-import 'package:houston_app/media/video/providers/video_detail_provider.dart';
+import '../../../core/screens/base_screen.dart';
+import '../../../core/components/empty_placeholder.dart';
+import '../providers/video_detail_provider.dart';
 
 class VideoDetailScreen extends BaseScreen {
   final String uuid;
   const VideoDetailScreen({
     Key? key,
     @PathParam('uuid') required this.uuid,
-  }) : super(
-          key: key
-        );
+  }) : super(key: key);
 
   @override
   AppBar? appBar(BuildContext context, WidgetRef ref) {

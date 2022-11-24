@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/utils/singletons.dart';
-import 'package:houston_app/core/utils/storage.dart';
+import '../../utils/singletons.dart';
+import '../../utils/storage.dart';
 
 class ThemeProvider extends StateNotifier<ThemeMode> {
   late final Storage _storage = singleton<Storage>();

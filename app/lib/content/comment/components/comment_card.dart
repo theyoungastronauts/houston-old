@@ -1,12 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/access/user/components/avatar.dart';
-import 'package:houston_app/content/comment/models/comment.dart';
-import 'package:houston_app/content/comment/providers/comment_form_provider.dart';
-import 'package:houston_app/content/post/models/post.dart';
-import 'package:houston_app/core/components/base_component.dart';
-import 'package:houston_app/core/utils/toast.dart';
+import '../../../access/user/components/avatar.dart';
+import '../models/comment.dart';
+import '../providers/comment_form_provider.dart';
+import '../../post/models/post.dart';
+import '../../../core/components/base_component.dart';
+import '../../../core/utils/toast.dart';
 
 class CommentCard extends BaseComponent {
   final Comment comment;

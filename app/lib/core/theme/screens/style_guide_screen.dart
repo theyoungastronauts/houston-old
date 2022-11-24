@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/components/buttons.dart';
-import 'package:houston_app/core/screens/base_screen.dart';
-import 'package:houston_app/core/theme/components/theme_chooser.dart';
-import 'package:houston_app/core/theme/theme.dart';
+import '../../components/buttons.dart';
+import '../../screens/base_screen.dart';
+import '../components/theme_chooser.dart';
+import '../theme.dart';
 
 class StyleGuideScreen extends BaseScreen {
   const StyleGuideScreen({Key? key}) : super(key: key);

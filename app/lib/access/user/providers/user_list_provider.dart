@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/access/user/models/user.dart';
-import 'package:houston_app/access/user/services/user_service.dart';
+import '../models/user.dart';
+import '../services/user_service.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class UserListProvider extends StateNotifier<List<User>> {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/components/base_component.dart';
-import 'package:houston_app/access/user/models/user.dart';
+import '../../../core/components/base_component.dart';
+import '../models/user.dart';
 
 class UserProfile extends BaseComponent {
   final User user;

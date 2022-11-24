@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/components/base_component.dart';
-import 'package:houston_app/core/providers/session_provider.dart';
-import 'package:houston_app/navigation/app_router.gr.dart';
-import 'package:houston_app/core/theme/theme.dart';
-import 'package:houston_app/access/user/components/avatar.dart';
+import '../../../core/components/base_component.dart';
+import '../../../core/providers/session_provider.dart';
+import '../../../navigation/app_router.gr.dart';
+import '../../../core/theme/theme.dart';
+import '../../user/components/avatar.dart';
 
 class AuthDropdown extends BaseComponent {
   final Function() onProfilePressed;

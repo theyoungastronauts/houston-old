@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/components/base_component.dart';
-import 'package:houston_app/core/components/buttons.dart';
-import 'package:houston_app/access/auth/providers/login_provider.dart';
+import '../../../core/components/base_component.dart';
+import '../../../core/components/buttons.dart';
+import '../providers/login_provider.dart';
 
 class LoginForm extends BaseComponent {
   const LoginForm({Key? key}) : super(key: key);

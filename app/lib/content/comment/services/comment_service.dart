@@ -1,9 +1,9 @@
-import 'package:houston_app/content/comment/models/new_comment.dart';
-import 'package:houston_app/core/services/base_service.dart';
-import 'package:houston_app/core/models/paginated_response.dart';
-import 'package:houston_app/content/comment/models/comment.dart';
-import 'package:houston_app/core/utils/logging.dart';
-import 'package:houston_app/core/utils/singletons.dart';
+import '../models/new_comment.dart';
+import '../../../core/services/base_service.dart';
+import '../../../core/models/paginated_response.dart';
+import '../models/comment.dart';
+import '../../../core/utils/logging.dart';
+import '../../../core/utils/singletons.dart';
 
 class CommentService extends BaseService {
   Future<PaginatedResponse<Comment>> _list(

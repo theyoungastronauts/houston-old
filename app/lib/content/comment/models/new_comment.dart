@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:houston_app/content/comment/models/comment.dart';
+import 'comment.dart';
 
 part 'new_comment.freezed.dart';
 

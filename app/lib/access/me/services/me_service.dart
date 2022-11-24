@@ -1,7 +1,7 @@
-import 'package:houston_app/core/services/base_service.dart';
-import 'package:houston_app/access/me/models/me_user.dart';
-import 'package:houston_app/content/post/models/post.dart';
-import 'package:houston_app/access/user/models/user.dart';
+import '../../../core/services/base_service.dart';
+import '../models/me_user.dart';
+import '../../../content/post/models/post.dart';
+import '../../user/models/user.dart';
 
 class MeService extends BaseService {
   static const basePath = '/user';
