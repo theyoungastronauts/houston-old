@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:houston_app/content/post/components/post_context_menu.dart';
 import 'package:houston_app/content/post/components/post_thumbnail.dart';
 import 'package:houston_app/content/post/models/post.dart';
 import 'package:houston_app/core/components/base_component.dart';
@@ -16,7 +17,9 @@ class PostListTile extends BaseComponent {
       title: Text(post.title),
       subtitle: Text(post.owner.name),
       leading: SizedBox(width: 32, height: 32, child: PostThumbnail(post)),
-      trailing: const Icon(Icons.chevron_right),
+      trailing: PostListContextMenu(
+        post: post,
+      ),
       onTap: () {
         AutoRouter.of(context).push(PostDetailScreenRoute(uuid: post.uuid));
       },
