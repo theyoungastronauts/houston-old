@@ -68,3 +68,16 @@ class IsAuthenticatedOrSecretToken(APIPermission):
             return True
 
         return False
+
+
+class IsCommentPostOwner(BasePermission):
+    def get_owner_object(self, obj):
+        return getattr(obj, "owner", None)
+
+    def has_object_permission(self, request, view, obj):
+        owner = self.get_owner_object(obj.post)
+        parent_owner = self.get_owner_object(obj.parent) if obj.parent else None
+        return bool(
+            (owner and owner == request.user)
+            or (parent_owner and parent_owner == request.user)
+        )

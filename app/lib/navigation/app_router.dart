@@ -3,6 +3,7 @@ import 'package:auto_route/empty_router_widgets.dart';
 import 'package:houston_app/access/auth/screens/login_screen.dart';
 import 'package:houston_app/access/me/screens/me_profile_edit_screen.dart';
 import 'package:houston_app/content/post/screens/me_post_list_screen.dart';
+import 'package:houston_app/content/post/screens/post_comment_screen.dart';
 import 'package:houston_app/navigation/dashboard/screens/home_screen.dart';
 import 'package:houston_app/navigation/landing/screens/landing_screen.dart';
 import 'package:houston_app/navigation/dashboard/components/dashboard_container.dart';
@@ -18,6 +19,7 @@ const List<AutoRoute> sharedRoutes = [
   AutoRoute(path: "settings/profile", page: MeProfileEditScreen),
   AutoRoute(path: "style-guide", page: StyleGuideScreen),
   AutoRoute(path: "post/:uuid", page: PostDetailScreen),
+  AutoRoute(path: "post/:uuid/comments", page: PostCommentsScreen),
 ];
 
 const List<AutoRoute> appRoutes = [

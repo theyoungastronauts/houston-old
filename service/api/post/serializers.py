@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from api.user.serializers import UserPublicSerializer
-from content.models import Post
+from content.models.post import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -31,3 +31,9 @@ class PostSerializer(serializers.ModelSerializer):
             "metadata",
             "created_at",
         ]
+
+
+class PostCommentSerializer(serializers.Serializer):
+    body = serializers.CharField()
+    owner = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    parent = serializers.CharField(default=None)

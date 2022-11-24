@@ -51,7 +51,7 @@ class Post(AbstractModel):
     objects = PostManager()
 
     def __str__(self):
-        return str(self.uuid)
+        return str(self.title)
 
     class Meta(AbstractModel.Meta):
         verbose_name = _("Post")

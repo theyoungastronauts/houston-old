@@ -1,8 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:houston_app/core/components/base_component.dart';
 import 'package:houston_app/content/post/models/post.dart';
+import 'package:houston_app/core/components/buttons.dart';
+import 'package:houston_app/navigation/app_router.gr.dart';
 
 class PostDetail extends BaseComponent {
   final Post post;
@@ -48,6 +51,12 @@ class PostDetail extends BaseComponent {
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
+        AppButton(
+          label: "Comment",
+          onPressed: () {
+            AutoRouter.of(context).push(PostCommentsScreenRoute(postUuid: post.uuid));
+          },
+        )
       ],
     );
   }

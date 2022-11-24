@@ -1,0 +1,71 @@
+import 'package:houston_app/content/comment/models/new_comment.dart';
+import 'package:houston_app/core/services/base_service.dart';
+import 'package:houston_app/core/models/paginated_response.dart';
+import 'package:houston_app/content/comment/models/comment.dart';
+import 'package:houston_app/core/utils/logging.dart';
+import 'package:houston_app/core/utils/singletons.dart';
+
+class CommentService extends BaseService {
+  Future<PaginatedResponse<Comment>> _list(
+    String postUuid, {
+    int page = 1,
+    int limit = 10,
+    Map<String, dynamic> params = const {},
+  }) async {
+    final url = "/post/$postUuid/comment/";
+    try {
+      final _params = {
+        ...buildPage(page),
+        ...buildLimit(limit),
+        ...params,
+      };
+
+      final response = await getHttp(url, params: _params);
+
+      List<Comment> results = response['results'].map<Comment>((item) => Comment.fromJson(item)).toList();
+
+      return PaginatedResponse(
+        count: response['count'],
+        page: response['page'],
+        num_pages: response['num_pages'],
+        results: results,
+      );
+    } catch (e, stackTrace) {
+      singleton<Log>().error("Problem fetching $url", e, stackTrace);
+      return PaginatedResponse.empty();
+    }
+  }
+
+  Future<PaginatedResponse<Comment>> list(
+    String postUuid, {
+    int page = 1,
+    int limit = 10,
+  }) async {
+    return await _list(postUuid, page: page, limit: limit);
+  }
+
+  Future<Comment?> create(NewComment comment) async {
+    final Map<String, dynamic> params = {
+      'body': comment.body,
+      ...comment.parent != null ? {'parent': comment.parent!.uuid} : {}
+    };
+
+    try {
+      final data = await postHttp("/post/${comment.postUuid}/comment/", params: params);
+      return Comment.fromJson(data);
+    } catch (e, st) {
+      singleton<Log>().error("Comment Create Error", e, st);
+      return null;
+    }
+  }
+
+  Future<bool> delete(Comment comment) async {
+    try {
+      await deleteHttp("/comment/${comment.uuid}");
+      return true;
+    } catch (e, st) {
+      singleton<Log>().error("Comment Delete Error", e, st);
+      return false;
+    }
+  }
+}

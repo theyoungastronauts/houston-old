@@ -6,11 +6,22 @@ from rest_framework.mixins import (
     RetrieveModelMixin,
     UpdateModelMixin,
 )
+from rest_framework import status
+from rest_framework.response import Response
 
-from content.models import Post
+from content.models.post import Post
+from content.models.comment import Comment
+from api import exceptions
 from api.post.filters import PostFilter
-from api.post.serializers import PostSerializer
-from api.permissions import IsAuthenticated, IsOwnerOrReadOnly, IsOwner
+from api.post.serializers import PostSerializer, PostCommentSerializer
+from api.permissions import (
+    IsAuthenticated,
+    IsAuthenticatedOrReadOnly,
+    IsOwnerOrReadOnly,
+    IsOwner,
+)
+from api.comment.serializers import CommentSerializer
+from api.comment.querysets import ALL_PARENT_COMMENTS_QUERYSET
 
 
 class PostAPIView(GenericAPIView):
@@ -80,3 +91,48 @@ class PostRetrieveMeView(
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
+
+
+class PostCommentListCreateView(ListModelMixin, CreateModelMixin, GenericAPIView):
+    serializer_class = CommentSerializer
+    permission_classes = [
+        IsAuthenticatedOrReadOnly,
+    ]
+
+    queryset = ALL_PARENT_COMMENTS_QUERYSET
+
+    ordering_fields = ["created_at"]
+    ordering = ["created_at"]
+
+    def get_post(self):
+        try:
+            story = Post.objects.published().get(uuid=self.kwargs["uuid"])
+        except Post.DoesNotExist:
+            raise exceptions.NotFound()
+        else:
+            return story
+
+    def get(self, request, *args, **kwargs):
+        post = self.get_post()
+        self.queryset = self.queryset.filter(post_id=post.id)
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.serializer_class = PostCommentSerializer
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        post = self.get_post()
+
+        parent_uuid = serializer.validated_data.get("parent")
+
+        parent = Comment.objects.get(uuid=parent_uuid) if parent_uuid else None
+
+        comment = Comment.objects.create(
+            body=serializer.validated_data.get("body"),
+            post_id=post.id,
+            owner=serializer.validated_data.get("owner"),
+            parent=parent,
+        )
+
+        return Response(CommentSerializer(comment).data, status.HTTP_201_CREATED)
