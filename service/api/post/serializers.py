@@ -18,6 +18,8 @@ class PostSerializer(serializers.ModelSerializer):
             "owner",
             "num_assets",
             "assets",
+            "is_unlisted",
+            "is_published",
             "metadata",
             "created_at",
         ]

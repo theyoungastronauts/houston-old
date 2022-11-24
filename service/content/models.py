@@ -11,6 +11,15 @@ User = get_user_model()
 
 
 class PostManager(models.Manager):
+    def available(self):
+        return super().filter(is_deleted=False, owner__is_active=True)
+
+    def published(self):
+        return self.available().filter(is_published=True)
+
+    def published_listed(self):
+        return self.published().filter(is_unlisted=False)
+
     def get_queryset(self):
         return super().get_queryset().annotate(num_assets=ArrayLength("assets"))
 
@@ -36,6 +45,8 @@ class Post(AbstractModel):
         blank=True,
     )
     is_deleted = models.BooleanField(_("Deleted"), default=False)
+    is_unlisted = models.BooleanField(_("Unlisted"), default=False)
+    is_published = models.BooleanField(_("Published"), default=False)
 
     objects = PostManager()
 
