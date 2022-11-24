@@ -52,6 +52,13 @@ class PostService extends BaseService {
     return await _list(page: page, limit: limit);
   }
 
+  Future<PaginatedResponse<Post>> me({
+    int page = 1,
+    int limit = 10,
+  }) async {
+    return await _list(page: page, limit: limit, url: "$baseUrl/me");
+  }
+
   Future<Post?> save(Post post) async {
     return post.exists ? _update(post) : _create(post);
   }

@@ -1,4 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:houston_app/core/providers/session_provider.dart';
 import 'package:houston_app/core/utils/image.dart';
 import 'package:houston_app/core/utils/strings.dart';
 import 'package:houston_app/access/user/models/user.dart';
@@ -45,5 +48,14 @@ class Post with _$Post {
 
   bool get exists {
     return id > 0;
+  }
+
+  bool isOwner(WidgetRef ref) {
+    final user = ref.read(sessionProvider).user;
+    if (user == null) {
+      return false;
+    }
+
+    return user.id == owner.id;
   }
 }

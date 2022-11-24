@@ -10,11 +10,15 @@ import 'package:houston_app/core/components/infinite_list.dart';
 import 'package:houston_app/core/providers/list_mode_provider.dart';
 
 class PostList extends BaseComponent {
-  const PostList({Key? key}) : super(key: key);
+  final PostListType type;
+  const PostList({
+    Key? key,
+    required this.type,
+  }) : super(key: key);
 
   @override
   Widget body(BuildContext context, WidgetRef ref) {
-    final listProvider = ref.watch(postListProvider.notifier);
+    final listProvider = ref.watch(postListProvider(type).notifier);
     final listMode = ref.watch(listModeProvider('post'));
 
     return listMode == ListMode.list

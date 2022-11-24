@@ -13,4 +13,8 @@ class Session with _$Session {
     MeUser? user,
     @Default(false) ready,
   }) = _Session;
+
+  bool get isAuthenticated {
+    return user != null;
+  }
 }

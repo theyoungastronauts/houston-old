@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/empty_router_widgets.dart';
 import 'package:houston_app/access/auth/screens/login_screen.dart';
 import 'package:houston_app/access/me/screens/me_profile_edit_screen.dart';
+import 'package:houston_app/content/post/screens/me_post_list_screen.dart';
 import 'package:houston_app/navigation/dashboard/screens/home_screen.dart';
 import 'package:houston_app/navigation/landing/screens/landing_screen.dart';
 import 'package:houston_app/navigation/dashboard/components/dashboard_container.dart';
@@ -47,7 +48,8 @@ const dashboardRouter = AutoRoute(
       page: EmptyRouterPage,
       children: [
         AutoRoute(path: "", page: PostListScreen),
-        AutoRoute(path: "", page: PostEditScreen),
+        AutoRoute(path: "me/", page: MePostListScreen),
+        AutoRoute(path: "edit/", page: PostEditScreen),
         ...sharedRoutes,
       ],
     ),

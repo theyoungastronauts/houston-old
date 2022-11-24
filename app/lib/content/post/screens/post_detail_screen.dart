@@ -27,14 +27,15 @@ class PostDetailScreen extends BaseScreen {
       data: (post) => AppBar(
         title: Text(post.title),
         actions: [
-          AppButton(
-            label: "Edit",
-            type: AppButtonType.Text,
-            onPressed: () {
-              ref.read(postFormProvider.notifier).load(post);
-              AutoRouter.of(context).push(const PostEditScreenRoute());
-            },
-          )
+          if (post.isOwner(ref))
+            AppButton(
+              label: "Edit",
+              type: AppButtonType.Text,
+              onPressed: () {
+                ref.read(postFormProvider.notifier).load(post);
+                AutoRouter.of(context).push(const PostEditScreenRoute());
+              },
+            )
         ],
       ),
       error: (_, __) => AppBar(
