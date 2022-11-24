@@ -18,14 +18,18 @@ class PostAdmin(ModelAdmin):
     autocomplete_fields = ["owner"]
 
     list_display = [
-        "__str__",
+        "title",
         "owner",
         "num_assets",
+        "is_published",
+        "is_unlisted",
         "is_deleted",
         "created_at",
     ]
     list_filter = [
         AutocompleteFilterFactory(_("Owner"), "owner"),
+        "is_published",
+        "is_unlisted",
         "is_deleted",
     ]
 
@@ -52,12 +56,12 @@ class PostAdmin(ModelAdmin):
             },
         ),
         (
-            _("Data"),
+            _("Flags"),
             {
                 "fields": [
-                    "num_assets",
+                    "is_published",
+                    "is_unlisted",
                     "is_deleted",
-                    "metadata",
                 ]
             },
         ),
@@ -67,6 +71,15 @@ class PostAdmin(ModelAdmin):
                 "fields": [
                     "created_at",
                     "updated_at",
+                ]
+            },
+        ),
+        (
+            _("Data"),
+            {
+                "fields": [
+                    "num_assets",
+                    "metadata",
                 ]
             },
         ),
