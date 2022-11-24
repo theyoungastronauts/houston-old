@@ -28,7 +28,7 @@ class PostFormActions extends BaseComponent {
               label: "Discard",
               type: AppButtonType.Text,
               onPressed: () {
-                provider.clear().then((pop) {
+                provider.discard().then((pop) {
                   if (pop) {
                     AutoRouter.of(context).pop();
                   }

@@ -1,0 +1,77 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:houston_app/content/post/models/post.dart';
+import 'package:houston_app/navigation/app_router.gr.dart';
+
+import '../../../core/components/base_component.dart';
+import '../providers/post_form_provider.dart';
+
+class PostListContextMenu extends BaseComponent {
+  final Post post;
+  final Function? onDelete;
+  const PostListContextMenu({
+    Key? key,
+    required this.post,
+    this.onDelete,
+  }) : super(key: key);
+
+  void _edit(BuildContext context, WidgetRef ref) {
+    ref.read(postFormProvider.notifier).load(post);
+    AutoRouter.of(context).push(const PostEditScreenRoute());
+  }
+
+  void _view(BuildContext context) {
+    AutoRouter.of(context).push(PostDetailScreenRoute(uuid: post.uuid));
+  }
+
+  void _share(BuildContext context, WidgetRef ref) {
+    ref.read(postFormProvider.notifier).share(post);
+  }
+
+  void _delete(WidgetRef ref, BuildContext context) async {
+    ref.read(postFormProvider.notifier).delete(post);
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return PopupMenuButton(
+      padding: EdgeInsets.zero,
+      icon: const Icon(Icons.more_vert),
+      itemBuilder: (context) {
+        return [
+          PopupMenuItem(
+            onTap: () {
+              _view(context);
+            },
+            child: const Text('View'),
+          ),
+          PopupMenuItem(
+            child: const Text('Share'),
+            onTap: () async {
+              _share(context, ref);
+
+              // withCopy: true,
+              // hasShare: true,
+              // sharingType: SharingType.playlist);
+              // ref.read(sharedPlaylistListProvider.notifier).refresh();
+            },
+          ),
+          PopupMenuItem(
+            onTap: () {
+              _edit(context, ref);
+            },
+            child: const Text('Edit'),
+          ),
+          PopupMenuItem(
+            textStyle: TextStyle(color: Theme.of(context).colorScheme.error),
+            child: const Text('Delete'),
+            onTap: () {
+              _delete(ref, context);
+            },
+          ),
+        ];
+      },
+    );
+  }
+}

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:houston_app/core/app.dart';
 import 'package:houston_app/core/theme/theme.dart';
+
+import '../components/buttons.dart';
 
 class InfoDialog {
   static show({
@@ -92,7 +95,7 @@ class ConfirmDialog {
 class PromptModal {
   static Future<List<String>?> show({
     required String title,
-    required String? Function(String?) validator,
+    String? Function(String?)? validator,
     required String labelText,
     bool obscureText = false,
     String? cancelText,
@@ -100,6 +103,8 @@ class PromptModal {
     String initialValue = "",
     bool destructive = false,
     bool seconaryInput = false,
+    bool readOnly = false,
+    bool withCopy = false,
     String secondaryLabel = "",
     String secondaryInitialValue = "",
     bool secondaryObscureText = false,
@@ -133,6 +138,7 @@ class PromptModal {
                   controller: _controller,
                   obscureText: obscureText,
                   autofocus: true,
+                  readOnly: readOnly,
                   decoration: InputDecoration(
                     label: Text(
                       labelText,
@@ -146,6 +152,18 @@ class PromptModal {
                   ),
                   validator: validator,
                 ),
+                if (withCopy)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 6),
+                    child: AppButton(
+                      label: "Copy",
+                      icon: Icons.copy,
+                      onPressed: () async {
+                        await Clipboard.setData(ClipboardData(text: initialValue));
+                      },
+                      type: AppButtonType.Text,
+                    ),
+                  ),
                 if (seconaryInput)
                   TextFormField(
                     controller: _secondaryController,
