@@ -72,4 +72,15 @@ class PostService extends BaseService {
     final p = await patchHttp("$baseUrl/${post.uuid}", params: post.toJson());
     return Post.fromJson(p);
   }
+
+  Future<bool> delete(Post post) async {
+    try {
+      await deleteHttp(
+        "$baseUrl/${post.uuid}",
+      );
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }
