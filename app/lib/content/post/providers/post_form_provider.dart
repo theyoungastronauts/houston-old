@@ -8,6 +8,10 @@ import 'package:houston_app/content/post/models/post.dart';
 import 'package:houston_app/content/post/providers/post_detail_provider.dart';
 import 'package:houston_app/content/post/providers/post_list_provider.dart';
 import 'package:houston_app/content/post/services/post_service.dart';
+import 'package:share_plus/share_plus.dart';
+
+import '../../../core/utils/env.dart';
+import '../../../core/utils/toast.dart';
 
 class PostFormProvider extends StateNotifier<Post> {
   final Ref ref;
@@ -74,12 +78,37 @@ class PostFormProvider extends StateNotifier<Post> {
         return false;
       }
     }
+    clear();
     return true;
   }
 
   void clear() {
     state = Post.empty(ref.read(sessionProvider).user?.asUser());
     init();
+  }
+
+  Future<void> share(Post post) async {
+    final uuid = post.uuid;
+    final url = "${Env.appBaseUrl}/#/share/p/$uuid";
+
+    await Share.share(url, subject: 'Share the link to this post');
+  }
+
+  Future<void> delete(Post post, {Function? onDelete}) async {
+    final confirmed = await ConfirmDialog.show(title: 'Are you sure you want to delete this post?', destructive: true);
+    ref.read(globalLoadingProvider.notifier).start();
+
+    if (confirmed != null && confirmed) {
+      final success = await PostService().delete(post);
+      ref.read(postListProvider.notifier).refresh();
+      if (success) {
+        Toast.message('Post deleted');
+        if (onDelete != null) onDelete.call();
+      } else {
+        Toast.error();
+      }
+    }
+    ref.read(globalLoadingProvider.notifier).complete();
   }
 
   Future<bool?> submit() async {
