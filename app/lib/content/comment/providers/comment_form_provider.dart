@@ -35,6 +35,10 @@ class CommentFormProvider extends StateNotifier<NewComment> {
     );
   }
 
+  void setFocus() {
+    focusNode.requestFocus();
+  }
+
   void clear() {
     state = NewComment(postUuid: postUuid, body: '', parent: null);
     bodyController.clear();

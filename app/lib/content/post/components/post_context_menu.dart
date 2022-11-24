@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:houston_app/content/comment/providers/comment_form_provider.dart';
 import 'package:houston_app/content/post/models/post.dart';
 import 'package:houston_app/navigation/app_router.gr.dart';
 
@@ -25,6 +27,11 @@ class PostListContextMenu extends BaseComponent {
     AutoRouter.of(context).push(PostDetailScreenRoute(uuid: post.uuid));
   }
 
+  void _comment(BuildContext context, WidgetRef ref) {
+    ref.read(commentFormProvider(post.uuid).notifier).setFocus();
+    AutoRouter.of(context).push(PostCommentsScreenRoute(postUuid: post.uuid));
+  }
+
   void _share(BuildContext context, WidgetRef ref) {
     ref.read(postFormProvider.notifier).share(post);
   }
@@ -47,14 +54,15 @@ class PostListContextMenu extends BaseComponent {
             child: const Text('View'),
           ),
           PopupMenuItem(
+            onTap: () {
+              _comment(context, ref);
+            },
+            child: const Text('Comment'),
+          ),
+          PopupMenuItem(
             child: const Text('Share'),
             onTap: () async {
               _share(context, ref);
-
-              // withCopy: true,
-              // hasShare: true,
-              // sharingType: SharingType.playlist);
-              // ref.read(sharedPlaylistListProvider.notifier).refresh();
             },
           ),
           PopupMenuItem(

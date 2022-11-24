@@ -100,7 +100,8 @@ class PostFormProvider extends StateNotifier<Post> {
 
     if (confirmed != null && confirmed) {
       final success = await PostService().delete(post);
-      ref.read(postListProvider.notifier).refresh();
+      ref.read(postListProvider(PostListType.all).notifier).refresh();
+      ref.read(postListProvider(PostListType.me).notifier).refresh();
       if (success) {
         Toast.message('Post deleted');
         if (onDelete != null) onDelete.call();
