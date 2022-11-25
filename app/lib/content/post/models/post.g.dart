@@ -18,6 +18,7 @@ _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
               .toList() ??
           const [],
       createdAt: DateTime.parse(json['created_at'] as String),
+      isPublished: json['is_published'] as bool,
     );
 
 Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
@@ -29,4 +30,5 @@ Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
       'num_assets': instance.numAssets,
       'assets': instance.assets,
       'created_at': instance.createdAt.toIso8601String(),
+      'is_published': instance.isPublished,
     };

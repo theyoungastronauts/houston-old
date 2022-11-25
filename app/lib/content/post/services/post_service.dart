@@ -9,7 +9,7 @@ class PostService extends BaseService {
 
   Future<Post> retrieve(String uuid) async {
     try {
-      final response = await getHttp('$baseUrl/$uuid');
+      final response = await getHttp('$baseUrl/me/$uuid');
       return Post.fromJson(response);
     } catch (e) {
       rethrow;
