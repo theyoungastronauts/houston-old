@@ -85,7 +85,6 @@ class PostFormActions extends BaseComponent {
                       },
                     ),
                   ),
-
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4),
                   child: AppButton(
@@ -102,22 +101,6 @@ class PostFormActions extends BaseComponent {
                     },
                   ),
                 ),
-
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(horizontal: 4),
-                //   child: AppButton(
-                //     label: post.canUnpublish ? 'Unpublish' : 'Publish',
-                //     variant: post.canUnpublish ? AppColorVariant.light : AppColorVariant.primary,
-                //     onPressed: () async {
-                //       final success = await provider.submit(shouldPublish: !post.canUnpublish);
-
-                //       if (success == true) {
-                //         Toast.message(post.canUnpublish ? "Post Unpublished" : "Post Published!");
-                //         Navigator.of(context).pop();
-                //       }
-                //     },
-                //   ),
-                // ),
               ],
             )
           ],
