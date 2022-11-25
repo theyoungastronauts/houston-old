@@ -85,22 +85,23 @@ class PostFormActions extends BaseComponent {
                       },
                     ),
                   ),
-                if (!post.isPublished)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    child: AppButton(
-                      label: 'Publish',
-                      variant: AppColorVariant.primary,
-                      onPressed: () async {
-                        final success = await provider.submit(shouldPublish: true);
 
-                        if (success == true) {
-                          Toast.message("Post Published");
-                          Navigator.of(context).pop();
-                        }
-                      },
-                    ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: AppButton(
+                    label: post.isPublished ? "Save Changes" : 'Publish',
+                    variant: AppColorVariant.primary,
+                    onPressed: () async {
+                      final message = post.isPublished ? "Post Updated" : "Post Published";
+                      final success = await provider.submit(shouldPublish: true);
+
+                      if (success == true) {
+                        Toast.message(message);
+                        Navigator.of(context).pop();
+                      }
+                    },
                   ),
+                ),
 
                 // Padding(
                 //   padding: const EdgeInsets.symmetric(horizontal: 4),
