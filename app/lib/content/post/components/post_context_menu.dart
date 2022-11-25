@@ -65,19 +65,21 @@ class PostListContextMenu extends BaseComponent {
               _share(context, ref);
             },
           ),
-          PopupMenuItem(
-            onTap: () {
-              _edit(context, ref);
-            },
-            child: const Text('Edit'),
-          ),
-          PopupMenuItem(
-            textStyle: TextStyle(color: Theme.of(context).colorScheme.error),
-            child: const Text('Delete'),
-            onTap: () {
-              _delete(ref, context);
-            },
-          ),
+          if (post.isOwner(ref))
+            PopupMenuItem(
+              onTap: () {
+                _edit(context, ref);
+              },
+              child: const Text('Edit'),
+            ),
+          if (post.isOwner(ref))
+            PopupMenuItem(
+              textStyle: TextStyle(color: Theme.of(context).colorScheme.error),
+              child: const Text('Delete'),
+              onTap: () {
+                _delete(ref, context);
+              },
+            ),
         ];
       },
     );

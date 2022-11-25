@@ -57,12 +57,9 @@ class PostFormProvider extends StateNotifier<Post> {
     bodyController.text = post.body;
   }
 
-  void updateModel() {
+  void updateModel({bool isDraft = false}) {
     changesMade = true;
-    state = state.copyWith(
-      title: titleController.text,
-      body: bodyController.text,
-    );
+    state = state.copyWith(title: titleController.text, body: bodyController.text, isPublished: !isDraft);
   }
 
   String? titleValidator(String? value) => formValidatorNotEmpty(value, "Title");
@@ -112,12 +109,12 @@ class PostFormProvider extends StateNotifier<Post> {
     ref.read(globalLoadingProvider.notifier).complete();
   }
 
-  Future<bool?> submit() async {
+  Future<bool?> submit({bool isDraft = false}) async {
     if (!formKey.currentState!.validate()) {
       return null;
     }
 
-    updateModel();
+    updateModel(isDraft: isDraft);
 
     ref.read(globalLoadingProvider.notifier).start();
 

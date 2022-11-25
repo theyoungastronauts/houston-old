@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../core/theme/theme.dart';
 import '../providers/post_form_provider.dart';
 import '../../../core/components/base_component.dart';
 import '../../../core/components/buttons.dart';
@@ -35,22 +36,69 @@ class PostFormActions extends BaseComponent {
                 });
               },
             ),
-            AppButton(
-              label: post.exists ? "Save" : "Publish",
-              onPressed: () async {
-                final success = await provider.submit();
+            Row(
+              children: [
+                !post.exists
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: AppButton(
+                          label: "Save as draft",
+                          variant: AppColorVariant.light,
+                          onPressed: () async {
+                            final success = await provider.submit(isDraft: true);
 
-                if (success == null) {
-                  return;
-                }
+                            if (success == null) {
+                              return;
+                            }
 
-                if (success) {
-                  AutoRouter.of(context).pop();
-                  Toast.message("Published!");
-                } else {
-                  Toast.error();
-                }
-              },
+                            if (success) {
+                              AutoRouter.of(context).pop();
+                              Toast.message("Saved as draft!");
+                            } else {
+                              Toast.error();
+                            }
+                          },
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: AppButton(
+                          label: post.isPublished ? 'Unpublish' : 'Publish',
+                          variant: AppColorVariant.light,
+                          onPressed: () async {
+                            final success = await provider.submit(isDraft: post.isPublished);
+
+                            if (success == null) {
+                              return;
+                            }
+
+                            if (success) {
+                              AutoRouter.of(context).pop();
+                              post.isPublished ? Toast.message("Post Unpublished!") : Toast.message("Post Published!");
+                            } else {
+                              Toast.error();
+                            }
+                          },
+                        ),
+                      ),
+                AppButton(
+                  label: post.exists ? "Save" : "Publish",
+                  onPressed: () async {
+                    final success = await provider.submit();
+
+                    if (success == null) {
+                      return;
+                    }
+
+                    if (success) {
+                      AutoRouter.of(context).pop();
+                      Toast.message("Published!");
+                    } else {
+                      Toast.error();
+                    }
+                  },
+                ),
+              ],
             )
           ],
         ),

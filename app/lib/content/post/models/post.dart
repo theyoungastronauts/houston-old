@@ -21,17 +21,12 @@ class Post with _$Post {
     @JsonKey(name: 'num_assets') @Default(0) int numAssets,
     @Default([]) List<String> assets,
     @JsonKey(name: "created_at") required DateTime createdAt,
+    @JsonKey(name: 'is_published') required bool isPublished,
   }) = _Post;
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 
-  factory Post.empty([User? owner]) => Post(
-        id: 0,
-        uuid: "",
-        title: "",
-        owner: owner ?? User.empty(),
-        createdAt: DateTime.now(),
-      );
+  factory Post.empty([User? owner]) => Post(id: 0, uuid: "", title: "", owner: owner ?? User.empty(), createdAt: DateTime.now(), isPublished: false);
 
   String thumbnail({double width = 300, double height = 300}) {
     if (assets.isNotEmpty) {

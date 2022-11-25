@@ -30,6 +30,8 @@ mixin _$Post {
   List<String> get assets => throw _privateConstructorUsedError;
   @JsonKey(name: "created_at")
   DateTime get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_published')
+  bool get isPublished => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +51,8 @@ abstract class $PostCopyWith<$Res> {
       String body,
       @JsonKey(name: 'num_assets') int numAssets,
       List<String> assets,
-      @JsonKey(name: "created_at") DateTime createdAt});
+      @JsonKey(name: "created_at") DateTime createdAt,
+      @JsonKey(name: 'is_published') bool isPublished});
 
   $UserCopyWith<$Res> get owner;
 }
@@ -75,6 +78,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? numAssets = null,
     Object? assets = null,
     Object? createdAt = null,
+    Object? isPublished = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -109,6 +113,10 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      isPublished: null == isPublished
+          ? _value.isPublished
+          : isPublished // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -135,7 +143,8 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       String body,
       @JsonKey(name: 'num_assets') int numAssets,
       List<String> assets,
-      @JsonKey(name: "created_at") DateTime createdAt});
+      @JsonKey(name: "created_at") DateTime createdAt,
+      @JsonKey(name: 'is_published') bool isPublished});
 
   @override
   $UserCopyWith<$Res> get owner;
@@ -158,6 +167,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
     Object? numAssets = null,
     Object? assets = null,
     Object? createdAt = null,
+    Object? isPublished = null,
   }) {
     return _then(_$_Post(
       id: null == id
@@ -192,6 +202,10 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      isPublished: null == isPublished
+          ? _value.isPublished
+          : isPublished // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -207,7 +221,8 @@ class _$_Post extends _Post {
       this.body = "",
       @JsonKey(name: 'num_assets') this.numAssets = 0,
       final List<String> assets = const [],
-      @JsonKey(name: "created_at") required this.createdAt})
+      @JsonKey(name: "created_at") required this.createdAt,
+      @JsonKey(name: 'is_published') required this.isPublished})
       : _assets = assets,
         super._();
 
@@ -238,10 +253,13 @@ class _$_Post extends _Post {
   @override
   @JsonKey(name: "created_at")
   final DateTime createdAt;
+  @override
+  @JsonKey(name: 'is_published')
+  final bool isPublished;
 
   @override
   String toString() {
-    return 'Post(id: $id, uuid: $uuid, title: $title, owner: $owner, body: $body, numAssets: $numAssets, assets: $assets, createdAt: $createdAt)';
+    return 'Post(id: $id, uuid: $uuid, title: $title, owner: $owner, body: $body, numAssets: $numAssets, assets: $assets, createdAt: $createdAt, isPublished: $isPublished)';
   }
 
   @override
@@ -258,13 +276,24 @@ class _$_Post extends _Post {
                 other.numAssets == numAssets) &&
             const DeepCollectionEquality().equals(other._assets, _assets) &&
             (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+                other.createdAt == createdAt) &&
+            (identical(other.isPublished, isPublished) ||
+                other.isPublished == isPublished));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, uuid, title, owner, body,
-      numAssets, const DeepCollectionEquality().hash(_assets), createdAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      uuid,
+      title,
+      owner,
+      body,
+      numAssets,
+      const DeepCollectionEquality().hash(_assets),
+      createdAt,
+      isPublished);
 
   @JsonKey(ignore: true)
   @override
@@ -289,7 +318,8 @@ abstract class _Post extends Post {
           final String body,
           @JsonKey(name: 'num_assets') final int numAssets,
           final List<String> assets,
-          @JsonKey(name: "created_at") required final DateTime createdAt}) =
+          @JsonKey(name: "created_at") required final DateTime createdAt,
+          @JsonKey(name: 'is_published') required final bool isPublished}) =
       _$_Post;
   _Post._() : super._();
 
@@ -313,6 +343,9 @@ abstract class _Post extends Post {
   @override
   @JsonKey(name: "created_at")
   DateTime get createdAt;
+  @override
+  @JsonKey(name: 'is_published')
+  bool get isPublished;
   @override
   @JsonKey(ignore: true)
   _$$_PostCopyWith<_$_Post> get copyWith => throw _privateConstructorUsedError;
