@@ -61,6 +61,8 @@ class PostFormProvider extends StateNotifier<Post> {
   void load(Post post) async {
     state = post;
     changesMade = false;
+    titleController.text = state.title;
+    bodyController.text = state.body;
   }
 
   String? titleValidator(String? value) => formValidatorNotEmpty(value, "Title");
@@ -80,8 +82,8 @@ class PostFormProvider extends StateNotifier<Post> {
 
   void clear() {
     state = Post.empty(ref.read(sessionProvider).user?.asUser());
-    titleController.text = state.title;
-    bodyController.text = state.body;
+    titleController.text = '';
+    bodyController.text = '';
   }
 
   Future<void> share(Post post) async {

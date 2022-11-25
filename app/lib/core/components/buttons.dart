@@ -261,18 +261,21 @@ class AppButton extends StatelessWidget {
             switch (type) {
               case AppButtonType.Elevated:
                 return ElevatedButton(
+                  key: Key('elevated${processing || disabled}'),
                   onPressed: processing || disabled ? () {} : onPressed,
                   style: _styleElevated(context),
                   child: _child(context),
                 );
               case AppButtonType.Outlined:
                 return OutlinedButton(
+                  key: Key('outlined${processing || disabled}'),
                   onPressed: processing || disabled ? () {} : onPressed,
                   style: _styleOutlined(context),
                   child: _child(context),
                 );
               case AppButtonType.Text:
                 return TextButton(
+                  key: Key('text${processing || disabled}'),
                   onPressed: processing || disabled ? () {} : onPressed,
                   style: _styleText(context),
                   child: _child(context),
