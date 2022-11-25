@@ -1,4 +1,7 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../../core/providers/session_provider.dart';
 import '../../../core/utils/strings.dart';
 
 part 'user.freezed.dart';
@@ -9,7 +12,6 @@ class User with _$User {
   const User._();
 
   factory User({
-    required int id,
     required String uuid,
     @Default("") String name,
     @Default("") String image,
@@ -19,7 +21,6 @@ class User with _$User {
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   factory User.empty() => User(
-        id: 0,
         uuid: "",
         name: "",
         createdAt: DateTime.now(),
@@ -27,5 +28,14 @@ class User with _$User {
 
   String get initials {
     return getInitials(name);
+  }
+
+  bool isMe(WidgetRef ref) {
+    final user = ref.read(sessionProvider).user;
+    if (user == null) {
+      return false;
+    }
+
+    return user.uuid == uuid;
   }
 }

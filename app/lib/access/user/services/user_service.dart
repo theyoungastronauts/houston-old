@@ -5,12 +5,12 @@ import '../models/user.dart';
 class UserService extends BaseService {
   static const baseUrl = "/user";
 
-  Future<User> retrieve(String uuid) async {
+  Future<User?> retrieve(String uuid) async {
     try {
       final response = await getHttp('$baseUrl/$uuid');
       return User.fromJson(response);
     } catch (e) {
-      rethrow;
+      return null;
     }
   }
 

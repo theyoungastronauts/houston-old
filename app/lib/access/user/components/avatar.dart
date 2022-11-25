@@ -1,10 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/components/base_component.dart';
 import '../../../core/utils/image.dart';
+import '../../../navigation/app_router.gr.dart';
 import '../models/user.dart';
 
-class Avatar extends StatelessWidget {
+class Avatar extends BaseComponent {
   final double size;
   final bool interactive;
   final User user;
@@ -17,9 +21,13 @@ class Avatar extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
-      onTap: interactive ? () {} : null,
+      onTap: interactive
+          ? () {
+              AutoRouter.of(context).push(UserDetailScreenRoute(uuid: user.uuid));
+            }
+          : null,
       child: SizedBox(
         width: size,
         height: size,

@@ -64,6 +64,6 @@ class Post with _$Post {
       return false;
     }
 
-    return user.id == owner.id;
+    return user.uuid == owner.uuid;
   }
 }

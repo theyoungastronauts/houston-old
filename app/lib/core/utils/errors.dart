@@ -25,6 +25,7 @@ AppBar appBarError({int? statusCode, String? message}) {
 
   return AppBar(
     title: Text(_errorText(statusCode: statusCode, message: message)),
+    automaticallyImplyLeading: false,
   );
 }
 

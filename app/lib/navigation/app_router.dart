@@ -1,18 +1,20 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/empty_router_widgets.dart';
+
 import '../access/auth/screens/login_screen.dart';
+import '../access/me/screens/me_profile_detail_screen.dart';
 import '../access/me/screens/me_profile_edit_screen.dart';
+import '../access/user/screens/user_detail_screen.dart';
 import '../content/post/screens/me_post_list_screen.dart';
 import '../content/post/screens/post_comment_screen.dart';
+import '../content/post/screens/post_detail_screen.dart';
+import '../content/post/screens/post_edit_screen.dart';
+import '../content/post/screens/post_list_screen.dart';
+import '../core/theme/screens/style_guide_screen.dart';
+import 'dashboard/components/dashboard_container.dart';
 import 'dashboard/screens/home_screen.dart';
 import 'landing/screens/landing_screen.dart';
-import 'dashboard/components/dashboard_container.dart';
-import '../content/post/screens/post_edit_screen.dart';
-import '../content/post/screens/post_detail_screen.dart';
-import '../content/post/screens/post_list_screen.dart';
 import 'settings/screens/settings_screen.dart';
-import '../core/theme/screens/style_guide_screen.dart';
-import '../access/me/screens/me_profile_detail_screen.dart';
 
 const List<AutoRoute> sharedRoutes = [
   AutoRoute(path: "settings", page: SettingsScreen),
@@ -20,6 +22,7 @@ const List<AutoRoute> sharedRoutes = [
   AutoRoute(path: "style-guide", page: StyleGuideScreen),
   AutoRoute(path: "post/:uuid", page: PostDetailScreen),
   AutoRoute(path: "post/:uuid/comments", page: PostCommentsScreen),
+  AutoRoute(path: "user/:uuid", page: UserDetailScreen),
 ];
 
 const List<AutoRoute> appRoutes = [

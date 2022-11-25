@@ -1,7 +1,7 @@
-import '../../../core/services/base_service.dart';
-import '../models/me_user.dart';
 import '../../../content/post/models/post.dart';
+import '../../../core/services/base_service.dart';
 import '../../user/models/user.dart';
+import '../models/me_user.dart';
 
 class MeService extends BaseService {
   static const basePath = '/user';
@@ -37,11 +37,11 @@ class MeService extends BaseService {
   }
 
   Future<bool> followUser(User user) async {
-    return await _action('$basePath/${user.id}/follow');
+    return await _action('$basePath/${user.uuid}/follow');
   }
 
   Future<bool> unfollowUser(User user) async {
-    return await _action('$basePath/${user.id}/unfollow');
+    return await _action('$basePath/${user.uuid}/unfollow');
   }
 
   Future<bool> bookmark(Post post) async {

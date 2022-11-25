@@ -18,6 +18,7 @@ class PostListScreen extends BaseScreen {
   AppBar? appBar(BuildContext context, WidgetRef ref) {
     return AppBar(
       title: const Text("Posts"),
+      centerTitle: true,
       actions: [
         if (ref.watch(sessionProvider).isAuthenticated)
           AppButton(

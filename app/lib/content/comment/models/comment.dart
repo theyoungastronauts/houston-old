@@ -1,9 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../access/user/models/user.dart';
-import '../../post/models/post.dart';
-import '../../../core/providers/session_provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
+
+import '../../../access/user/models/user.dart';
+import '../../../core/providers/session_provider.dart';
+import '../../post/models/post.dart';
+
 part 'comment.freezed.dart';
 part 'comment.g.dart';
 
@@ -31,15 +33,15 @@ class Comment with _$Comment {
       return false;
     }
 
-    if (owner.id == user.id) {
+    if (owner.uuid == user.uuid) {
       return true;
     }
 
-    if (parent != null && parent.owner.id == user.id) {
+    if (parent != null && parent.owner.uuid == user.uuid) {
       return true;
     }
 
-    if (post.owner.id == user.id) {
+    if (post.owner.uuid == user.uuid) {
       return true;
     }
 

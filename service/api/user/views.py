@@ -21,6 +21,11 @@ class UserAPIView(GenericAPIView):
     ordering = ["-created_at"]
 
 
+class UserRetrieveView(RetrieveModelMixin, UserAPIView):
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+
 class UserMeRetrieveUpdateView(RetrieveModelMixin, UpdateModelMixin, UserAPIView):
     serializer_class = UserSerializer
 

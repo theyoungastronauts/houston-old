@@ -10,7 +10,6 @@ class MeUser with _$MeUser {
   const MeUser._();
 
   factory MeUser({
-    required int id,
     required String uuid,
     @Default("") String name,
     @Default("") String image,
@@ -21,7 +20,6 @@ class MeUser with _$MeUser {
 
   User asUser() {
     return User(
-      id: id,
       uuid: uuid,
       createdAt: createdAt,
       image: image,

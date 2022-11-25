@@ -20,7 +20,6 @@ MeUser _$MeUserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MeUser {
-  int get id => throw _privateConstructorUsedError;
   String get uuid => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
@@ -38,8 +37,7 @@ abstract class $MeUserCopyWith<$Res> {
       _$MeUserCopyWithImpl<$Res, MeUser>;
   @useResult
   $Res call(
-      {int id,
-      String uuid,
+      {String uuid,
       String name,
       String image,
       @JsonKey(name: "created_at") DateTime createdAt});
@@ -58,17 +56,12 @@ class _$MeUserCopyWithImpl<$Res, $Val extends MeUser>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? uuid = null,
     Object? name = null,
     Object? image = null,
     Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
       uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
@@ -96,8 +89,7 @@ abstract class _$$_MeUserCopyWith<$Res> implements $MeUserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id,
-      String uuid,
+      {String uuid,
       String name,
       String image,
       @JsonKey(name: "created_at") DateTime createdAt});
@@ -113,17 +105,12 @@ class __$$_MeUserCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? uuid = null,
     Object? name = null,
     Object? image = null,
     Object? createdAt = null,
   }) {
     return _then(_$_MeUser(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
       uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
@@ -148,8 +135,7 @@ class __$$_MeUserCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_MeUser extends _MeUser {
   _$_MeUser(
-      {required this.id,
-      required this.uuid,
+      {required this.uuid,
       this.name = "",
       this.image = "",
       @JsonKey(name: "created_at") required this.createdAt})
@@ -158,8 +144,6 @@ class _$_MeUser extends _MeUser {
   factory _$_MeUser.fromJson(Map<String, dynamic> json) =>
       _$$_MeUserFromJson(json);
 
-  @override
-  final int id;
   @override
   final String uuid;
   @override
@@ -174,7 +158,7 @@ class _$_MeUser extends _MeUser {
 
   @override
   String toString() {
-    return 'MeUser(id: $id, uuid: $uuid, name: $name, image: $image, createdAt: $createdAt)';
+    return 'MeUser(uuid: $uuid, name: $name, image: $image, createdAt: $createdAt)';
   }
 
   @override
@@ -182,7 +166,6 @@ class _$_MeUser extends _MeUser {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MeUser &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.uuid, uuid) || other.uuid == uuid) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.image, image) || other.image == image) &&
@@ -192,8 +175,7 @@ class _$_MeUser extends _MeUser {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, uuid, name, image, createdAt);
+  int get hashCode => Object.hash(runtimeType, uuid, name, image, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -211,8 +193,7 @@ class _$_MeUser extends _MeUser {
 
 abstract class _MeUser extends MeUser {
   factory _MeUser(
-          {required final int id,
-          required final String uuid,
+          {required final String uuid,
           final String name,
           final String image,
           @JsonKey(name: "created_at") required final DateTime createdAt}) =
@@ -221,8 +202,6 @@ abstract class _MeUser extends MeUser {
 
   factory _MeUser.fromJson(Map<String, dynamic> json) = _$_MeUser.fromJson;
 
-  @override
-  int get id;
   @override
   String get uuid;
   @override

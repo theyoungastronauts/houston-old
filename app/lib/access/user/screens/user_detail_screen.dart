@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../core/screens/base_screen.dart';
 import '../../../core/utils/errors.dart';
+import '../components/user_profile.dart';
 import '../providers/user_detail_provider.dart';
 
 class UserDetailScreen extends BaseScreen {
@@ -14,27 +16,24 @@ class UserDetailScreen extends BaseScreen {
 
   @override
   AppBar? appBar(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userDetailProvider(uuid));
-
-    return user.when(
+    final data = ref.watch(userDetailProvider(uuid));
+    return data.when(
       loading: () => AppBar(
         title: const Text("User"),
       ),
       data: (user) => AppBar(
-        title: Text(user.uuid),
+        title: user != null ? Text(user.name) : appBarError(),
       ),
-      error: (_, __) => AppBar(
-        title: const Text("Error"),
-      ),
+      error: (_, __) => appBarError(),
     );
   }
 
   @override
   Widget body(BuildContext context, WidgetRef ref) {
-    final _user = ref.watch(userDetailProvider(uuid));
+    final data = ref.watch(userDetailProvider(uuid));
 
-    return _user.when(
-      data: (user) => Text(user.uuid),
+    return data.when(
+      data: (user) => user != null ? UserProfile(user) : contentError(),
       error: (_, __) => contentError(),
       loading: () => const Center(
         child: CircularProgressIndicator(),
