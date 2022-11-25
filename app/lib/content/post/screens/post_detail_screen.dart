@@ -1,9 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../core/components/buttons.dart';
 import '../../../core/screens/base_screen.dart';
-import '../../../core/components/empty_placeholder.dart';
+import '../../../core/utils/errors.dart';
 import '../../../navigation/app_router.gr.dart';
 import '../components/post_detail.dart';
 import '../providers/post_detail_provider.dart';
@@ -21,27 +22,26 @@ class PostDetailScreen extends BaseScreen {
     final data = ref.watch(postDetailProvider(uuid));
 
     return data.when(
-      loading: () => AppBar(
-        title: const Text("Post"),
-      ),
-      data: (post) => AppBar(
-        title: Text(post.title),
-        actions: [
-          if (post.isOwner(ref))
-            AppButton(
-              label: "Edit",
-              type: AppButtonType.Text,
-              onPressed: () {
-                ref.read(postFormProvider.notifier).load(post);
-                AutoRouter.of(context).push(const PostEditScreenRoute());
-              },
-            )
-        ],
-      ),
-      error: (_, __) => AppBar(
-        title: const Text("Error"),
-      ),
-    );
+        loading: () => AppBar(
+              title: const Text("Post"),
+            ),
+        data: (post) => post != null
+            ? AppBar(
+                title: Text("${post.title}${post.isDraft ? ' [Draft]' : ''}"),
+                actions: [
+                  if (post.isOwner(ref))
+                    AppButton(
+                      label: "Edit",
+                      type: AppButtonType.Text,
+                      onPressed: () {
+                        ref.read(postFormProvider.notifier).load(post);
+                        AutoRouter.of(context).push(const PostEditScreenRoute());
+                      },
+                    )
+                ],
+              )
+            : appBarError(),
+        error: (_, __) => appBarError());
   }
 
   @override
@@ -49,8 +49,8 @@ class PostDetailScreen extends BaseScreen {
     final _post = ref.watch(postDetailProvider(uuid));
 
     return _post.when(
-      data: (post) => PostDetail(post),
-      error: (_, __) => const EmptyPlaceholder(title: "Error"),
+      data: (post) => post != null ? PostDetail(post) : contentError(),
+      error: (_, __) => contentError(),
       loading: () => const Center(
         child: CircularProgressIndicator(),
       ),

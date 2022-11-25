@@ -1,9 +1,9 @@
 import '../../../core/services/base_service.dart';
 import '../../../core/utils/logging.dart';
 import '../../../core/utils/singletons.dart';
+import '../../user/models/user.dart';
 import '../models/login_result.dart';
 import '../models/token.dart';
-import '../../user/models/user.dart';
 
 class AuthService extends BaseService {
   static const basePath = '/auth';

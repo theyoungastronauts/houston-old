@@ -1,7 +1,9 @@
-import 'dart:typed_data';
 import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
+
 import '../../../core/services/base_service.dart';
 import '../../../core/utils/env.dart';
 import '../../../core/utils/image.dart';

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../../user/models/user.dart';
 
 part 'me_user.freezed.dart';

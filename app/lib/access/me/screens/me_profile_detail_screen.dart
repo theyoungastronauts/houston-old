@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/components/empty_placeholder.dart';
 import '../../../core/screens/base_screen.dart';
+import '../../../core/utils/errors.dart';
 import '../../../navigation/app_router.gr.dart';
 import '../components/me_profile.dart';
 import '../providers/me_provider.dart';
@@ -43,7 +44,7 @@ class MeProfileDetailScreen extends BaseScreen {
 
     return data.when(
       data: (user) => user != null ? MeProfile(user) : const EmptyPlaceholder(title: "You are not logged in."),
-      error: (_, __) => const EmptyPlaceholder(title: "Error"),
+      error: (_, __) => contentError(),
       loading: () => const Center(
         child: CircularProgressIndicator(),
       ),

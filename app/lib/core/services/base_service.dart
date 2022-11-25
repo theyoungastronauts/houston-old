@@ -1,8 +1,9 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
+
 import '../../access/auth/models/token.dart';
 import '../utils/env.dart';
-import 'package:dio/dio.dart';
 
 class BaseService {
   Map<String, dynamic> _headers([bool auth = true]) {

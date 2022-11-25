@@ -1,9 +1,9 @@
-import '../models/new_comment.dart';
-import '../../../core/services/base_service.dart';
 import '../../../core/models/paginated_response.dart';
-import '../models/comment.dart';
+import '../../../core/services/base_service.dart';
 import '../../../core/utils/logging.dart';
 import '../../../core/utils/singletons.dart';
+import '../models/comment.dart';
+import '../models/new_comment.dart';
 
 class CommentService extends BaseService {
   Future<PaginatedResponse<Comment>> _list(

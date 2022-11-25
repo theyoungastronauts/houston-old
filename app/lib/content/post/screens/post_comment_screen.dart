@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../core/utils/errors.dart';
 import '../../comment/components/comment_form.dart';
 import '../../comment/components/comment_list.dart';
 import '../providers/post_detail_provider.dart';
@@ -20,14 +21,12 @@ class PostCommentsScreen extends BaseScreen {
 
     return post.when(
       loading: () => AppBar(),
-      error: (_, __) => AppBar(
-        title: const Text("Error"),
-      ),
-      data: (post) {
-        return AppBar(
-          title: Text("Comments on ${post.title}"),
-        );
-      },
+      error: (err, __) => appBarError(),
+      data: (post) => post != null
+          ? AppBar(
+              title: Text("Comments on ${post.title}"),
+            )
+          : appBarError(),
     );
   }
 
@@ -36,12 +35,9 @@ class PostCommentsScreen extends BaseScreen {
     final post = ref.watch(postDetailProvider(postUuid));
 
     return post.when(
-      loading: () => const CenteredLoader(),
-      error: (_, __) => const Text("Error"),
-      data: (post) {
-        return CommentList(post: post);
-      },
-    );
+        loading: () => const CenteredLoader(),
+        error: (_, __) => contentError(),
+        data: (post) => post != null ? CommentList(post: post) : contentError());
   }
 
   @override

@@ -2,9 +2,10 @@
 
 import 'dart:convert';
 
+import 'package:jwt_decoder/jwt_decoder.dart';
+
 import '../../../core/utils/singletons.dart';
 import '../../../core/utils/storage.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 
 class Token {
   String access;

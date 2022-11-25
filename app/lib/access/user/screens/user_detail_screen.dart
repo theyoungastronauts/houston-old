@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/components/empty_placeholder.dart';
 import '../../../core/screens/base_screen.dart';
+import '../../../core/utils/errors.dart';
 import '../providers/user_detail_provider.dart';
 
 class UserDetailScreen extends BaseScreen {
@@ -35,7 +35,7 @@ class UserDetailScreen extends BaseScreen {
 
     return _user.when(
       data: (user) => Text(user.uuid),
-      error: (_, __) => const EmptyPlaceholder(title: "Error"),
+      error: (_, __) => contentError(),
       loading: () => const Center(
         child: CircularProgressIndicator(),
       ),

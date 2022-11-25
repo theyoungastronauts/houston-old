@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../core/components/base_component.dart';
-import '../providers/post_form_provider.dart';
 import '../../../media/asset/components/multi_asset_manager.dart';
+import '../providers/post_form_provider.dart';
 
 class PostForm extends BaseComponent {
   const PostForm({Key? key}) : super(key: key);
@@ -24,9 +25,6 @@ class PostForm extends BaseComponent {
                 controller: provider.titleController,
                 validator: provider.titleValidator,
                 decoration: const InputDecoration(label: Text("Title")),
-                onChanged: (_) {
-                  provider.updateModel();
-                },
               ),
               TextFormField(
                 controller: provider.bodyController,
@@ -34,9 +32,6 @@ class PostForm extends BaseComponent {
                 decoration: const InputDecoration(label: Text("Body")),
                 minLines: 3,
                 maxLines: 3,
-                onChanged: (_) {
-                  provider.updateModel();
-                },
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),

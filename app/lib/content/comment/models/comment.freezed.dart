@@ -20,7 +20,6 @@ Comment _$CommentFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Comment {
-  int get id => throw _privateConstructorUsedError;
   String get uuid => throw _privateConstructorUsedError;
   String get body => throw _privateConstructorUsedError;
   User get owner => throw _privateConstructorUsedError;
@@ -39,8 +38,7 @@ abstract class $CommentCopyWith<$Res> {
       _$CommentCopyWithImpl<$Res, Comment>;
   @useResult
   $Res call(
-      {int id,
-      String uuid,
+      {String uuid,
       String body,
       User owner,
       List<Comment>? children,
@@ -62,7 +60,6 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? uuid = null,
     Object? body = null,
     Object? owner = null,
@@ -70,10 +67,6 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
     Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
       uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
@@ -114,8 +107,7 @@ abstract class _$$_CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id,
-      String uuid,
+      {String uuid,
       String body,
       User owner,
       List<Comment>? children,
@@ -135,7 +127,6 @@ class __$$_CommentCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? uuid = null,
     Object? body = null,
     Object? owner = null,
@@ -143,10 +134,6 @@ class __$$_CommentCopyWithImpl<$Res>
     Object? createdAt = null,
   }) {
     return _then(_$_Comment(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
       uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
@@ -175,8 +162,7 @@ class __$$_CommentCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Comment extends _Comment {
   _$_Comment(
-      {required this.id,
-      required this.uuid,
+      {required this.uuid,
       required this.body,
       required this.owner,
       final List<Comment>? children,
@@ -187,8 +173,6 @@ class _$_Comment extends _Comment {
   factory _$_Comment.fromJson(Map<String, dynamic> json) =>
       _$$_CommentFromJson(json);
 
-  @override
-  final int id;
   @override
   final String uuid;
   @override
@@ -210,7 +194,7 @@ class _$_Comment extends _Comment {
 
   @override
   String toString() {
-    return 'Comment(id: $id, uuid: $uuid, body: $body, owner: $owner, children: $children, createdAt: $createdAt)';
+    return 'Comment(uuid: $uuid, body: $body, owner: $owner, children: $children, createdAt: $createdAt)';
   }
 
   @override
@@ -218,7 +202,6 @@ class _$_Comment extends _Comment {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Comment &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.uuid, uuid) || other.uuid == uuid) &&
             (identical(other.body, body) || other.body == body) &&
             (identical(other.owner, owner) || other.owner == owner) &&
@@ -229,7 +212,7 @@ class _$_Comment extends _Comment {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, uuid, body, owner,
+  int get hashCode => Object.hash(runtimeType, uuid, body, owner,
       const DeepCollectionEquality().hash(_children), createdAt);
 
   @JsonKey(ignore: true)
@@ -248,8 +231,7 @@ class _$_Comment extends _Comment {
 
 abstract class _Comment extends Comment {
   factory _Comment(
-          {required final int id,
-          required final String uuid,
+          {required final String uuid,
           required final String body,
           required final User owner,
           final List<Comment>? children,
@@ -259,8 +241,6 @@ abstract class _Comment extends Comment {
 
   factory _Comment.fromJson(Map<String, dynamic> json) = _$_Comment.fromJson;
 
-  @override
-  int get id;
   @override
   String get uuid;
   @override

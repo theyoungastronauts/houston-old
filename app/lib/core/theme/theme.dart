@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import '../utils/color.dart';
 import '../utils/html/html_helpers.dart';
 
@@ -164,25 +165,29 @@ class AppTheme {
     );
   }
 
-  static appVariantToColor(BuildContext context, AppColorVariant variant) {
+  static Color appVariantToColor(
+    BuildContext context,
+    AppColorVariant variant, [
+    double opacity = 1.0,
+  ]) {
     final _colors = Theme.of(context).colorScheme;
     switch (variant) {
       case AppColorVariant.primary:
-        return _colors.primary;
+        return _colors.primary.withOpacity(opacity);
       case AppColorVariant.secondary:
-        return _colors.secondary;
+        return _colors.secondary.withOpacity(opacity);
       case AppColorVariant.info:
-        return _colors.info;
+        return _colors.info.withOpacity(opacity);
       case AppColorVariant.success:
-        return _colors.success;
+        return _colors.success.withOpacity(opacity);
       case AppColorVariant.warning:
-        return _colors.warning;
+        return _colors.warning.withOpacity(opacity);
       case AppColorVariant.danger:
-        return _colors.danger;
+        return _colors.danger.withOpacity(opacity);
       case AppColorVariant.light:
-        return _colors.light;
+        return _colors.light.withOpacity(opacity);
       case AppColorVariant.dark:
-        return _colors.dark;
+        return _colors.dark.withOpacity(opacity);
     }
   }
 }

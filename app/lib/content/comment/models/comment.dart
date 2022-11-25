@@ -12,7 +12,6 @@ class Comment with _$Comment {
   const Comment._();
 
   factory Comment({
-    required int id,
     required String uuid,
     required String body,
     required User owner,

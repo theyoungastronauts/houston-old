@@ -20,7 +20,6 @@ Post _$PostFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Post {
-  int get id => throw _privateConstructorUsedError;
   String get uuid => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   User get owner => throw _privateConstructorUsedError;
@@ -44,8 +43,7 @@ abstract class $PostCopyWith<$Res> {
       _$PostCopyWithImpl<$Res, Post>;
   @useResult
   $Res call(
-      {int id,
-      String uuid,
+      {String uuid,
       String title,
       User owner,
       String body,
@@ -70,7 +68,6 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? uuid = null,
     Object? title = null,
     Object? owner = null,
@@ -81,10 +78,6 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? isPublished = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
       uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
@@ -136,8 +129,7 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id,
-      String uuid,
+      {String uuid,
       String title,
       User owner,
       String body,
@@ -159,7 +151,6 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? uuid = null,
     Object? title = null,
     Object? owner = null,
@@ -170,10 +161,6 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
     Object? isPublished = null,
   }) {
     return _then(_$_Post(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
       uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
@@ -214,8 +201,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
 @JsonSerializable()
 class _$_Post extends _Post {
   _$_Post(
-      {required this.id,
-      required this.uuid,
+      {required this.uuid,
       required this.title,
       required this.owner,
       this.body = "",
@@ -228,8 +214,6 @@ class _$_Post extends _Post {
 
   factory _$_Post.fromJson(Map<String, dynamic> json) => _$$_PostFromJson(json);
 
-  @override
-  final int id;
   @override
   final String uuid;
   @override
@@ -259,7 +243,7 @@ class _$_Post extends _Post {
 
   @override
   String toString() {
-    return 'Post(id: $id, uuid: $uuid, title: $title, owner: $owner, body: $body, numAssets: $numAssets, assets: $assets, createdAt: $createdAt, isPublished: $isPublished)';
+    return 'Post(uuid: $uuid, title: $title, owner: $owner, body: $body, numAssets: $numAssets, assets: $assets, createdAt: $createdAt, isPublished: $isPublished)';
   }
 
   @override
@@ -267,7 +251,6 @@ class _$_Post extends _Post {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Post &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.uuid, uuid) || other.uuid == uuid) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.owner, owner) || other.owner == owner) &&
@@ -285,7 +268,6 @@ class _$_Post extends _Post {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      id,
       uuid,
       title,
       owner,
@@ -311,8 +293,7 @@ class _$_Post extends _Post {
 
 abstract class _Post extends Post {
   factory _Post(
-          {required final int id,
-          required final String uuid,
+          {required final String uuid,
           required final String title,
           required final User owner,
           final String body,
@@ -325,8 +306,6 @@ abstract class _Post extends Post {
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
 
-  @override
-  int get id;
   @override
   String get uuid;
   @override

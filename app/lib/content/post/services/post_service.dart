@@ -1,5 +1,5 @@
-import '../../../core/services/base_service.dart';
 import '../../../core/models/paginated_response.dart';
+import '../../../core/services/base_service.dart';
 import '../../../core/utils/logging.dart';
 import '../../../core/utils/singletons.dart';
 import '../models/post.dart';
@@ -7,12 +7,21 @@ import '../models/post.dart';
 class PostService extends BaseService {
   static const baseUrl = "/post";
 
-  Future<Post> retrieve(String uuid) async {
+  Future<Post?> retrieve(String uuid) async {
+    try {
+      final response = await getHttp('$baseUrl/$uuid');
+      return Post.fromJson(response);
+    } catch (e) {
+      return await meRetrieve(uuid);
+    }
+  }
+
+  Future<Post?> meRetrieve(String uuid) async {
     try {
       final response = await getHttp('$baseUrl/me/$uuid');
       return Post.fromJson(response);
     } catch (e) {
-      rethrow;
+      return null;
     }
   }
 

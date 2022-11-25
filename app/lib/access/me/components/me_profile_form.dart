@@ -1,6 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../core/components/base_component.dart';
 import '../../../core/components/buttons.dart';
 import '../../../core/utils/toast.dart';
@@ -56,7 +56,7 @@ class MeProfileForm extends BaseComponent {
                     label: "Discard",
                     type: AppButtonType.Text,
                     onPressed: () {
-                      AutoRouter.of(context).pop();
+                      Navigator.of(context).pop();
                     },
                   ),
                   AppButton(
@@ -69,7 +69,7 @@ class MeProfileForm extends BaseComponent {
                       }
 
                       if (success) {
-                        AutoRouter.of(context).pop();
+                        Navigator.of(context).pop();
                         Toast.message("Updated!");
                       } else {
                         Toast.error();

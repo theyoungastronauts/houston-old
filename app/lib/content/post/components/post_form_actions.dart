@@ -1,11 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/theme/theme.dart';
-import '../providers/post_form_provider.dart';
+
 import '../../../core/components/base_component.dart';
 import '../../../core/components/buttons.dart';
+import '../../../core/theme/theme.dart';
 import '../../../core/utils/toast.dart';
+import '../providers/post_form_provider.dart';
 
 class PostFormActions extends BaseComponent {
   const PostFormActions({
@@ -28,76 +29,94 @@ class PostFormActions extends BaseComponent {
             AppButton(
               label: "Discard",
               type: AppButtonType.Text,
-              onPressed: () {
-                provider.discard().then((pop) {
-                  if (pop) {
-                    AutoRouter.of(context).pop();
-                  }
-                });
+              onPressed: () async {
+                final confirmed = await provider.discard();
+                if (confirmed) {
+                  Navigator.of(context).pop();
+                }
               },
             ),
             Row(
               children: [
-                !post.exists
-                    ? Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4),
-                        child: AppButton(
-                          label: "Save as draft",
-                          variant: AppColorVariant.light,
-                          onPressed: () async {
-                            final success = await provider.submit(isDraft: true);
+                if (post.exists)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: AppButton(
+                      label: 'Delete',
+                      variant: AppColorVariant.danger,
+                      onPressed: () {
+                        provider.delete(post, onDelete: () {
+                          AutoRouter.of(context).popUntilRoot();
+                        });
+                      },
+                    ),
+                  ),
+                if (!post.exists || !post.isPublished)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: AppButton(
+                      label: "Save Draft",
+                      variant: AppColorVariant.light,
+                      onPressed: () async {
+                        final success = await provider.submit(shouldPublish: false);
 
-                            if (success == null) {
-                              return;
-                            }
+                        if (success == true) {
+                          Navigator.of(context).pop();
+                          Toast.message("Saved as draft!");
+                        } else {
+                          Toast.error();
+                        }
+                      },
+                    ),
+                  ),
+                if (post.isPublished)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: AppButton(
+                      label: 'Unpublish',
+                      variant: AppColorVariant.secondary,
+                      onPressed: () async {
+                        final success = await provider.submit(shouldPublish: false);
 
-                            if (success) {
-                              AutoRouter.of(context).pop();
-                              Toast.message("Saved as draft!");
-                            } else {
-                              Toast.error();
-                            }
-                          },
-                        ),
-                      )
-                    : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4),
-                        child: AppButton(
-                          label: post.isPublished ? 'Unpublish' : 'Publish',
-                          variant: AppColorVariant.light,
-                          onPressed: () async {
-                            final success = await provider.submit(isDraft: post.isPublished);
+                        if (success == true) {
+                          Toast.message("Post Unpublished");
+                          Navigator.of(context).pop();
+                        }
+                      },
+                    ),
+                  ),
+                if (!post.isPublished)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: AppButton(
+                      label: 'Publish',
+                      variant: AppColorVariant.primary,
+                      onPressed: () async {
+                        final success = await provider.submit(shouldPublish: true);
 
-                            if (success == null) {
-                              return;
-                            }
+                        if (success == true) {
+                          Toast.message("Post Published");
+                          Navigator.of(context).pop();
+                        }
+                      },
+                    ),
+                  ),
 
-                            if (success) {
-                              AutoRouter.of(context).pop();
-                              post.isPublished ? Toast.message("Post Unpublished!") : Toast.message("Post Published!");
-                            } else {
-                              Toast.error();
-                            }
-                          },
-                        ),
-                      ),
-                AppButton(
-                  label: post.exists ? "Save" : "Publish",
-                  onPressed: () async {
-                    final success = await provider.submit();
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 4),
+                //   child: AppButton(
+                //     label: post.canUnpublish ? 'Unpublish' : 'Publish',
+                //     variant: post.canUnpublish ? AppColorVariant.light : AppColorVariant.primary,
+                //     onPressed: () async {
+                //       final success = await provider.submit(shouldPublish: !post.canUnpublish);
 
-                    if (success == null) {
-                      return;
-                    }
-
-                    if (success) {
-                      AutoRouter.of(context).pop();
-                      Toast.message("Published!");
-                    } else {
-                      Toast.error();
-                    }
-                  },
-                ),
+                //       if (success == true) {
+                //         Toast.message(post.canUnpublish ? "Post Unpublished" : "Post Published!");
+                //         Navigator.of(context).pop();
+                //       }
+                //     },
+                //   ),
+                // ),
               ],
             )
           ],

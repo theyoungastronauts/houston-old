@@ -1,9 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../../access/user/models/user.dart';
 import '../../../core/providers/session_provider.dart';
 import '../../../core/utils/image.dart';
 import '../../../core/utils/strings.dart';
-import '../../../access/user/models/user.dart';
 
 part 'post.freezed.dart';
 part 'post.g.dart';
@@ -13,7 +14,6 @@ class Post with _$Post {
   const Post._();
 
   factory Post({
-    required int id,
     required String uuid,
     required String title,
     required User owner,
@@ -26,7 +26,13 @@ class Post with _$Post {
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 
-  factory Post.empty([User? owner]) => Post(id: 0, uuid: "", title: "", owner: owner ?? User.empty(), createdAt: DateTime.now(), isPublished: false);
+  factory Post.empty([User? owner]) => Post(
+        uuid: "",
+        title: "",
+        owner: owner ?? User.empty(),
+        createdAt: DateTime.now(),
+        isPublished: false,
+      );
 
   String thumbnail({double width = 300, double height = 300}) {
     if (assets.isNotEmpty) {
@@ -41,7 +47,15 @@ class Post with _$Post {
   }
 
   bool get exists {
-    return id > 0;
+    return uuid.isNotEmpty;
+  }
+
+  bool get isDraft {
+    return exists && !isPublished;
+  }
+
+  bool get canUnpublish {
+    return exists && isPublished;
   }
 
   bool isOwner(WidgetRef ref) {

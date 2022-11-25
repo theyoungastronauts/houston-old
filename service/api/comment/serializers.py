@@ -10,7 +10,6 @@ class ChildCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = [
-            "id",
             "uuid",
             "body",
             "owner",
@@ -18,7 +17,6 @@ class ChildCommentSerializer(serializers.ModelSerializer):
         ]
 
         read_only_fields = [
-            "id",
             "uuid",
             "uuid",
             "created_at",
@@ -32,7 +30,6 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = [
-            "id",
             "uuid",
             "body",
             "children",
@@ -41,7 +38,6 @@ class CommentSerializer(serializers.ModelSerializer):
         ]
 
         read_only_fields = [
-            "id",
             "uuid",
             "children",
             "created_at",

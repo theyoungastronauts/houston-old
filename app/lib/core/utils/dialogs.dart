@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import '../app.dart';
+import '../components/buttons.dart';
 import '../theme/theme.dart';
 
-import '../components/buttons.dart';
-
 class InfoDialog {
-  static show({
+  static Future<bool?> show({
     required String title,
     String? body,
     Widget? content,
@@ -43,7 +43,7 @@ class InfoDialog {
 }
 
 class ConfirmDialog {
-  static show({
+  static Future<bool?> show({
     required String title,
     Widget? content,
     String? body,

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'post_list_tile.dart';
+
 import '../../../core/components/base_component.dart';
 import '../../../core/components/infinite_grid.dart';
-import 'post_card.dart';
-import '../models/post.dart';
-import '../providers/post_list_provider.dart';
 import '../../../core/components/infinite_list.dart';
 import '../../../core/providers/list_mode_provider.dart';
+import '../models/post.dart';
+import '../providers/post_list_provider.dart';
+import 'post_card.dart';
+import 'post_list_tile.dart';
 
 class PostList extends BaseComponent {
   final PostListType type;

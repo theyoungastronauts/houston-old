@@ -45,18 +45,18 @@ class MeService extends BaseService {
   }
 
   Future<bool> bookmark(Post post) async {
-    return await _action('/post/${post.id}/bookmark');
+    return await _action('/post/${post.uuid}/bookmark');
   }
 
   Future<bool> unbookmark(Post post) async {
-    return await _action('/post/${post.id}/unbookmark');
+    return await _action('/post/${post.uuid}/unbookmark');
   }
 
   Future<bool> like(Post post) async {
-    return await _action('/post/${post.id}/like');
+    return await _action('/post/${post.uuid}/like');
   }
 
   Future<bool> unlike(Post post) async {
-    return await _action('/post/${post.id}/unlike');
+    return await _action('/post/${post.uuid}/unlike');
   }
 }

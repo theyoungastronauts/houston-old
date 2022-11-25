@@ -1,12 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'post_context_menu.dart';
-import 'post_thumbnail.dart';
+
+import '../../../access/user/components/avatar.dart';
+import '../../../core/components/badges.dart';
+import '../../../core/components/base_component.dart';
+import '../../../core/theme/theme.dart';
 import '../../../navigation/app_router.gr.dart';
 import '../models/post.dart';
-import '../../../core/components/base_component.dart';
-import '../../../access/user/components/avatar.dart';
+import 'post_context_menu.dart';
+import 'post_thumbnail.dart';
 
 class PostCard extends BaseComponent {
   final Post post;
@@ -55,7 +58,24 @@ class PostCard extends BaseComponent {
                   ),
                 ),
               ),
-              Expanded(child: PostThumbnail(post)),
+              Expanded(
+                child: Stack(
+                  children: [
+                    PostThumbnail(post),
+                    if (post.isDraft)
+                      const Align(
+                        alignment: Alignment.topRight,
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: AppBadge(
+                            label: "Draft",
+                            variant: AppColorVariant.info,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
