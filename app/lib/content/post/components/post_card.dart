@@ -32,6 +32,7 @@ class PostCard extends BaseComponent {
           },
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 color: Theme.of(context).colorScheme.background,
