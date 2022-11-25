@@ -253,6 +253,7 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final key = "$variant:$type:$size:$processing:$icon:$iconTrails:$disabled";
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -261,21 +262,21 @@ class AppButton extends StatelessWidget {
             switch (type) {
               case AppButtonType.Elevated:
                 return ElevatedButton(
-                  key: Key('elevated${processing || disabled}'),
+                  key: Key('elevated:$key'),
                   onPressed: processing || disabled ? () {} : onPressed,
                   style: _styleElevated(context),
                   child: _child(context),
                 );
               case AppButtonType.Outlined:
                 return OutlinedButton(
-                  key: Key('outlined${processing || disabled}'),
+                  key: Key('outlined:$key'),
                   onPressed: processing || disabled ? () {} : onPressed,
                   style: _styleOutlined(context),
                   child: _child(context),
                 );
               case AppButtonType.Text:
                 return TextButton(
-                  key: Key('text${processing || disabled}'),
+                  key: Key('text:$key'),
                   onPressed: processing || disabled ? () {} : onPressed,
                   style: _styleText(context),
                   child: _child(context),
