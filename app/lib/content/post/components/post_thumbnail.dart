@@ -1,29 +1,42 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
+import '../../../core/utils/dialogs.dart';
 import '../models/post.dart';
 
 class PostThumbnail extends StatelessWidget {
+  final Post post;
+  final bool interactive;
+  final int assetIndex;
+
   const PostThumbnail(
     this.post, {
     Key? key,
+    this.interactive = true,
+    this.assetIndex = 0,
   }) : super(key: key);
-
-  final Post post;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      final w = constraints.maxWidth;
-      final h = constraints.maxHeight;
+      final width = constraints.maxWidth;
+      final height = constraints.maxHeight;
 
-      return SizedBox(
-        width: w,
-        height: h,
-        child: CachedNetworkImage(
-          imageUrl: post.thumbnail(width: w, height: h),
-          width: w,
-          height: h,
-          fit: BoxFit.contain,
+      return InkWell(
+        onTap: interactive
+            ? () {
+                ImagePreviewDialog.show(post.assets[assetIndex]);
+              }
+            : null,
+        child: SizedBox(
+          width: width,
+          height: height,
+          child: CachedNetworkImage(
+            imageUrl: post.thumbnail(assetIndex: assetIndex, width: width, height: height),
+            width: width,
+            height: height,
+            fit: BoxFit.cover,
+          ),
         ),
       );
     });

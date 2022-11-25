@@ -34,12 +34,12 @@ class Post with _$Post {
         isPublished: false,
       );
 
-  String thumbnail({double width = 300, double height = 300}) {
+  String thumbnail({int assetIndex = 0, double width = 300, double height = 300}) {
     if (assets.isNotEmpty) {
-      return ImageUrlBuilder.resize(assets.first, width: width, height: height);
+      return ImageUrlBuilder.resize(assets[assetIndex], width: width, height: height);
     }
 
-    return "https://placekitten.com/${width.round()}/${height.round()}";
+    return "https://via.placeholder.com/${width.round()}/${height.round()}";
   }
 
   String excerpt({int length = 64, String ommission = "..."}) {

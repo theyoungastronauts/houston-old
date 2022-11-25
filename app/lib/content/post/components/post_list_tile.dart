@@ -1,11 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'post_context_menu.dart';
-import 'post_thumbnail.dart';
-import '../models/post.dart';
+
 import '../../../core/components/base_component.dart';
 import '../../../navigation/app_router.gr.dart';
+import '../models/post.dart';
+import 'post_context_menu.dart';
+import 'post_thumbnail.dart';
 
 class PostListTile extends BaseComponent {
   final Post post;
@@ -16,7 +17,14 @@ class PostListTile extends BaseComponent {
     return ListTile(
       title: Text(post.title),
       subtitle: Text(post.owner.name),
-      leading: SizedBox(width: 32, height: 32, child: PostThumbnail(post)),
+      leading: SizedBox(
+        width: 32,
+        height: 32,
+        child: PostThumbnail(
+          post,
+          interactive: false,
+        ),
+      ),
       trailing: PostListContextMenu(
         post: post,
       ),

@@ -1,11 +1,12 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../core/components/base_component.dart';
-import '../models/post.dart';
 import '../../../core/components/buttons.dart';
 import '../../../navigation/app_router.gr.dart';
+import '../models/post.dart';
+import 'post_thumbnail.dart';
 
 class PostDetail extends BaseComponent {
   final Post post;
@@ -29,18 +30,18 @@ class PostDetail extends BaseComponent {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Wrap(
+              spacing: 8.0,
               children: post.assets
-                  .map(
-                    (url) => SizedBox(
-                      width: 64,
-                      height: 64,
-                      child: CachedNetworkImage(
-                        imageUrl: url,
-                        width: 64,
-                        height: 64,
-                      ),
-                    ),
-                  )
+                  .asMap()
+                  .entries
+                  .map((entry) => SizedBox(
+                        width: 128,
+                        height: 128,
+                        child: PostThumbnail(
+                          post,
+                          assetIndex: entry.key,
+                        ),
+                      ))
                   .toList(),
             ),
           ),

@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../app.dart';
 import '../components/buttons.dart';
 import '../theme/theme.dart';
+import 'image.dart';
 
 class InfoDialog {
   static Future<bool?> show({
@@ -215,6 +217,37 @@ class PromptModal {
                 Navigator.of(context).pop(value.isNotEmpty ? value : null);
               },
               child: Text(confirmText ?? "Submit"),
+            )
+          ],
+        );
+      },
+    );
+  }
+}
+
+class ImagePreviewDialog {
+  static Future<bool?> show(String url, {double width = 512}) async {
+    final context = rootNavigatorKey.currentContext!;
+
+    return await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          contentPadding: const EdgeInsets.all(16.0),
+          content: SizedBox(
+            width: width,
+            child: CachedNetworkImage(
+              imageUrl: ImageUrlBuilder.resize(url, width: width),
+              fit: BoxFit.fitWidth,
+            ),
+          ),
+          actions: [
+            AppButton(
+              label: "Close",
+              type: AppButtonType.Text,
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             )
           ],
         );

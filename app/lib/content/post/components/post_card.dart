@@ -62,7 +62,10 @@ class PostCard extends BaseComponent {
               Expanded(
                 child: Stack(
                   children: [
-                    PostThumbnail(post),
+                    PostThumbnail(
+                      post,
+                      interactive: false,
+                    ),
                     if (post.isDraft)
                       const Align(
                         alignment: Alignment.topRight,

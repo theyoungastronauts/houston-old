@@ -31,7 +31,10 @@ class PostList extends BaseComponent {
           )
         : InfiniteGrid<Post>(
             pagingController: listProvider.pagingController,
-            itemBuilder: (context, post, index) => PostCard(post),
+            itemBuilder: (context, post, index) => PostCard(
+              post,
+              width: 300,
+            ),
             emptyText: "No Posts",
             onRefresh: listProvider.refresh,
             itemWidth: 300,
