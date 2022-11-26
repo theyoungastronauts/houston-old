@@ -32,6 +32,7 @@ class UserSerializer(serializers.ModelSerializer):
             "name",
             "email",
             "image",
+            "bio",
             "is_setup",
             "metadata",
             "created_at",
@@ -56,5 +57,6 @@ class UserPublicSerializer(serializers.ModelSerializer):
             "uuid",
             "name",
             "image",
+            "bio",
             "created_at",
         ]

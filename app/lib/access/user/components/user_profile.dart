@@ -34,6 +34,18 @@ class UserProfile extends BaseComponent {
                 style: Theme.of(context).textTheme.headline3,
               ),
             ),
+            if (user.bio.isNotEmpty)
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 500),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    user.bio,
+                    style: Theme.of(context).textTheme.bodyText2,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
             if (isMe)
               AppButton(
                 label: "Setting",

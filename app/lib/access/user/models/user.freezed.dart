@@ -23,6 +23,7 @@ mixin _$User {
   String get uuid => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
+  String get bio => throw _privateConstructorUsedError;
   @JsonKey(name: "created_at")
   DateTime get createdAt => throw _privateConstructorUsedError;
 
@@ -40,6 +41,7 @@ abstract class $UserCopyWith<$Res> {
       {String uuid,
       String name,
       String image,
+      String bio,
       @JsonKey(name: "created_at") DateTime createdAt});
 }
 
@@ -59,6 +61,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? uuid = null,
     Object? name = null,
     Object? image = null,
+    Object? bio = null,
     Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
@@ -73,6 +76,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
+              as String,
+      bio: null == bio
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: null == createdAt
           ? _value.createdAt
@@ -92,6 +99,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       {String uuid,
       String name,
       String image,
+      String bio,
       @JsonKey(name: "created_at") DateTime createdAt});
 }
 
@@ -107,6 +115,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? uuid = null,
     Object? name = null,
     Object? image = null,
+    Object? bio = null,
     Object? createdAt = null,
   }) {
     return _then(_$_User(
@@ -121,6 +130,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
+              as String,
+      bio: null == bio
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: null == createdAt
           ? _value.createdAt
@@ -137,6 +150,7 @@ class _$_User extends _User {
       {required this.uuid,
       this.name = "",
       this.image = "",
+      this.bio = "",
       @JsonKey(name: "created_at") required this.createdAt})
       : super._();
 
@@ -151,12 +165,15 @@ class _$_User extends _User {
   @JsonKey()
   final String image;
   @override
+  @JsonKey()
+  final String bio;
+  @override
   @JsonKey(name: "created_at")
   final DateTime createdAt;
 
   @override
   String toString() {
-    return 'User(uuid: $uuid, name: $name, image: $image, createdAt: $createdAt)';
+    return 'User(uuid: $uuid, name: $name, image: $image, bio: $bio, createdAt: $createdAt)';
   }
 
   @override
@@ -167,13 +184,15 @@ class _$_User extends _User {
             (identical(other.uuid, uuid) || other.uuid == uuid) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.image, image) || other.image == image) &&
+            (identical(other.bio, bio) || other.bio == bio) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, uuid, name, image, createdAt);
+  int get hashCode =>
+      Object.hash(runtimeType, uuid, name, image, bio, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -194,6 +213,7 @@ abstract class _User extends User {
           {required final String uuid,
           final String name,
           final String image,
+          final String bio,
           @JsonKey(name: "created_at") required final DateTime createdAt}) =
       _$_User;
   _User._() : super._();
@@ -206,6 +226,8 @@ abstract class _User extends User {
   String get name;
   @override
   String get image;
+  @override
+  String get bio;
   @override
   @JsonKey(name: "created_at")
   DateTime get createdAt;

@@ -42,6 +42,7 @@ class User(AbstractModel, AbstractBaseUser):
         validators=[RegexValidator(settings.BITPACK_IMAGE_URL_RE)],
         blank=True,
     )
+    bio = models.TextField(_("Bio"), blank=True, default="")
     is_active = models.BooleanField(
         _("Active"),
         help_text=_("Designates whether this user can access their account."),

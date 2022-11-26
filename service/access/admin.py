@@ -66,6 +66,7 @@ class UserAdmin(OverridesMixin, BaseUserAdmin):
                     "name",
                     "email",
                     "image",
+                    "bio",
                     "password1",
                     "password2",
                 ]
@@ -89,6 +90,7 @@ class UserAdmin(OverridesMixin, BaseUserAdmin):
                     "name",
                     "email",
                     "image",
+                    "bio",
                 ]
             },
         ),

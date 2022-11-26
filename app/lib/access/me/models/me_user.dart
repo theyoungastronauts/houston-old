@@ -13,6 +13,7 @@ class MeUser with _$MeUser {
     required String uuid,
     @Default("") String name,
     @Default("") String image,
+    @Default("") String bio,
     @JsonKey(name: "created_at") required DateTime createdAt,
   }) = _MeUser;
 
