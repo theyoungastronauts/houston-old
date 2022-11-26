@@ -9,8 +9,8 @@ from rest_framework.mixins import (
 from rest_framework import status
 from rest_framework.response import Response
 
-from content.models.post import Post
-from content.models.comment import Comment
+from content.models import Post
+from content.models import Comment
 from api import exceptions
 from api.post.filters import PostFilter
 from api.post.serializers import PostSerializer, PostCommentSerializer

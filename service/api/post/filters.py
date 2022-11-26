@@ -1,5 +1,5 @@
 from api import filters
-from content.models.post import Post
+from content.models import Post
 
 
 class PostFilter(filters.FilterSet):

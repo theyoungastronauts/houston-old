@@ -14,52 +14,191 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='User',
+            name="User",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('uuid', models.UUIDField(db_index=True, default=project.utils.uuid.get_uuid, editable=False, unique=True, verbose_name='UUID')),
-                ('metadata', models.JSONField(blank=True, default=dict, null=True, validators=[project.validators.TypeValidator(dict)], verbose_name='Metadata')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Updated At')),
-                ('number', phonenumber_field.modelfields.PhoneNumberField(db_index=True, max_length=128, region=None, unique=True, verbose_name='Number')),
-                ('name', models.CharField(blank=True, max_length=32, verbose_name='Name')),
-                ('email', project.fields.CIEmailField(blank=True, db_index=True, max_length=128, null=True, unique=True, verbose_name='Email')),
-                ('password', models.CharField(max_length=128, verbose_name='Password')),
-                ('image', models.URLField(blank=True, max_length=256, validators=[django.core.validators.RegexValidator('^https://api\\.bitpack\\.app/asset/houston\\-dev/image/.+$')], verbose_name='Image')),
-                ('is_active', models.BooleanField(default=True, help_text='Designates whether this user can access their account.', verbose_name='Active')),
-                ('is_setup', models.BooleanField(default=False, help_text='Designates whether the user requires onboarding.', verbose_name='Setup')),
-                ('is_admin', models.BooleanField(default=False, help_text='Designates whether the user can log into this admin site.', verbose_name='Admin')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "uuid",
+                    models.UUIDField(
+                        db_index=True,
+                        default=project.utils.uuid.get_uuid,
+                        editable=False,
+                        unique=True,
+                        verbose_name="UUID",
+                    ),
+                ),
+                (
+                    "metadata",
+                    models.JSONField(
+                        blank=True,
+                        default=dict,
+                        null=True,
+                        validators=[project.validators.TypeValidator(dict)],
+                        verbose_name="Metadata",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Updated At"),
+                ),
+                (
+                    "number",
+                    phonenumber_field.modelfields.PhoneNumberField(
+                        db_index=True,
+                        max_length=128,
+                        region=None,
+                        unique=True,
+                        verbose_name="Number",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(blank=True, max_length=32, verbose_name="Name"),
+                ),
+                (
+                    "email",
+                    project.fields.CIEmailField(
+                        blank=True,
+                        db_index=True,
+                        max_length=128,
+                        null=True,
+                        unique=True,
+                        verbose_name="Email",
+                    ),
+                ),
+                ("password", models.CharField(max_length=128, verbose_name="Password")),
+                (
+                    "image",
+                    models.URLField(
+                        blank=True,
+                        max_length=256,
+                        validators=[
+                            django.core.validators.RegexValidator(
+                                "^https://api\\.bitpack\\.app/asset/houston\\-dev/image/.+$"
+                            )
+                        ],
+                        verbose_name="Image",
+                    ),
+                ),
+                (
+                    "is_active",
+                    models.BooleanField(
+                        default=True,
+                        help_text="Designates whether this user can access their account.",
+                        verbose_name="Active",
+                    ),
+                ),
+                (
+                    "is_setup",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Designates whether the user requires onboarding.",
+                        verbose_name="Setup",
+                    ),
+                ),
+                (
+                    "is_admin",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Designates whether the user can log into this admin site.",
+                        verbose_name="Admin",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'User',
-                'verbose_name_plural': 'Users',
-                'ordering': ['-created_at'],
-                'abstract': False,
+                "verbose_name": "User",
+                "verbose_name_plural": "Users",
+                "ordering": ["-created_at"],
+                "abstract": False,
             },
         ),
         migrations.CreateModel(
-            name='OneTimePassword',
+            name="OneTimePassword",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('uuid', models.UUIDField(db_index=True, default=project.utils.uuid.get_uuid, editable=False, unique=True, verbose_name='UUID')),
-                ('metadata', models.JSONField(blank=True, default=dict, null=True, validators=[project.validators.TypeValidator(dict)], verbose_name='Metadata')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Updated At')),
-                ('code', models.CharField(db_index=True, default=access.models.get_otp_code, editable=False, max_length=6, verbose_name='Code')),
-                ('expires_at', models.DateTimeField(verbose_name='Expires At')),
-                ('consumed_at', models.DateTimeField(blank=True, null=True, verbose_name='Consumed At')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='access.user', verbose_name='User')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "uuid",
+                    models.UUIDField(
+                        db_index=True,
+                        default=project.utils.uuid.get_uuid,
+                        editable=False,
+                        unique=True,
+                        verbose_name="UUID",
+                    ),
+                ),
+                (
+                    "metadata",
+                    models.JSONField(
+                        blank=True,
+                        default=dict,
+                        null=True,
+                        validators=[project.validators.TypeValidator(dict)],
+                        verbose_name="Metadata",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created At"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Updated At"),
+                ),
+                (
+                    "code",
+                    models.CharField(
+                        db_index=True,
+                        default=access.models.get_otp_code,
+                        editable=False,
+                        max_length=6,
+                        verbose_name="Code",
+                    ),
+                ),
+                ("expires_at", models.DateTimeField(verbose_name="Expires At")),
+                (
+                    "consumed_at",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="Consumed At"
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="access.user",
+                        verbose_name="User",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'OTP',
-                'verbose_name_plural': 'OTPs',
-                'ordering': ['-created_at'],
-                'abstract': False,
+                "verbose_name": "OTP",
+                "verbose_name_plural": "OTPs",
+                "ordering": ["-created_at"],
+                "abstract": False,
             },
         ),
     ]

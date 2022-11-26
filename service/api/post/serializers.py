@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from api.user.serializers import UserPublicSerializer
-from content.models.post import Post
+from content.models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
