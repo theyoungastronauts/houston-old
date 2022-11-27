@@ -1,45 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../core/providers/global_loading_provider.dart';
 import '../../../core/providers/session_provider.dart';
 import '../../../core/utils/image.dart';
 import '../../../core/utils/validation.dart';
 import '../models/me_user.dart';
-import 'me_provider.dart';
 import '../services/me_service.dart';
+import 'me_provider.dart';
 
 class MeProfileFormProvider extends StateNotifier<MeUser> {
   final Ref ref;
 
   final GlobalKey<FormState> formKey = GlobalKey();
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController bioController = TextEditingController();
+  bool changesMade = false;
 
   MeProfileFormProvider(this.ref, dynamic model) : super(model) {
-    init();
+    load(state);
+    _addListeners();
   }
 
-  void init() {
-    load(state);
+  void _addListeners() {
+    nameController.addListener(() {
+      changesMade = true;
+      state = state.copyWith(name: nameController.text);
+    });
+
+    bioController.addListener(() {
+      changesMade = true;
+      state = state.copyWith(bio: bioController.text);
+    });
   }
 
   void load(MeUser me) {
     state = me;
     nameController.text = me.name;
-  }
-
-  void updateModel() {
-    state = state.copyWith(name: nameController.text);
+    bioController.text = me.bio;
   }
 
   String? nameValidator(String? value) => formValidatorNotEmpty(value, "Name");
 
   void setImage(String? url) {
+    changesMade = true;
     state = state.copyWith(image: url ?? "");
   }
 
   void clear(MeUser me) {
     state = me;
-    init();
+    nameController.text = '';
+    bioController.text = '';
   }
 
   Future<bool?> submit() async {
@@ -47,10 +58,10 @@ class MeProfileFormProvider extends StateNotifier<MeUser> {
       return null;
     }
 
-    updateModel();
     ref.read(globalLoadingProvider.notifier).start();
     final me = await MeService().update({
       'name': state.name,
+      'bio': state.bio,
       'image': ImageUrlBuilder.stripTransforms(state.image),
     });
 

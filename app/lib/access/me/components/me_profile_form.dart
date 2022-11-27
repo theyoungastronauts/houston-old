@@ -28,10 +28,7 @@ class MeProfileForm extends BaseComponent {
                 TextFormField(
                   controller: provider.nameController,
                   validator: provider.nameValidator,
-                  onChanged: (_) {
-                    provider.updateModel();
-                  },
-                  decoration: const InputDecoration(label: Text("Title")),
+                  decoration: const InputDecoration(label: Text("Name")),
                 ),
                 ReplaceAsset(
                   initialUrl: me.image,
@@ -41,7 +38,11 @@ class MeProfileForm extends BaseComponent {
                   onRemove: () {
                     provider.setImage(null);
                   },
-                )
+                ),
+                TextFormField(
+                  controller: provider.bioController,
+                  decoration: const InputDecoration(label: Text("Bio")),
+                ),
               ],
             ),
           ),
