@@ -46,41 +46,6 @@ class MeProfileForm extends BaseComponent {
               ],
             ),
           ),
-          Container(
-            color: Colors.black38,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  AppButton(
-                    label: "Discard",
-                    type: AppButtonType.Text,
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  AppButton(
-                    label: "Save",
-                    onPressed: () async {
-                      final success = await provider.submit();
-
-                      if (success == null) {
-                        return;
-                      }
-
-                      if (success) {
-                        Navigator.of(context).pop();
-                        Toast.message("Updated!");
-                      } else {
-                        Toast.error();
-                      }
-                    },
-                  )
-                ],
-              ),
-            ),
-          )
         ],
       ),
     );
