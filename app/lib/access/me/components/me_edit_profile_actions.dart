@@ -24,8 +24,8 @@ class ProfileEditFormActions extends BaseComponent {
             AppButton(
               label: "Discard",
               type: AppButtonType.Text,
-              onPressed: () {
-                Navigator.of(context).pop();
+              onPressed: () async {
+                if (await provider.discard()) Navigator.of(context).pop();
               },
             ),
             AppButton(
