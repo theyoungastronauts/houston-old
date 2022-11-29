@@ -6,6 +6,7 @@ import '../../../core/components/buttons.dart';
 import '../../../core/components/centered_loader.dart';
 import '../../../core/providers/global_loading_provider.dart';
 import '../../../access/auth/components/auth_dropdown.dart';
+import '../../../core/providers/session_provider.dart';
 import '../../app_router.gr.dart';
 import '../../../core/theme/theme.dart';
 
@@ -39,19 +40,20 @@ class DashboardContainer extends BaseComponent {
           type: BottomNavigationBarType.fixed,
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          items: const [
-            BottomNavigationBarItem(
+          items: [
+            const BottomNavigationBarItem(
               label: "Home",
               icon: Icon(Icons.home),
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               label: "Posts",
               icon: Icon(Icons.article),
             ),
-            BottomNavigationBarItem(
-              label: "Profile",
-              icon: Icon(Icons.person),
-            ),
+            if (ref.watch(sessionProvider).isAuthenticated)
+              const BottomNavigationBarItem(
+                label: "Profile",
+                icon: Icon(Icons.person),
+              ),
           ],
         );
       },

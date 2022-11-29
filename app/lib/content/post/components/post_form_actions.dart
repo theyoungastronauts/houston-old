@@ -5,8 +5,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/components/base_component.dart';
 import '../../../core/components/buttons.dart';
 import '../../../core/theme/theme.dart';
+import '../../../core/utils/screen.dart';
 import '../../../core/utils/toast.dart';
 import '../providers/post_form_provider.dart';
+import 'post_actions_context_menu.dart';
 
 class PostFormActions extends BaseComponent {
   const PostFormActions({
@@ -17,6 +19,7 @@ class PostFormActions extends BaseComponent {
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.read(postFormProvider.notifier);
     final post = ref.watch(postFormProvider);
+    final shouldShowContextMenu = MediaQuery.of(context).size.width <= ScreenUtils.breakpointSm;
 
     return Container(
       constraints: const BoxConstraints(minHeight: 30, maxHeight: 100),
@@ -38,7 +41,7 @@ class PostFormActions extends BaseComponent {
             ),
             Row(
               children: [
-                if (post.exists)
+                if (post.exists && !shouldShowContextMenu)
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: AppButton(
@@ -51,7 +54,7 @@ class PostFormActions extends BaseComponent {
                       },
                     ),
                   ),
-                if (!post.exists || !post.isPublished)
+                if ((!post.exists || !post.isPublished) && !shouldShowContextMenu)
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: AppButton(
@@ -69,7 +72,7 @@ class PostFormActions extends BaseComponent {
                       },
                     ),
                   ),
-                if (post.isPublished)
+                if (post.isPublished && !shouldShowContextMenu)
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: AppButton(
@@ -101,6 +104,13 @@ class PostFormActions extends BaseComponent {
                     },
                   ),
                 ),
+                if (shouldShowContextMenu)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 2),
+                    child: PostActionsContextMenu(
+                      post: post,
+                    ),
+                  )
               ],
             )
           ],

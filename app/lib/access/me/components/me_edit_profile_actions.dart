@@ -13,7 +13,7 @@ class ProfileEditFormActions extends BaseComponent {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final MeProfileFormProvider provider = ref.read(meProfileFormProvider.notifier);
+    final provider = ref.read(meProfileFormProvider.notifier);
     return Container(
       color: Colors.black38,
       child: Padding(
