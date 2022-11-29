@@ -31,27 +31,30 @@ class LoginFormProvider extends StateNotifier<LoginFormModel> {
   final TextEditingController passwordController = TextEditingController();
 
   LoginFormProvider(this.ref, LoginFormModel model) : super(model) {
-    init();
+    _addListeners();
   }
 
   String? emailValidator(String? value) => formValidatorEmail(value);
   String? passwordValidator(String? value) => formValidatorNotEmpty(value, "Password");
 
-  void init() {
-    emailController.text = state.email;
-    passwordController.text = state.password;
+  void _addListeners() {
+    emailController.addListener(() {
+      state = state.copyWith(email: emailController.text);
+    });
+
+    passwordController.addListener(() {
+      state = state.copyWith(password: passwordController.text);
+    });
   }
 
   void clear() {
     state = initialState;
-    init();
   }
 
   Future<void> submit() async {
     if (!formKey.currentState!.validate()) {
       return;
     }
-
     state = state.copyWith(processing: true);
     final result = await AuthService().login(email: emailController.text, password: passwordController.text);
     if (result == null) {
