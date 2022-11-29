@@ -31,6 +31,7 @@ class LoginFormProvider extends StateNotifier<LoginFormModel> {
   final TextEditingController passwordController = TextEditingController();
 
   LoginFormProvider(this.ref, LoginFormModel model) : super(model) {
+    load(model);
     _addListeners();
   }
 
@@ -51,12 +52,18 @@ class LoginFormProvider extends StateNotifier<LoginFormModel> {
     state = initialState;
   }
 
+  void load(LoginFormModel login) async {
+    state = login;
+    emailController.text = state.email;
+    passwordController.text = state.password;
+  }
+
   Future<void> submit() async {
     if (!formKey.currentState!.validate()) {
       return;
     }
     state = state.copyWith(processing: true);
-    final result = await AuthService().login(email: emailController.text, password: passwordController.text);
+    final result = await AuthService().login(email: state.email, password: state.password);
     if (result == null) {
       Toast.error("Invalid login details");
       state = state.copyWith(processing: false);
