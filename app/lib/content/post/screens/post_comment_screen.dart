@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../core/providers/session_provider.dart';
 import '../../../core/utils/errors.dart';
 import '../../comment/components/comment_form.dart';
 import '../../comment/components/comment_list.dart';
@@ -42,6 +43,6 @@ class PostCommentsScreen extends BaseScreen {
 
   @override
   Widget? bottomNavigationBar(BuildContext context, WidgetRef ref) {
-    return CommentForm(postUuid);
+    return ref.watch(sessionProvider).isAuthenticated ? CommentForm(postUuid) : const SizedBox.shrink();
   }
 }
