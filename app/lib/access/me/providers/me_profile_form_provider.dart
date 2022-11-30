@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/providers/global_loading_provider.dart';
 import '../../../core/providers/session_provider.dart';
+import '../../../core/utils/dialogs.dart';
 import '../../../core/utils/image.dart';
 import '../../../core/utils/validation.dart';
 import '../models/me_user.dart';
@@ -32,6 +33,19 @@ class MeProfileFormProvider extends StateNotifier<MeUser> {
       changesMade = true;
       state = state.copyWith(bio: bioController.text);
     });
+  }
+
+  Future<bool> discard() async {
+    if (changesMade) {
+      final confirmed = await ConfirmDialog.show(title: "Are you sure you want to discard all unsaved changes?");
+
+      if (confirmed != true) {
+        return false;
+      }
+    }
+    load(ref.read(sessionProvider).user!);
+    changesMade = false;
+    return true;
   }
 
   void load(MeUser me) {

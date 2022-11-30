@@ -27,7 +27,7 @@ from api.comment.querysets import ALL_PARENT_COMMENTS_QUERYSET
 class PostAPIView(GenericAPIView):
     queryset = Post.objects.available()
     serializer_class = PostSerializer
-    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+    permission_classes = [IsAuthenticated | IsOwnerOrReadOnly]
     filterset_class = PostFilter
 
     search_fields = ["owner__name"]

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../access/user/components/avatar.dart';
 import '../../../core/components/base_component.dart';
+import '../../../core/providers/session_provider.dart';
 import '../../../core/utils/toast.dart';
 import '../../post/models/post.dart';
 import '../models/comment.dart';
@@ -46,23 +47,24 @@ class CommentCard extends BaseComponent {
                         children: [
                           TextSpan(text: comment.createdAtLabel),
                           const TextSpan(text: " | "),
-                          TextSpan(
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                final provider = ref.read(commentFormProvider(post.uuid).notifier);
+                          if (ref.watch(sessionProvider).isAuthenticated)
+                            TextSpan(
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  final provider = ref.read(commentFormProvider(post.uuid).notifier);
 
-                                if (parent != null) {
-                                  provider.setParent(parent, comment.owner.name);
-                                } else {
-                                  provider.setParent(comment);
-                                }
-                                provider.focusNode.requestFocus();
-                              },
-                            text: "Reply",
-                            style: const TextStyle(
-                              decoration: TextDecoration.underline,
+                                  if (parent != null) {
+                                    provider.setParent(parent, comment.owner.name);
+                                  } else {
+                                    provider.setParent(comment);
+                                  }
+                                  provider.focusNode.requestFocus();
+                                },
+                              text: "Reply",
+                              style: const TextStyle(
+                                decoration: TextDecoration.underline,
+                              ),
                             ),
-                          ),
                           if (comment.canDelete(ref, post: post)) ...[
                             const TextSpan(text: " | "),
                             TextSpan(
