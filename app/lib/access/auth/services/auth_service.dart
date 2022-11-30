@@ -67,6 +67,11 @@ class AuthService extends BaseService {
       'language': language,
     };
 
+    // PHONE
+    // strip out "+"
+    // check length. if less than 11, append 1
+    // add back in the +
+
     try {
       final data = await postHttp('$basePath/register', params: params, auth: false);
 

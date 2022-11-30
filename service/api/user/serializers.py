@@ -41,12 +41,12 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "id",
             "uuid",
-            "number",
             "is_setup",
             "metadata",
             "created_at",
             "updated_at",
         ]
+        extra_kwargs = {}
 
 
 class UserPublicSerializer(serializers.ModelSerializer):

@@ -358,6 +358,54 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Register Account",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "test4@tylersavery.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "younotry",
+									"type": "text"
+								},
+								{
+									"key": "number",
+									"value": "+14169974260",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Test guy",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/v1/auth/register/",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"event": [
