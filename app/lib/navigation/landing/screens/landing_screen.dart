@@ -36,7 +36,9 @@ class LandingScreen extends BaseScreen {
             ),
             AppButton(
               label: "Register",
-              onPressed: () {},
+              onPressed: () {
+                AutoRouter.of(context).push(const RegisterScreenRoute());
+              },
             ),
             AppButton(
               label: "Continue as guest",

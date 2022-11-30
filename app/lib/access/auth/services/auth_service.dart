@@ -56,26 +56,36 @@ class AuthService extends BaseService {
 
   Future<User?> register({
     required String email,
-    required String username,
+    required String name,
     required String password,
-    required String language,
+    required String number,
   }) async {
+    String formattedPhone = formatPhone(number);
+
     final params = {
       'email': email,
       'password': password,
-      'username': username,
-      'language': language,
+      'name': name,
+      'number': formattedPhone,
     };
 
-    // PHONE
-    // strip out "+"
-    // check length. if less than 11, append 1
-    // add back in the +
+    try {
+      final data = await postHttp('$basePath/register', params: params, auth: true);
+      return User.fromJson(data);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<Token?> createToken(String email, String password) async {
+    final params = {
+      'email': email,
+      'password': password,
+    };
 
     try {
-      final data = await postHttp('$basePath/register', params: params, auth: false);
-
-      return User.fromJson(data);
+      final response = await postHttp('$basePath/token/', params: params, auth: false);
+      return Token.fromJson(response);
     } catch (e) {
       return null;
     }
@@ -255,4 +265,18 @@ class AuthService extends BaseService {
       return false;
     }
   }
+}
+
+String formatPhone(String number) {
+  // PHONE
+  // strip out "+"
+  // check length. if less than 11, append 1
+  // add back in the +
+  String formattedPhone = number.replaceAll('+', '');
+  if (formattedPhone.length < 11) {
+    formattedPhone = '1' + formattedPhone;
+  }
+  formattedPhone = '+' + formattedPhone;
+
+  return formattedPhone;
 }
