@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/empty_router_widgets.dart';
 
 import '../access/auth/screens/login_screen.dart';
+import '../access/auth/screens/register_screen.dart';
 import '../access/me/screens/me_profile_detail_screen.dart';
 import '../access/me/screens/me_profile_edit_screen.dart';
 import '../access/user/screens/user_detail_screen.dart';
@@ -28,6 +29,7 @@ const List<AutoRoute> sharedRoutes = [
 const List<AutoRoute> appRoutes = [
   AutoRoute(initial: true, path: "/", page: LandingScreen),
   AutoRoute(path: "login", page: LoginScreen),
+  AutoRoute(path: "register", page: RegisterScreen),
   dashboardRouter,
   ...sharedRoutes,
   RedirectRoute(path: '*', redirectTo: '/'),
