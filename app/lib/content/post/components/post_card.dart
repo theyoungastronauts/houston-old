@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:simple_markdown_editor/widgets/markdown_parse.dart';
 
 import '../../../access/user/components/avatar.dart';
 import '../../../core/components/badges.dart';
@@ -91,13 +90,7 @@ class PostCard extends BaseComponent {
                       post.title,
                       style: Theme.of(context).textTheme.headline5,
                     ),
-                    SizedBox(
-                        child: MarkdownParse(
-                          data: post.excerpt(),
-                          physics: const NeverScrollableScrollPhysics(),
-                        ),
-                        height: 50,
-                        width: 2000),
+                    Text(post.excerpt()),
                   ],
                 ),
               ),

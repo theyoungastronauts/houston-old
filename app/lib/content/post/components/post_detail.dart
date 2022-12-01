@@ -53,7 +53,6 @@ class PostDetail extends BaseComponent {
             width: 2000,
             child: MarkdownParse(
               data: post.body,
-              // style: Theme.of(context).textTheme.bodyLarge,
             ),
           ),
         ),
