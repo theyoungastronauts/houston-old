@@ -43,7 +43,7 @@ class Post with _$Post {
   }
 
   String excerpt({int length = 64, String ommission = "..."}) {
-    return truncate(body, length: length, omission: ommission);
+    return truncate(body, length: length, omission: ommission).replaceAll(new RegExp(r'[^\w\s]+'), '');
   }
 
   bool get exists {
