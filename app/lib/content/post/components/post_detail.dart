@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:simple_markdown_editor/widgets/markdown_parse.dart';
 
 import '../../../core/components/base_component.dart';
 import '../../../core/components/buttons.dart';
@@ -47,9 +48,13 @@ class PostDetail extends BaseComponent {
           ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(
-            post.body,
-            style: Theme.of(context).textTheme.bodyLarge,
+          child: SizedBox(
+            height: 100,
+            width: 2000,
+            child: MarkdownParse(
+              data: post.body,
+              // style: Theme.of(context).textTheme.bodyLarge,
+            ),
           ),
         ),
         AppButton(
