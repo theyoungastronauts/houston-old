@@ -14,17 +14,13 @@ class MeUser with _$MeUser {
     @Default("") String name,
     @Default("") String image,
     @Default("") String bio,
+    @JsonKey(name: "liked_posts") required List<int> likes,
     @JsonKey(name: "created_at") required DateTime createdAt,
   }) = _MeUser;
 
   factory MeUser.fromJson(Map<String, dynamic> json) => _$MeUserFromJson(json);
 
   User asUser() {
-    return User(
-      uuid: uuid,
-      createdAt: createdAt,
-      image: image,
-      name: name,
-    );
+    return User(uuid: uuid, createdAt: createdAt, image: image, name: name);
   }
 }
