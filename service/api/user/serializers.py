@@ -23,6 +23,8 @@ class UserSerializer(serializers.ModelSerializer):
         required=False,
     )
 
+    liked_posts = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
     class Meta:
         model = User
         fields = [
@@ -33,6 +35,7 @@ class UserSerializer(serializers.ModelSerializer):
             "email",
             "image",
             "bio",
+            "liked_posts",
             "is_setup",
             "metadata",
             "created_at",

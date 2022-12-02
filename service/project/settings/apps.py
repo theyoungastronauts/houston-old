@@ -22,5 +22,6 @@ INSTALLED_APPS = [
     "api.apps.ApiConfig",
     "bitpack.apps.BitpackConfig",
     "content.apps.ContentConfig",
+    "connect.apps.ConnectConfig",
     #::HOUSTON-INSERT-MODULE::
 ]

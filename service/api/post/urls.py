@@ -6,6 +6,7 @@ from api.post.views import (
     PostListMeView,
     PostRetrieveMeView,
     PostCommentListCreateView,
+    PostLikeView,
 )
 
 urlpatterns = [
@@ -14,4 +15,14 @@ urlpatterns = [
     path("me/", PostListMeView.as_view()),
     path("me/<uuid:uuid>/", PostRetrieveMeView.as_view(lookup_field="uuid")),
     path("<uuid:uuid>/comment/", PostCommentListCreateView.as_view()),
+    path(
+        "<uuid:uuid>/like/",
+        PostLikeView.as_view(lookup_field="uuid"),
+        {"will_like": True},
+    ),
+    path(
+        "<uuid:uuid>/unlike/",
+        PostLikeView.as_view(lookup_field="uuid"),
+        {"will_like": False},
+    ),
 ]

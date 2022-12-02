@@ -13,7 +13,11 @@ from content.models import Post
 from content.models import Comment
 from api import exceptions
 from api.post.filters import PostFilter
-from api.post.serializers import PostSerializer, PostCommentSerializer
+from api.post.serializers import (
+    PostSerializer,
+    PostCommentSerializer,
+    PostLikeSerializer,
+)
 from api.permissions import (
     IsAuthenticated,
     IsAuthenticatedOrReadOnly,
@@ -22,6 +26,7 @@ from api.permissions import (
 )
 from api.comment.serializers import CommentSerializer
 from api.comment.querysets import ALL_PARENT_COMMENTS_QUERYSET
+from connect.models import Like
 
 
 class PostAPIView(GenericAPIView):
@@ -136,3 +141,28 @@ class PostCommentListCreateView(ListModelMixin, CreateModelMixin, GenericAPIView
         )
 
         return Response(CommentSerializer(comment).data, status.HTTP_201_CREATED)
+
+
+class PostLikeView(GenericAPIView):
+
+    queryset = Post.objects.published()
+    serializer_class = PostLikeSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        post = self.get_object()
+        owner = serializer.validated_data.get("owner")
+
+        if bool(kwargs.get("will_like")):
+            Like.objects.get_or_create(post=post, owner=owner)
+        else:
+            try:
+                like = Like.objects.get(post=post, owner=owner)
+            except Like.DoesNotExist:
+                pass
+            else:
+                like.delete()
+
+        return Response({}, status=status.HTTP_204_NO_CONTENT)

@@ -43,6 +43,15 @@ class User(AbstractModel, AbstractBaseUser):
         blank=True,
     )
     bio = models.TextField(_("Bio"), blank=True, default="")
+
+    liked_posts = models.ManyToManyField(
+        "content.Post",
+        verbose_name=_("liked posts"),
+        blank=True,
+        related_name="user_post_likes",
+        through="connect.Like",
+    )
+
     is_active = models.BooleanField(
         _("Active"),
         help_text=_("Designates whether this user can access their account."),

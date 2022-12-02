@@ -11,6 +11,7 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = [
+            "id",
             "uuid",
             "title",
             "body",
@@ -23,6 +24,7 @@ class PostSerializer(serializers.ModelSerializer):
             "created_at",
         ]
         read_only_fields = [
+            "id",
             "uuid",
             "owner",
             "num_assets",
@@ -35,3 +37,7 @@ class PostCommentSerializer(serializers.Serializer):
     body = serializers.CharField()
     owner = serializers.HiddenField(default=serializers.CurrentUserDefault())
     parent = serializers.CharField(default=None)
+
+
+class PostLikeSerializer(serializers.Serializer):
+    owner = serializers.HiddenField(default=serializers.CurrentUserDefault())

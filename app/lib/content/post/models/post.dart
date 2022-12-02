@@ -14,6 +14,7 @@ class Post with _$Post {
   const Post._();
 
   factory Post({
+    required int id,
     required String uuid,
     required String title,
     required User owner,
@@ -27,6 +28,7 @@ class Post with _$Post {
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 
   factory Post.empty([User? owner]) => Post(
+        id: 0,
         uuid: "",
         title: "",
         owner: owner ?? User.empty(),
