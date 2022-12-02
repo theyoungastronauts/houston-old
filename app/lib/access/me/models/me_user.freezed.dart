@@ -24,6 +24,8 @@ mixin _$MeUser {
   String get name => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   String get bio => throw _privateConstructorUsedError;
+  @JsonKey(name: "liked_posts")
+  List<int> get likes => throw _privateConstructorUsedError;
   @JsonKey(name: "created_at")
   DateTime get createdAt => throw _privateConstructorUsedError;
 
@@ -42,6 +44,7 @@ abstract class $MeUserCopyWith<$Res> {
       String name,
       String image,
       String bio,
+      @JsonKey(name: "liked_posts") List<int> likes,
       @JsonKey(name: "created_at") DateTime createdAt});
 }
 
@@ -62,6 +65,7 @@ class _$MeUserCopyWithImpl<$Res, $Val extends MeUser>
     Object? name = null,
     Object? image = null,
     Object? bio = null,
+    Object? likes = null,
     Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
@@ -81,6 +85,10 @@ class _$MeUserCopyWithImpl<$Res, $Val extends MeUser>
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
               as String,
+      likes: null == likes
+          ? _value.likes
+          : likes // ignore: cast_nullable_to_non_nullable
+              as List<int>,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -100,6 +108,7 @@ abstract class _$$_MeUserCopyWith<$Res> implements $MeUserCopyWith<$Res> {
       String name,
       String image,
       String bio,
+      @JsonKey(name: "liked_posts") List<int> likes,
       @JsonKey(name: "created_at") DateTime createdAt});
 }
 
@@ -117,6 +126,7 @@ class __$$_MeUserCopyWithImpl<$Res>
     Object? name = null,
     Object? image = null,
     Object? bio = null,
+    Object? likes = null,
     Object? createdAt = null,
   }) {
     return _then(_$_MeUser(
@@ -136,6 +146,10 @@ class __$$_MeUserCopyWithImpl<$Res>
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
               as String,
+      likes: null == likes
+          ? _value._likes
+          : likes // ignore: cast_nullable_to_non_nullable
+              as List<int>,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -152,8 +166,10 @@ class _$_MeUser extends _MeUser {
       this.name = "",
       this.image = "",
       this.bio = "",
+      @JsonKey(name: "liked_posts") required final List<int> likes,
       @JsonKey(name: "created_at") required this.createdAt})
-      : super._();
+      : _likes = likes,
+        super._();
 
   factory _$_MeUser.fromJson(Map<String, dynamic> json) =>
       _$$_MeUserFromJson(json);
@@ -169,13 +185,21 @@ class _$_MeUser extends _MeUser {
   @override
   @JsonKey()
   final String bio;
+  final List<int> _likes;
+  @override
+  @JsonKey(name: "liked_posts")
+  List<int> get likes {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_likes);
+  }
+
   @override
   @JsonKey(name: "created_at")
   final DateTime createdAt;
 
   @override
   String toString() {
-    return 'MeUser(uuid: $uuid, name: $name, image: $image, bio: $bio, createdAt: $createdAt)';
+    return 'MeUser(uuid: $uuid, name: $name, image: $image, bio: $bio, likes: $likes, createdAt: $createdAt)';
   }
 
   @override
@@ -187,14 +211,15 @@ class _$_MeUser extends _MeUser {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.bio, bio) || other.bio == bio) &&
+            const DeepCollectionEquality().equals(other._likes, _likes) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, uuid, name, image, bio, createdAt);
+  int get hashCode => Object.hash(runtimeType, uuid, name, image, bio,
+      const DeepCollectionEquality().hash(_likes), createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -216,6 +241,7 @@ abstract class _MeUser extends MeUser {
           final String name,
           final String image,
           final String bio,
+          @JsonKey(name: "liked_posts") required final List<int> likes,
           @JsonKey(name: "created_at") required final DateTime createdAt}) =
       _$_MeUser;
   _MeUser._() : super._();
@@ -230,6 +256,9 @@ abstract class _MeUser extends MeUser {
   String get image;
   @override
   String get bio;
+  @override
+  @JsonKey(name: "liked_posts")
+  List<int> get likes;
   @override
   @JsonKey(name: "created_at")
   DateTime get createdAt;
