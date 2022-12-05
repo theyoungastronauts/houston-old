@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../access/me/services/me_service.dart';
 import '../../../access/user/models/user.dart';
+import '../../../access/user/providers/user_list_provider.dart';
 import '../../../access/user/services/user_service.dart';
 part 'following_provider.freezed.dart';
 
@@ -34,6 +35,7 @@ class FollowingProvider extends StateNotifier<UserFollowingModel> {
     final success = await UserService().follow(user, willFollow: willFollow);
     if (success) {
       load();
+      ref.read(userListProvider(UserListType.following).notifier).refresh();
       return true;
     }
     return false;

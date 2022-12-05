@@ -8,6 +8,7 @@ import '../../../core/components/buttons.dart';
 import '../../../navigation/app_router.gr.dart';
 import '../../me/providers/me_provider.dart';
 import '../models/user.dart';
+import '../providers/user_list_provider.dart';
 import 'avatar.dart';
 
 class UserProfile extends BaseComponent {
@@ -50,6 +51,7 @@ class UserProfile extends BaseComponent {
                   ),
                 ),
               ),
+            if (isMe) const FollowerCount(),
             if (isMe)
               AppButton(
                 label: "Setting",
@@ -74,6 +76,76 @@ class UserProfile extends BaseComponent {
               ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class FollowerCount extends BaseComponent {
+  const FollowerCount({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final followingData = ref.watch(followingProvider);
+
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 500),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          InkWell(
+            onTap: () {
+              AutoRouter.of(context).push(UserListScreenRoute(type: UserListType.followers));
+            },
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    followingData.followers.length.toString(),
+                    style: Theme.of(context).textTheme.headline1,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Followers',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              AutoRouter.of(context).push(UserListScreenRoute(type: UserListType.following));
+            },
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    followingData.following.length.toString(),
+                    style: Theme.of(context).textTheme.headline1,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Following',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

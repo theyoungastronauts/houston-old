@@ -61,6 +61,20 @@ class UserService extends BaseService {
     }
   }
 
+  Future<PaginatedResponse<User>> followers({
+    int page = 1,
+    int limit = 10,
+  }) async {
+    return await _list(page: page, limit: limit, url: '$baseUrl/me/followers/');
+  }
+
+  Future<PaginatedResponse<User>> following({
+    int page = 1,
+    int limit = 10,
+  }) async {
+    return await _list(page: page, limit: limit, url: '$baseUrl/me/following/');
+  }
+
   Future<PaginatedResponse<User>> list({
     int page = 1,
     int limit = 10,

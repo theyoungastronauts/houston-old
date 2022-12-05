@@ -1,12 +1,16 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../core/models/paginated_response.dart';
 import '../models/user.dart';
 import '../services/user_service.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+enum UserListType { following, followers }
+
 class UserListProvider extends StateNotifier<List<User>> {
   final PagingController<int, User> pagingController = PagingController(firstPageKey: 1);
+  final UserListType type;
 
-  UserListProvider([List<User> initialItems = const []]) : super(initialItems) {
+  UserListProvider(this.type, [List<User> initialItems = const []]) : super(initialItems) {
     pagingController.addPageRequestListener((page) {
       _fetchPage(page);
     });
@@ -14,7 +18,17 @@ class UserListProvider extends StateNotifier<List<User>> {
 
   Future<void> _fetchPage(int page) async {
     try {
-      final data = await UserService().list(page: page);
+      late PaginatedResponse<User> data;
+      switch (type) {
+        case UserListType.followers:
+          data = await UserService().followers(page: page);
+          break;
+        case UserListType.following:
+          data = await UserService().following(page: page);
+          break;
+        default:
+          data = await UserService().list(page: page);
+      }
 
       if (data.page >= data.num_pages) {
         pagingController.appendLastPage(data.results);
@@ -34,6 +48,6 @@ class UserListProvider extends StateNotifier<List<User>> {
   }
 }
 
-final userListProvider = StateNotifierProvider<UserListProvider, List<User>>(
-  (ref) => UserListProvider(),
+final userListProvider = StateNotifierProvider.family<UserListProvider, List<User>, UserListType>(
+  (ref, family) => UserListProvider(family),
 );
