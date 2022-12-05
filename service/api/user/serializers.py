@@ -24,6 +24,7 @@ class UserSerializer(serializers.ModelSerializer):
     )
 
     liked_posts = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    followed_users = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = User
@@ -36,6 +37,7 @@ class UserSerializer(serializers.ModelSerializer):
             "image",
             "bio",
             "liked_posts",
+            "followed_users",
             "is_setup",
             "metadata",
             "created_at",
@@ -63,3 +65,7 @@ class UserPublicSerializer(serializers.ModelSerializer):
             "bio",
             "created_at",
         ]
+
+
+class UserFollowSerializer(serializers.Serializer):
+    owner = serializers.HiddenField(default=serializers.CurrentUserDefault())

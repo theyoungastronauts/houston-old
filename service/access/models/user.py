@@ -48,8 +48,16 @@ class User(AbstractModel, AbstractBaseUser):
         "content.Post",
         verbose_name=_("liked posts"),
         blank=True,
-        related_name="user_post_likes",
+        related_name="user_liked_posts",
         through="connect.Like",
+    )
+
+    followed_users = models.ManyToManyField(
+        "access.User",
+        verbose_name=_("liked posts"),
+        blank=True,
+        related_name="user_followed_users",
+        through="connect.Follow",
     )
 
     is_active = models.BooleanField(

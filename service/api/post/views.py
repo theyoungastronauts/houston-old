@@ -147,6 +147,7 @@ class PostLikeView(GenericAPIView):
 
     queryset = Post.objects.published()
     serializer_class = PostLikeSerializer
+    permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
