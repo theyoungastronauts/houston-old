@@ -21,6 +21,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$User {
   String get uuid => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   String get bio => throw _privateConstructorUsedError;
@@ -39,6 +40,7 @@ abstract class $UserCopyWith<$Res> {
   @useResult
   $Res call(
       {String uuid,
+      int id,
       String name,
       String image,
       String bio,
@@ -59,6 +61,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @override
   $Res call({
     Object? uuid = null,
+    Object? id = null,
     Object? name = null,
     Object? image = null,
     Object? bio = null,
@@ -69,6 +72,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -97,6 +104,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   @useResult
   $Res call(
       {String uuid,
+      int id,
       String name,
       String image,
       String bio,
@@ -113,6 +121,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
   @override
   $Res call({
     Object? uuid = null,
+    Object? id = null,
     Object? name = null,
     Object? image = null,
     Object? bio = null,
@@ -123,6 +132,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -148,6 +161,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
 class _$_User extends _User {
   _$_User(
       {required this.uuid,
+      required this.id,
       this.name = "",
       this.image = "",
       this.bio = "",
@@ -158,6 +172,8 @@ class _$_User extends _User {
 
   @override
   final String uuid;
+  @override
+  final int id;
   @override
   @JsonKey()
   final String name;
@@ -173,7 +189,7 @@ class _$_User extends _User {
 
   @override
   String toString() {
-    return 'User(uuid: $uuid, name: $name, image: $image, bio: $bio, createdAt: $createdAt)';
+    return 'User(uuid: $uuid, id: $id, name: $name, image: $image, bio: $bio, createdAt: $createdAt)';
   }
 
   @override
@@ -182,6 +198,7 @@ class _$_User extends _User {
         (other.runtimeType == runtimeType &&
             other is _$_User &&
             (identical(other.uuid, uuid) || other.uuid == uuid) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.bio, bio) || other.bio == bio) &&
@@ -192,7 +209,7 @@ class _$_User extends _User {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, uuid, name, image, bio, createdAt);
+      Object.hash(runtimeType, uuid, id, name, image, bio, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -211,6 +228,7 @@ class _$_User extends _User {
 abstract class _User extends User {
   factory _User(
           {required final String uuid,
+          required final int id,
           final String name,
           final String image,
           final String bio,
@@ -222,6 +240,8 @@ abstract class _User extends User {
 
   @override
   String get uuid;
+  @override
+  int get id;
   @override
   String get name;
   @override

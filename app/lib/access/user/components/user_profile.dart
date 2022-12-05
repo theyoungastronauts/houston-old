@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../content/post/providers/following_provider.dart';
 import '../../../core/components/base_component.dart';
 import '../../../core/components/buttons.dart';
 import '../../../navigation/app_router.gr.dart';
@@ -17,7 +18,8 @@ class UserProfile extends BaseComponent {
   @override
   Widget body(BuildContext context, WidgetRef ref) {
     final isMe = user.isMe(ref);
-    final meData = ref.read(meProvider);
+    final provider = ref.read(followingProvider.notifier);
+    final followingData = ref.watch(followingProvider);
 
     return Center(
       child: Padding(
@@ -58,10 +60,16 @@ class UserProfile extends BaseComponent {
               ),
             if (!isMe)
               AppButton(
-                label: "Follow",
+                label: followingData.following.contains(user.id) ? 'Unfollow' : 'Follow',
                 type: AppButtonType.Elevated,
                 onPressed: () {
-                  print('Following ${user.name}');
+                  if (followingData.following.contains(user.id)) {
+                    provider.follow(user, willFollow: false);
+                  } else {
+                    provider.follow(
+                      user,
+                    );
+                  }
                 },
               ),
           ],
