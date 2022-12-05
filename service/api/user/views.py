@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework.generics import GenericAPIView
-from rest_framework.mixins import RetrieveModelMixin, UpdateModelMixin
+from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, UpdateModelMixin
 from rest_framework import status
 from rest_framework.response import Response
 
@@ -73,3 +73,33 @@ class UserFollowView(GenericAPIView):
                 follow.delete()
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+
+class UserListMeFollowersView(ListModelMixin, GenericAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserPublicSerializer
+    filterset_class = UserFilter
+
+    search_fields = ["name"]
+    ordering = ["-follow_owners__created_at"]
+
+    def get_queryset(self):
+        return self.request.user.followers.filter(is_active=True)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+
+class UserListMeFollowingView(ListModelMixin, GenericAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserPublicSerializer
+    filterset_class = UserFilter
+
+    search_fields = ["username"]
+    ordering = ["-follow_users__created_at"]
+
+    def get_queryset(self):
+        return self.request.user.following.filter(is_active=True)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)

@@ -24,7 +24,8 @@ class UserSerializer(serializers.ModelSerializer):
     )
 
     liked_posts = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    followed_users = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    followers = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    following = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = User
@@ -37,7 +38,8 @@ class UserSerializer(serializers.ModelSerializer):
             "image",
             "bio",
             "liked_posts",
-            "followed_users",
+            "followers",
+            "following",
             "is_setup",
             "metadata",
             "created_at",
