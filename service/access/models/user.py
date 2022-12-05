@@ -52,12 +52,22 @@ class User(AbstractModel, AbstractBaseUser):
         through="connect.Like",
     )
 
-    followed_users = models.ManyToManyField(
+    following = models.ManyToManyField(
         "access.User",
-        verbose_name=_("liked posts"),
+        verbose_name=_("followed users"),
         blank=True,
-        related_name="user_followed_users",
+        related_name="user_following",
         through="connect.Follow",
+        through_fields=("owner", "user"),
+    )
+
+    followers = models.ManyToManyField(
+        "access.User",
+        verbose_name=_("followed by users"),
+        blank=True,
+        related_name="user_followers",
+        through="connect.Follow",
+        through_fields=("user", "owner"),
     )
 
     is_active = models.BooleanField(

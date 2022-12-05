@@ -24,6 +24,6 @@ class Follow(AbstractModel):
 
     class Meta:
         ordering = ["-created_at"]
-        verbose_name = _("user like")
-        verbose_name_plural = _("user likes")
+        verbose_name = _("user follow")
+        verbose_name_plural = _("user follows")
         unique_together = [("user", "owner")]

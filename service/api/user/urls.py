@@ -1,6 +1,12 @@
 from django.urls import path
 
-from api.user.views import UserMeRetrieveUpdateView, UserRetrieveView, UserFollowView
+from api.user.views import (
+    UserMeRetrieveUpdateView,
+    UserRetrieveView,
+    UserFollowView,
+    UserListMeFollowersView,
+    UserListMeFollowingView,
+)
 
 urlpatterns = [
     path("me/", UserMeRetrieveUpdateView.as_view()),
@@ -15,4 +21,6 @@ urlpatterns = [
         UserFollowView.as_view(lookup_field="uuid"),
         {"will_follow": False},
     ),
+    path("me/followers/", UserListMeFollowersView.as_view()),
+    path("me/following/", UserListMeFollowingView.as_view()),
 ]

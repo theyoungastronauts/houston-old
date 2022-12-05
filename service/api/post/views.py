@@ -98,6 +98,16 @@ class PostRetrieveMeView(
         return self.retrieve(request, *args, **kwargs)
 
 
+class PostListMeLikesView(ListModelMixin, PostAPIView):
+    def get_queryset(self):
+        return self.request.user.liked_posts.filter(
+            is_published=True, is_unlisted=False, is_deleted=False
+        )
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+
 class PostCommentListCreateView(ListModelMixin, CreateModelMixin, GenericAPIView):
     serializer_class = CommentSerializer
     permission_classes = [
