@@ -6,6 +6,7 @@ import '../../../core/components/base_component.dart';
 import '../../../navigation/app_router.gr.dart';
 import '../../comment/providers/comment_form_provider.dart';
 import '../models/post.dart';
+import '../providers/likes_provider.dart';
 import '../providers/post_form_provider.dart';
 
 class PostListContextMenu extends BaseComponent {
@@ -35,12 +36,17 @@ class PostListContextMenu extends BaseComponent {
     ref.read(postFormProvider.notifier).share(post);
   }
 
+  void _like(BuildContext context, WidgetRef ref, bool willLike) {
+    ref.read(likesProvider.notifier).likePost(post, willLike);
+  }
+
   void _delete(WidgetRef ref, BuildContext context) async {
     ref.read(postFormProvider.notifier).delete(post);
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final bool isLiked = ref.watch(likesProvider).postLikes.contains(post.id);
     return PopupMenuButton(
       padding: EdgeInsets.zero,
       icon: const Icon(Icons.more_vert),
@@ -64,6 +70,19 @@ class PostListContextMenu extends BaseComponent {
               _share(context, ref);
             },
           ),
+          isLiked
+              ? PopupMenuItem(
+                  child: const Text('Unlike'),
+                  onTap: () async {
+                    _like(context, ref, false);
+                  },
+                )
+              : PopupMenuItem(
+                  child: const Text('Like'),
+                  onTap: () async {
+                    _like(context, ref, true);
+                  },
+                ),
           if (post.isOwner(ref))
             PopupMenuItem(
               onTap: () {

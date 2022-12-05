@@ -54,6 +54,20 @@ class PostService extends BaseService {
     }
   }
 
+  Future<bool> like(Post post, {required bool willLike}) async {
+    try {
+      if (willLike) {
+        await postHttp('$baseUrl/${post.uuid}/like');
+      } else {
+        await postHttp('$baseUrl/${post.uuid}/unlike');
+      }
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
   Future<PaginatedResponse<Post>> list({
     int page = 1,
     int limit = 10,

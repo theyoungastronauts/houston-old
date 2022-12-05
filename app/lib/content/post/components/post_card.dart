@@ -1,13 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../../access/user/components/avatar.dart';
 import '../../../core/components/badges.dart';
 import '../../../core/components/base_component.dart';
 import '../../../core/theme/theme.dart';
 import '../../../navigation/app_router.gr.dart';
 import '../models/post.dart';
+import '../providers/likes_provider.dart';
+import 'like_button.dart';
 import 'post_context_menu.dart';
 import 'post_thumbnail.dart';
 
@@ -80,19 +81,25 @@ class PostCard extends BaseComponent {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      post.title,
-                      style: Theme.of(context).textTheme.headline5,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          post.title,
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                        Text(post.excerpt()),
+                      ],
                     ),
-                    Text(post.excerpt()),
-                  ],
-                ),
+                  ),
+                  LikePostButton(post: post),
+                ],
               ),
             ],
           ),
