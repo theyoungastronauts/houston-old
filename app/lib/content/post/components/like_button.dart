@@ -16,7 +16,7 @@ class LikePostButton extends BaseComponent {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(likesProvider.notifier);
-    final isLiked = ref.watch(likesProvider).postLikes.contains(post.id);
+    final isLiked = ref.watch(likesProvider).contains(post.id);
     return IconButton(
       onPressed: () {
         provider.likePost(post, !isLiked);

@@ -1,42 +1,27 @@
+import 'dart:core';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../access/me/services/me_service.dart';
 import '../../../core/providers/global_loading_provider.dart';
 import '../models/post.dart';
 import '../services/post_service.dart';
-import 'post_list_provider.dart';
 
-class LikesModel {
-  final List<int> postLikes;
-
-  const LikesModel({
-    this.postLikes = const [],
-  });
-
-  LikesModel copyWith({
-    List<int>? postLikes,
-  }) {
-    return LikesModel(
-      postLikes: postLikes ?? this.postLikes,
-    );
-  }
-}
-
-class LikesProvider extends StateNotifier<LikesModel> {
+class LikesProvider extends StateNotifier<List<int>> {
   final Ref ref;
   Future<void> load() async {
-    state = state.copyWith(postLikes: (await MeService().retrieve()).likes);
+    state = (await MeService().retrieve()).likes;
   }
 
-  LikesProvider(this.ref, [LikesModel model = const LikesModel()]) : super(model) {
+  LikesProvider(this.ref, [List<int> initialItems = const []]) : super(initialItems) {
     load();
   }
 
   Future<void> likePost(Post post, [bool willLike = true]) async {
     if (willLike) {
-      state = state.copyWith(postLikes: [...state.postLikes, post.id]);
+      state = [...state, post.id];
     } else {
-      state = state.copyWith(postLikes: [...state.postLikes]..removeWhere((id) => id == post.id));
+      state = [...state]..removeWhere((id) => id == post.id);
     }
     ref.read(globalLoadingProvider.notifier).start();
 
@@ -51,6 +36,6 @@ class LikesProvider extends StateNotifier<LikesModel> {
   void init() {}
 }
 
-final likesProvider = StateNotifierProvider<LikesProvider, LikesModel>(
+final likesProvider = StateNotifierProvider<LikesProvider, List<int>>(
   (ref) => LikesProvider(ref),
 );
