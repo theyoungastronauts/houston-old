@@ -6,6 +6,7 @@ import '../../../access/me/services/me_service.dart';
 import '../../../core/providers/global_loading_provider.dart';
 import '../models/post.dart';
 import '../services/post_service.dart';
+import 'post_list_provider.dart';
 
 class LikesProvider extends StateNotifier<List<int>> {
   final Ref ref;
@@ -26,14 +27,16 @@ class LikesProvider extends StateNotifier<List<int>> {
     ref.read(globalLoadingProvider.notifier).start();
 
     if (willLike) {
-      PostService().like(post, willLike: true);
+      PostService().like(post, willLike: true).then((_) {
+        ref.read(postListProvider(PostListType.likes).notifier).refresh();
+      });
     } else {
-      PostService().like(post, willLike: false);
+      PostService().like(post, willLike: false).then((_) {
+        ref.read(postListProvider(PostListType.likes).notifier).refresh();
+      });
     }
     ref.read(globalLoadingProvider.notifier).complete();
   }
-
-  void init() {}
 }
 
 final likesProvider = StateNotifierProvider<LikesProvider, List<int>>(
