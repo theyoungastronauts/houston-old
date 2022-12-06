@@ -13,6 +13,7 @@ class User with _$User {
 
   factory User({
     required String uuid,
+    required int id,
     @Default("") String name,
     @Default("") String image,
     @Default("") String bio,
@@ -24,6 +25,7 @@ class User with _$User {
   factory User.empty() => User(
         uuid: "",
         name: "",
+        id: -12,
         createdAt: DateTime.now(),
       );
 

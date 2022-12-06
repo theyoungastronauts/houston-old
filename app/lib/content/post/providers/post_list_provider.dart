@@ -4,10 +4,7 @@ import '../services/post_service.dart';
 import '../../../core/models/paginated_response.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-enum PostListType {
-  all,
-  me,
-}
+enum PostListType { all, me, likes }
 
 class PostListProvider extends StateNotifier<List<Post>> {
   final PagingController<int, Post> pagingController = PagingController(firstPageKey: 1);
@@ -30,6 +27,8 @@ class PostListProvider extends StateNotifier<List<Post>> {
         case PostListType.all:
           data = await PostService().list(page: page);
           break;
+        case PostListType.likes:
+          data = await PostService().likedPosts(page: page);
       }
 
       if (data.page >= data.num_pages) {

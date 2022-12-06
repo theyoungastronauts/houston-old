@@ -6,6 +6,7 @@ import '../access/auth/screens/register_screen.dart';
 import '../access/me/screens/me_profile_detail_screen.dart';
 import '../access/me/screens/me_profile_edit_screen.dart';
 import '../access/user/screens/user_detail_screen.dart';
+import '../access/user/screens/user_list_screen.dart';
 import '../content/post/screens/me_post_list_screen.dart';
 import '../content/post/screens/post_comment_screen.dart';
 import '../content/post/screens/post_detail_screen.dart';
@@ -24,6 +25,7 @@ const List<AutoRoute> sharedRoutes = [
   AutoRoute(path: "post/:uuid", page: PostDetailScreen),
   AutoRoute(path: "post/:uuid/comments", page: PostCommentsScreen),
   AutoRoute(path: "user/:uuid", page: UserDetailScreen),
+  AutoRoute(path: "users/", page: UserListScreen)
 ];
 
 const List<AutoRoute> appRoutes = [

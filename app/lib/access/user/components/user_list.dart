@@ -7,11 +7,12 @@ import '../models/user.dart';
 import '../providers/user_list_provider.dart';
 
 class UserList extends BaseComponent {
-  const UserList({Key? key}) : super(key: key);
+  const UserList(this.type, {Key? key}) : super(key: key);
+  final UserListType type;
 
   @override
   Widget body(BuildContext context, WidgetRef ref) {
-    final listProvider = ref.watch(userListProvider.notifier);
+    final listProvider = ref.watch(userListProvider(type).notifier);
 
     return InfiniteList<User>(
       pagingController: listProvider.pagingController,

@@ -2,24 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/screens/base_screen.dart';
 import '../components/user_list.dart';
+import '../providers/user_list_provider.dart';
 
 class UserListScreen extends BaseScreen {
-  const UserListScreen({Key? key})
+  const UserListScreen(this.type, {Key? key})
       : super(
           key: key,
-          includeMainDrawer: true,
         );
+  final UserListType type;
 
   @override
   AppBar? appBar(BuildContext context, WidgetRef ref) {
     return AppBar(
-      title: const Text("User List"),
+      title: Text(type == UserListType.followers ? 'Followers' : 'Following'),
       actions: const [],
     );
   }
 
   @override
   Widget body(BuildContext context, WidgetRef ref) {
-    return const UserList();
+    return UserList(type);
   }
 }

@@ -46,7 +46,7 @@ class PostListContextMenu extends BaseComponent {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bool isLiked = ref.watch(likesProvider).postLikes.contains(post.id);
+    final bool isLiked = ref.watch(likesProvider).contains(post.id);
     return PopupMenuButton(
       padding: EdgeInsets.zero,
       icon: const Icon(Icons.more_vert),

@@ -21,9 +21,14 @@ MeUser _$MeUserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$MeUser {
   String get uuid => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   String get bio => throw _privateConstructorUsedError;
+  @JsonKey(name: 'following')
+  List<int> get following => throw _privateConstructorUsedError;
+  @JsonKey(name: 'followers')
+  List<int> get followers => throw _privateConstructorUsedError;
   @JsonKey(name: "liked_posts")
   List<int> get likes => throw _privateConstructorUsedError;
   @JsonKey(name: "created_at")
@@ -41,9 +46,12 @@ abstract class $MeUserCopyWith<$Res> {
   @useResult
   $Res call(
       {String uuid,
+      int id,
       String name,
       String image,
       String bio,
+      @JsonKey(name: 'following') List<int> following,
+      @JsonKey(name: 'followers') List<int> followers,
       @JsonKey(name: "liked_posts") List<int> likes,
       @JsonKey(name: "created_at") DateTime createdAt});
 }
@@ -62,9 +70,12 @@ class _$MeUserCopyWithImpl<$Res, $Val extends MeUser>
   @override
   $Res call({
     Object? uuid = null,
+    Object? id = null,
     Object? name = null,
     Object? image = null,
     Object? bio = null,
+    Object? following = null,
+    Object? followers = null,
     Object? likes = null,
     Object? createdAt = null,
   }) {
@@ -73,6 +84,10 @@ class _$MeUserCopyWithImpl<$Res, $Val extends MeUser>
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -85,6 +100,14 @@ class _$MeUserCopyWithImpl<$Res, $Val extends MeUser>
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
               as String,
+      following: null == following
+          ? _value.following
+          : following // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      followers: null == followers
+          ? _value.followers
+          : followers // ignore: cast_nullable_to_non_nullable
+              as List<int>,
       likes: null == likes
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
@@ -105,9 +128,12 @@ abstract class _$$_MeUserCopyWith<$Res> implements $MeUserCopyWith<$Res> {
   @useResult
   $Res call(
       {String uuid,
+      int id,
       String name,
       String image,
       String bio,
+      @JsonKey(name: 'following') List<int> following,
+      @JsonKey(name: 'followers') List<int> followers,
       @JsonKey(name: "liked_posts") List<int> likes,
       @JsonKey(name: "created_at") DateTime createdAt});
 }
@@ -123,9 +149,12 @@ class __$$_MeUserCopyWithImpl<$Res>
   @override
   $Res call({
     Object? uuid = null,
+    Object? id = null,
     Object? name = null,
     Object? image = null,
     Object? bio = null,
+    Object? following = null,
+    Object? followers = null,
     Object? likes = null,
     Object? createdAt = null,
   }) {
@@ -134,6 +163,10 @@ class __$$_MeUserCopyWithImpl<$Res>
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -146,6 +179,14 @@ class __$$_MeUserCopyWithImpl<$Res>
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
               as String,
+      following: null == following
+          ? _value._following
+          : following // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      followers: null == followers
+          ? _value._followers
+          : followers // ignore: cast_nullable_to_non_nullable
+              as List<int>,
       likes: null == likes
           ? _value._likes
           : likes // ignore: cast_nullable_to_non_nullable
@@ -163,12 +204,17 @@ class __$$_MeUserCopyWithImpl<$Res>
 class _$_MeUser extends _MeUser {
   _$_MeUser(
       {required this.uuid,
+      required this.id,
       this.name = "",
       this.image = "",
       this.bio = "",
+      @JsonKey(name: 'following') required final List<int> following,
+      @JsonKey(name: 'followers') required final List<int> followers,
       @JsonKey(name: "liked_posts") required final List<int> likes,
       @JsonKey(name: "created_at") required this.createdAt})
-      : _likes = likes,
+      : _following = following,
+        _followers = followers,
+        _likes = likes,
         super._();
 
   factory _$_MeUser.fromJson(Map<String, dynamic> json) =>
@@ -176,6 +222,8 @@ class _$_MeUser extends _MeUser {
 
   @override
   final String uuid;
+  @override
+  final int id;
   @override
   @JsonKey()
   final String name;
@@ -185,6 +233,22 @@ class _$_MeUser extends _MeUser {
   @override
   @JsonKey()
   final String bio;
+  final List<int> _following;
+  @override
+  @JsonKey(name: 'following')
+  List<int> get following {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_following);
+  }
+
+  final List<int> _followers;
+  @override
+  @JsonKey(name: 'followers')
+  List<int> get followers {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_followers);
+  }
+
   final List<int> _likes;
   @override
   @JsonKey(name: "liked_posts")
@@ -199,7 +263,7 @@ class _$_MeUser extends _MeUser {
 
   @override
   String toString() {
-    return 'MeUser(uuid: $uuid, name: $name, image: $image, bio: $bio, likes: $likes, createdAt: $createdAt)';
+    return 'MeUser(uuid: $uuid, id: $id, name: $name, image: $image, bio: $bio, following: $following, followers: $followers, likes: $likes, createdAt: $createdAt)';
   }
 
   @override
@@ -208,9 +272,14 @@ class _$_MeUser extends _MeUser {
         (other.runtimeType == runtimeType &&
             other is _$_MeUser &&
             (identical(other.uuid, uuid) || other.uuid == uuid) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.bio, bio) || other.bio == bio) &&
+            const DeepCollectionEquality()
+                .equals(other._following, _following) &&
+            const DeepCollectionEquality()
+                .equals(other._followers, _followers) &&
             const DeepCollectionEquality().equals(other._likes, _likes) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
@@ -218,8 +287,17 @@ class _$_MeUser extends _MeUser {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, uuid, name, image, bio,
-      const DeepCollectionEquality().hash(_likes), createdAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      uuid,
+      id,
+      name,
+      image,
+      bio,
+      const DeepCollectionEquality().hash(_following),
+      const DeepCollectionEquality().hash(_followers),
+      const DeepCollectionEquality().hash(_likes),
+      createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -238,9 +316,12 @@ class _$_MeUser extends _MeUser {
 abstract class _MeUser extends MeUser {
   factory _MeUser(
           {required final String uuid,
+          required final int id,
           final String name,
           final String image,
           final String bio,
+          @JsonKey(name: 'following') required final List<int> following,
+          @JsonKey(name: 'followers') required final List<int> followers,
           @JsonKey(name: "liked_posts") required final List<int> likes,
           @JsonKey(name: "created_at") required final DateTime createdAt}) =
       _$_MeUser;
@@ -251,11 +332,19 @@ abstract class _MeUser extends MeUser {
   @override
   String get uuid;
   @override
+  int get id;
+  @override
   String get name;
   @override
   String get image;
   @override
   String get bio;
+  @override
+  @JsonKey(name: 'following')
+  List<int> get following;
+  @override
+  @JsonKey(name: 'followers')
+  List<int> get followers;
   @override
   @JsonKey(name: "liked_posts")
   List<int> get likes;
