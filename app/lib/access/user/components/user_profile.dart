@@ -4,12 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/components/base_component.dart';
 import '../../../core/components/buttons.dart';
-import '../../../core/providers/session_provider.dart';
 import '../../../navigation/app_router.gr.dart';
-import '../../me/providers/me_provider.dart';
 import '../models/user.dart';
 import '../providers/user_list_provider.dart';
 import 'avatar.dart';
+import 'follow_button.dart';
 
 class UserProfile extends BaseComponent {
   final User user;
@@ -19,7 +18,6 @@ class UserProfile extends BaseComponent {
   @override
   Widget body(BuildContext context, WidgetRef ref) {
     final isMe = user.isMe(ref);
-    final isFollowing = ref.watch(sessionProvider).isFollowing(user);
 
     return Center(
       child: Padding(
@@ -50,7 +48,7 @@ class UserProfile extends BaseComponent {
                   ),
                 ),
               ),
-            FollowerCount(user),
+            _FollowerCount(user),
             if (isMe)
               AppButton(
                 label: "Setting",
@@ -59,14 +57,7 @@ class UserProfile extends BaseComponent {
                   AutoRouter.of(context).push(const SettingsScreenRoute());
                 },
               ),
-            if (!isMe)
-              AppButton(
-                label: isFollowing ? 'Unfollow' : 'Follow',
-                type: AppButtonType.Elevated,
-                onPressed: () {
-                  ref.read(meProvider.notifier).follow(user, willFollow: !isFollowing);
-                },
-              ),
+            if (!isMe) FollowButton(user),
           ],
         ),
       ),
@@ -74,9 +65,9 @@ class UserProfile extends BaseComponent {
   }
 }
 
-class FollowerCount extends BaseComponent {
+class _FollowerCount extends BaseComponent {
   final User user;
-  const FollowerCount(
+  const _FollowerCount(
     this.user, {
     Key? key,
   }) : super(key: key);
@@ -84,13 +75,14 @@ class FollowerCount extends BaseComponent {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isMe = user.isMe(ref);
+
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 500),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           InkWell(
-            onTap: user.isMe(ref)
+            onTap: isMe
                 ? () {
                     AutoRouter.of(context).push(UserListScreenRoute(type: UserListType.followers));
                   }
@@ -117,7 +109,7 @@ class FollowerCount extends BaseComponent {
             ),
           ),
           InkWell(
-            onTap: user.isMe(ref)
+            onTap: isMe
                 ? () {
                     AutoRouter.of(context).push(UserListScreenRoute(type: UserListType.following));
                   }

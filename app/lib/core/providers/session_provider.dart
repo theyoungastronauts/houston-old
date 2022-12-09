@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../access/auth/models/token.dart';
 import '../../access/auth/services/auth_service.dart';
 import '../../access/me/models/me_user.dart';
+import '../../access/me/providers/me_provider.dart';
 import '../../access/me/services/me_service.dart';
 import '../../navigation/app_router.gr.dart';
 import '../app.dart';
@@ -79,6 +80,7 @@ class SessionProvider extends StateNotifier<Session> {
 
   void setMe(MeUser me) {
     state = state.copyWith(user: me);
+    ref.read(meProvider.notifier).load(state.user);
   }
 
   Future<Token?> refreshToken(Token token) async {
