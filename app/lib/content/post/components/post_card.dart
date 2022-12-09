@@ -94,7 +94,10 @@ class PostCard extends BaseComponent {
                           post.title,
                           style: Theme.of(context).textTheme.headline5,
                         ),
-                        Text(post.excerpt()),
+                        Text(
+                          post.excerpt(),
+                          maxLines: 3,
+                        ),
                       ],
                     ),
                   ),
