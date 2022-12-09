@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/components/empty_placeholder.dart';
+import '../../../core/providers/session_provider.dart';
 import '../../../core/screens/base_screen.dart';
-import '../../../core/utils/errors.dart';
 import '../../../navigation/app_router.gr.dart';
 import '../../user/components/user_profile.dart';
-import '../providers/me_provider.dart';
 
 class MeProfileDetailScreen extends BaseScreen {
   const MeProfileDetailScreen({
@@ -16,40 +15,29 @@ class MeProfileDetailScreen extends BaseScreen {
 
   @override
   AppBar? appBar(BuildContext context, WidgetRef ref) {
-    final data = ref.watch(meProvider);
-    return data.when(
-      loading: () => AppBar(
-        title: const Text("My Profile"),
-      ),
-      data: (user) => AppBar(
-        title: const Text("My Profile"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              AutoRouter.of(context).push(const SettingsScreenRoute());
-            },
-            icon: const Icon(
-              Icons.settings,
-            ),
-          )
-        ],
-      ),
-      error: (_, __) => AppBar(
-        title: const Text("Error"),
-      ),
+    return AppBar(
+      title: const Text("My Profile"),
+      actions: [
+        IconButton(
+          onPressed: () {
+            AutoRouter.of(context).push(const SettingsScreenRoute());
+          },
+          icon: const Icon(
+            Icons.settings,
+          ),
+        )
+      ],
     );
   }
 
   @override
   Widget body(BuildContext context, WidgetRef ref) {
-    final data = ref.watch(meProvider);
+    final user = ref.watch(sessionProvider).user;
 
-    return data.when(
-      data: (user) => user != null ? UserProfile(user.asUser()) : const EmptyPlaceholder(title: "You are not logged in."),
-      error: (_, __) => contentError(),
-      loading: () => const Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
+    if (user == null) {
+      return const EmptyPlaceholder(title: "You are not logged in.");
+    }
+
+    return UserProfile(user.asUser());
   }
 }

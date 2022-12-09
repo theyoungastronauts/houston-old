@@ -15,8 +15,8 @@ class MeUser with _$MeUser {
     @Default("") String name,
     @Default("") String image,
     @Default("") String bio,
-    @JsonKey(name: 'following') required List<int> following,
-    @JsonKey(name: 'followers') required List<int> followers,
+    @Default([]) List<int> following,
+    @Default([]) List<int> followers,
     @JsonKey(name: "liked_posts") required List<int> likes,
     @JsonKey(name: "created_at") required DateTime createdAt,
   }) = _MeUser;

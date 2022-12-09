@@ -25,9 +25,7 @@ mixin _$MeUser {
   String get name => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   String get bio => throw _privateConstructorUsedError;
-  @JsonKey(name: 'following')
   List<int> get following => throw _privateConstructorUsedError;
-  @JsonKey(name: 'followers')
   List<int> get followers => throw _privateConstructorUsedError;
   @JsonKey(name: "liked_posts")
   List<int> get likes => throw _privateConstructorUsedError;
@@ -50,8 +48,8 @@ abstract class $MeUserCopyWith<$Res> {
       String name,
       String image,
       String bio,
-      @JsonKey(name: 'following') List<int> following,
-      @JsonKey(name: 'followers') List<int> followers,
+      List<int> following,
+      List<int> followers,
       @JsonKey(name: "liked_posts") List<int> likes,
       @JsonKey(name: "created_at") DateTime createdAt});
 }
@@ -132,8 +130,8 @@ abstract class _$$_MeUserCopyWith<$Res> implements $MeUserCopyWith<$Res> {
       String name,
       String image,
       String bio,
-      @JsonKey(name: 'following') List<int> following,
-      @JsonKey(name: 'followers') List<int> followers,
+      List<int> following,
+      List<int> followers,
       @JsonKey(name: "liked_posts") List<int> likes,
       @JsonKey(name: "created_at") DateTime createdAt});
 }
@@ -208,8 +206,8 @@ class _$_MeUser extends _MeUser {
       this.name = "",
       this.image = "",
       this.bio = "",
-      @JsonKey(name: 'following') required final List<int> following,
-      @JsonKey(name: 'followers') required final List<int> followers,
+      final List<int> following = const [],
+      final List<int> followers = const [],
       @JsonKey(name: "liked_posts") required final List<int> likes,
       @JsonKey(name: "created_at") required this.createdAt})
       : _following = following,
@@ -235,7 +233,7 @@ class _$_MeUser extends _MeUser {
   final String bio;
   final List<int> _following;
   @override
-  @JsonKey(name: 'following')
+  @JsonKey()
   List<int> get following {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_following);
@@ -243,7 +241,7 @@ class _$_MeUser extends _MeUser {
 
   final List<int> _followers;
   @override
-  @JsonKey(name: 'followers')
+  @JsonKey()
   List<int> get followers {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_followers);
@@ -320,8 +318,8 @@ abstract class _MeUser extends MeUser {
           final String name,
           final String image,
           final String bio,
-          @JsonKey(name: 'following') required final List<int> following,
-          @JsonKey(name: 'followers') required final List<int> followers,
+          final List<int> following,
+          final List<int> followers,
           @JsonKey(name: "liked_posts") required final List<int> likes,
           @JsonKey(name: "created_at") required final DateTime createdAt}) =
       _$_MeUser;
@@ -340,10 +338,8 @@ abstract class _MeUser extends MeUser {
   @override
   String get bio;
   @override
-  @JsonKey(name: 'following')
   List<int> get following;
   @override
-  @JsonKey(name: 'followers')
   List<int> get followers;
   @override
   @JsonKey(name: "liked_posts")

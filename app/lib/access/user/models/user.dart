@@ -17,6 +17,8 @@ class User with _$User {
     @Default("") String name,
     @Default("") String image,
     @Default("") String bio,
+    @Default([]) List<int> following,
+    @Default([]) List<int> followers,
     @JsonKey(name: "created_at") required DateTime createdAt,
   }) = _User;
 

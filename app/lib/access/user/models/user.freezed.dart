@@ -25,6 +25,8 @@ mixin _$User {
   String get name => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   String get bio => throw _privateConstructorUsedError;
+  List<int> get following => throw _privateConstructorUsedError;
+  List<int> get followers => throw _privateConstructorUsedError;
   @JsonKey(name: "created_at")
   DateTime get createdAt => throw _privateConstructorUsedError;
 
@@ -44,6 +46,8 @@ abstract class $UserCopyWith<$Res> {
       String name,
       String image,
       String bio,
+      List<int> following,
+      List<int> followers,
       @JsonKey(name: "created_at") DateTime createdAt});
 }
 
@@ -65,6 +69,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? name = null,
     Object? image = null,
     Object? bio = null,
+    Object? following = null,
+    Object? followers = null,
     Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
@@ -88,6 +94,14 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
               as String,
+      following: null == following
+          ? _value.following
+          : following // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      followers: null == followers
+          ? _value.followers
+          : followers // ignore: cast_nullable_to_non_nullable
+              as List<int>,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -108,6 +122,8 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String name,
       String image,
       String bio,
+      List<int> following,
+      List<int> followers,
       @JsonKey(name: "created_at") DateTime createdAt});
 }
 
@@ -125,6 +141,8 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? name = null,
     Object? image = null,
     Object? bio = null,
+    Object? following = null,
+    Object? followers = null,
     Object? createdAt = null,
   }) {
     return _then(_$_User(
@@ -148,6 +166,14 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
               as String,
+      following: null == following
+          ? _value._following
+          : following // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      followers: null == followers
+          ? _value._followers
+          : followers // ignore: cast_nullable_to_non_nullable
+              as List<int>,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -165,8 +191,12 @@ class _$_User extends _User {
       this.name = "",
       this.image = "",
       this.bio = "",
+      final List<int> following = const [],
+      final List<int> followers = const [],
       @JsonKey(name: "created_at") required this.createdAt})
-      : super._();
+      : _following = following,
+        _followers = followers,
+        super._();
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
@@ -183,13 +213,29 @@ class _$_User extends _User {
   @override
   @JsonKey()
   final String bio;
+  final List<int> _following;
+  @override
+  @JsonKey()
+  List<int> get following {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_following);
+  }
+
+  final List<int> _followers;
+  @override
+  @JsonKey()
+  List<int> get followers {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_followers);
+  }
+
   @override
   @JsonKey(name: "created_at")
   final DateTime createdAt;
 
   @override
   String toString() {
-    return 'User(uuid: $uuid, id: $id, name: $name, image: $image, bio: $bio, createdAt: $createdAt)';
+    return 'User(uuid: $uuid, id: $id, name: $name, image: $image, bio: $bio, following: $following, followers: $followers, createdAt: $createdAt)';
   }
 
   @override
@@ -202,14 +248,26 @@ class _$_User extends _User {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.bio, bio) || other.bio == bio) &&
+            const DeepCollectionEquality()
+                .equals(other._following, _following) &&
+            const DeepCollectionEquality()
+                .equals(other._followers, _followers) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, uuid, id, name, image, bio, createdAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      uuid,
+      id,
+      name,
+      image,
+      bio,
+      const DeepCollectionEquality().hash(_following),
+      const DeepCollectionEquality().hash(_followers),
+      createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -232,6 +290,8 @@ abstract class _User extends User {
           final String name,
           final String image,
           final String bio,
+          final List<int> following,
+          final List<int> followers,
           @JsonKey(name: "created_at") required final DateTime createdAt}) =
       _$_User;
   _User._() : super._();
@@ -248,6 +308,10 @@ abstract class _User extends User {
   String get image;
   @override
   String get bio;
+  @override
+  List<int> get following;
+  @override
+  List<int> get followers;
   @override
   @JsonKey(name: "created_at")
   DateTime get createdAt;

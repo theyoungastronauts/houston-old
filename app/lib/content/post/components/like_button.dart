@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../access/me/providers/me_provider.dart';
 import '../../../core/components/base_component.dart';
+import '../../../core/providers/session_provider.dart';
 import '../models/post.dart';
-import '../providers/likes_provider.dart';
 
 class LikePostButton extends BaseComponent {
+  final Post post;
+
   const LikePostButton({
     Key? key,
     required this.post,
   }) : super(key: key);
 
-  final Post post;
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.watch(likesProvider.notifier);
-    final isLiked = ref.watch(likesProvider).contains(post.id);
+    final isLiked = ref.watch(sessionProvider).postIsLiked(post);
+
     return IconButton(
       onPressed: () {
-        provider.likePost(post, !isLiked);
+        ref.read(meProvider.notifier).likePost(post, !isLiked);
       },
       icon: Icon(isLiked ? Icons.favorite : Icons.favorite_outline),
     );

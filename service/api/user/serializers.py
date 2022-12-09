@@ -48,6 +48,8 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "id",
             "uuid",
+            "followers",
+            "following",
             "is_setup",
             "metadata",
             "created_at",
@@ -57,6 +59,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class UserPublicSerializer(serializers.ModelSerializer):
+    followers = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    following = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
     class Meta:
         model = User
         fields = [
@@ -65,7 +70,14 @@ class UserPublicSerializer(serializers.ModelSerializer):
             "name",
             "image",
             "bio",
+            "followers",
+            "following",
             "created_at",
+        ]
+
+        read_only_fields = [
+            "followers",
+            "following",
         ]
 
 

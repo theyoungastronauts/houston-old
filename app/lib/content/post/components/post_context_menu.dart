@@ -2,11 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../access/me/providers/me_provider.dart';
 import '../../../core/components/base_component.dart';
+import '../../../core/providers/session_provider.dart';
 import '../../../navigation/app_router.gr.dart';
 import '../../comment/providers/comment_form_provider.dart';
 import '../models/post.dart';
-import '../providers/likes_provider.dart';
 import '../providers/post_form_provider.dart';
 
 class PostListContextMenu extends BaseComponent {
@@ -37,7 +38,7 @@ class PostListContextMenu extends BaseComponent {
   }
 
   void _like(BuildContext context, WidgetRef ref, bool willLike) {
-    ref.read(likesProvider.notifier).likePost(post, willLike);
+    ref.read(meProvider.notifier).likePost(post, willLike);
   }
 
   void _delete(WidgetRef ref, BuildContext context) async {
@@ -46,7 +47,8 @@ class PostListContextMenu extends BaseComponent {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bool isLiked = ref.watch(likesProvider).contains(post.id);
+    final isLiked = ref.watch(sessionProvider).postIsLiked(post);
+
     return PopupMenuButton(
       padding: EdgeInsets.zero,
       icon: const Icon(Icons.more_vert),

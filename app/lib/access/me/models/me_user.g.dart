@@ -12,10 +12,14 @@ _$_MeUser _$$_MeUserFromJson(Map<String, dynamic> json) => _$_MeUser(
       name: json['name'] as String? ?? "",
       image: json['image'] as String? ?? "",
       bio: json['bio'] as String? ?? "",
-      following:
-          (json['following'] as List<dynamic>).map((e) => e as int).toList(),
-      followers:
-          (json['followers'] as List<dynamic>).map((e) => e as int).toList(),
+      following: (json['following'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList() ??
+          const [],
+      followers: (json['followers'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList() ??
+          const [],
       likes:
           (json['liked_posts'] as List<dynamic>).map((e) => e as int).toList(),
       createdAt: DateTime.parse(json['created_at'] as String),

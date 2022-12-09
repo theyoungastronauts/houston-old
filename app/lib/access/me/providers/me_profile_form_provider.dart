@@ -8,7 +8,6 @@ import '../../../core/utils/image.dart';
 import '../../../core/utils/validation.dart';
 import '../models/me_user.dart';
 import '../services/me_service.dart';
-import 'me_provider.dart';
 
 class MeProfileFormProvider extends StateNotifier<MeUser> {
   final Ref ref;
@@ -81,7 +80,6 @@ class MeProfileFormProvider extends StateNotifier<MeUser> {
 
     if (me != null) {
       state = me;
-      ref.invalidate(meProvider);
       ref.read(sessionProvider.notifier).setMe(me);
       ref.read(globalLoadingProvider.notifier).complete();
       return true;
