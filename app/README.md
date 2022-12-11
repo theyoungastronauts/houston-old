@@ -33,20 +33,3 @@ fvm flutter packages pub run build_runner build --delete-conflicting-outputs
 
 That should be all you need to get up and running. Make sure you are running the python service in your machine in order to interact with the API. 
 
----
-
-### Development
-
-#### Initialize Mason
-
-Only needs to be run once per project to initialize.
-(run from root folder)
-```
-mason get
-```
-
-#### Create Feature
-```
-cd lib/feature
-mason make feature
-```
