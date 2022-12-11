@@ -1,0 +1,15 @@
+name: module
+description: Scaffold for module
+version: 0.1.0+1
+vars:
+  project:
+    type: string
+    description: Name of project - for import statements mostly
+    default: houston_app
+    prompt: Project name?
+
+  name:
+    type: string
+    description: Name of module
+    default: cool_module
+    prompt: New module name?

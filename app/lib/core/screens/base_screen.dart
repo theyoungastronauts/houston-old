@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/utils/screen.dart';
-import 'package:houston_app/feature/navigation/components/main_drawer.dart';
+
+import '../../navigation/global/components/main_drawer.dart';
+import '../utils/screen.dart';
 
 abstract class BaseScreen extends ConsumerWidget {
   const BaseScreen({
@@ -25,6 +26,7 @@ abstract class BaseScreen extends ConsumerWidget {
               : appBar(context, ref),
       drawer: includeMainDrawer ? const MainDrawer() : null,
       floatingActionButton: floatingActionButton(context, ref),
+      bottomNavigationBar: bottomNavigationBar(context, ref),
       body: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: horizontalPadding,
@@ -59,6 +61,10 @@ abstract class BaseScreen extends ConsumerWidget {
   }
 
   FloatingActionButton? floatingActionButton(BuildContext context, WidgetRef ref) {
+    return null;
+  }
+
+  Widget? bottomNavigationBar(BuildContext context, WidgetRef ref) {
     return null;
   }
 

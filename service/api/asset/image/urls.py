@@ -1,7 +1,7 @@
 from django.urls import path
 
-from api.asset.image.views import AssetImageCreateView
+from api.asset.image.views import ImageCreateRetrieveView
 
 urlpatterns = [
-    path("", AssetImageCreateView.as_view()),
+    path("", ImageCreateRetrieveView.as_view()),
 ]

@@ -1,7 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:houston_app/core/utils/env.dart';
-import 'package:houston_app/core/utils/singletons.dart';
+import 'env.dart';
+import 'singletons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class Storage {

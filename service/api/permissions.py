@@ -1,3 +1,4 @@
+from django.conf import settings
 from rest_framework.permissions import BasePermission
 
 
@@ -54,3 +55,29 @@ class IsOwnerOrReadOnly(OrReadOnlyMixin, IsOwner):
         if self.is_safe(request):
             return True
         return super().has_object_permission(request, view, obj)
+
+
+class IsAuthenticatedOrSecretToken(APIPermission):
+    def has_permission(self, request, view):
+        print(request.headers)
+        if "X-Authorization" in request.headers:
+            if request.headers["X-Authorization"] == settings.BITPACK_ADMIN_TOKEN:
+                return True
+
+        if request.user and request.user.is_authenticated:
+            return True
+
+        return False
+
+
+class IsCommentPostOwner(BasePermission):
+    def get_owner_object(self, obj):
+        return getattr(obj, "owner", None)
+
+    def has_object_permission(self, request, view, obj):
+        owner = self.get_owner_object(obj.post)
+        parent_owner = self.get_owner_object(obj.parent) if obj.parent else None
+        return bool(
+            (owner and owner == request.user)
+            or (parent_owner and parent_owner == request.user)
+        )

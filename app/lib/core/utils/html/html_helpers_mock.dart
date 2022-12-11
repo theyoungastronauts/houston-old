@@ -1,4 +1,6 @@
-import 'package:houston_app/core/utils/html/html_helpers_interface.dart';
+import 'html_helpers_interface.dart';
+import '../logging.dart';
+import '../singletons.dart';
 
 class HtmlUtilsImplementation extends HtmlUtilsInterface {
   @override
@@ -23,7 +25,7 @@ class HtmlUtilsImplementation extends HtmlUtilsInterface {
 
   @override
   void triggerDownload(String url, String name) {
-    print(url);
+    singleton<Log>().warn("trigger download not implemented for native");
   }
 
   @override

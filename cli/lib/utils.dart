@@ -1,0 +1,81 @@
+import 'dart:io';
+import 'package:cli/models/blueprint.dart';
+import 'package:yaml/yaml.dart';
+import 'package:dcli/dcli.dart';
+
+const isCompiled = String.fromEnvironment('COMPILED') == 'true';
+
+String appName() {
+  final yaml = parseYaml("${appDir()}/pubspec.yaml");
+
+  return yaml['name'];
+}
+
+String houstonRoot() {
+  if (isCompiled) {
+    return pwd;
+  }
+
+  return (Directory(pwd).parent).path;
+}
+
+String cliDir() {
+  return Directory("${houstonRoot()}/cli").path;
+}
+
+String appDir() {
+  return Directory("${houstonRoot()}/app").path;
+}
+
+String serviceDir() {
+  return Directory("${houstonRoot()}/service").path;
+}
+
+String blueprintsDir() {
+  return Directory("${cliDir()}/blueprints").path;
+}
+
+String bricksDir() {
+  return Directory("${cliDir()}/bricks").path;
+}
+
+String appModuleDirectory() {
+  return Directory("${appDir()}/lib").path;
+}
+
+String serviceApiDir() {
+  return Directory("${serviceDir()}/api").path;
+}
+
+YamlMap parseYaml(String path) {
+  File file = File(path);
+  String yamlString = file.readAsStringSync();
+  final yaml = loadYaml(yamlString);
+  return yaml;
+}
+
+BluePrint parseBlueprint(String path) {
+  final yaml = parseYaml(path);
+  return BluePrint.fromYaml(yaml);
+}
+
+Future<void> insertTextInFile({
+  required String path,
+  required String token,
+  required String value,
+  bool preventDuplicates = true,
+}) async {
+  final f = File(path);
+  String text = await f.readAsString();
+
+  if (preventDuplicates && text.contains(value)) {
+    print(orange("text already exists in file"));
+    return;
+  }
+
+  final newLine = '''$value
+    $token''';
+
+  text = text.replaceAll(token, newLine);
+  await f.writeAsString(text);
+}

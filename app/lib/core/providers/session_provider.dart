@@ -4,15 +4,18 @@ import 'dart:convert';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_app/core/app.dart';
-import 'package:houston_app/core/models/session.dart';
-import 'package:houston_app/core/utils/dialogs.dart';
-import 'package:houston_app/core/utils/singletons.dart';
-import 'package:houston_app/core/utils/storage.dart';
-import 'package:houston_app/feature/auth/models/token.dart';
-import 'package:houston_app/feature/auth/services/auth_service.dart';
-import 'package:houston_app/feature/auth/services/me_service.dart';
-import 'package:houston_app/feature/navigation/app_router.gr.dart';
+
+import '../../access/auth/models/token.dart';
+import '../../access/auth/services/auth_service.dart';
+import '../../access/me/models/me_user.dart';
+import '../../access/me/providers/me_provider.dart';
+import '../../access/me/services/me_service.dart';
+import '../../navigation/app_router.gr.dart';
+import '../app.dart';
+import '../models/session.dart';
+import '../utils/dialogs.dart';
+import '../utils/singletons.dart';
+import '../utils/storage.dart';
 
 class SessionProvider extends StateNotifier<Session> {
   final Ref ref;
@@ -75,13 +78,18 @@ class SessionProvider extends StateNotifier<Session> {
     });
   }
 
+  void setMe(MeUser me) {
+    state = state.copyWith(user: me);
+    ref.read(meProvider.notifier).load(state.user);
+  }
+
   Future<Token?> refreshToken(Token token) async {
     return await AuthService().refresh(token.refresh);
   }
 
   Future<void> logout([bool withConfirm = false]) async {
     if (withConfirm) {
-      bool confirmed = await ConfirmDialog.show(
+      final confirmed = await ConfirmDialog.show(
         title: "Logout",
         body: "Are you sure you want to logout?",
         destructive: true,

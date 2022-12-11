@@ -8,7 +8,6 @@ gen_watch:
 
 fix_gen:
 	mkdir ./.dart_tool/flutter_gen
-	touch ./.dart_tool/flutter_gen/package.yaml
 	echo "version: 1.0.0" > ./.dart_tool/flutter_gen/pubspec.yaml
 
 build_web_production:

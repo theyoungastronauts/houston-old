@@ -18,6 +18,8 @@ class PostSerializer(serializers.ModelSerializer):
             "owner",
             "num_assets",
             "assets",
+            "is_unlisted",
+            "is_published",
             "metadata",
             "created_at",
         ]
@@ -29,3 +31,13 @@ class PostSerializer(serializers.ModelSerializer):
             "metadata",
             "created_at",
         ]
+
+
+class PostCommentSerializer(serializers.Serializer):
+    body = serializers.CharField()
+    owner = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    parent = serializers.CharField(default=None)
+
+
+class PostLikeSerializer(serializers.Serializer):
+    owner = serializers.HiddenField(default=serializers.CurrentUserDefault())

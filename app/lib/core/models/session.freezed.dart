@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Session {
   Token? get token => throw _privateConstructorUsedError;
-  AuthenticatedUser? get user => throw _privateConstructorUsedError;
+  MeUser? get user => throw _privateConstructorUsedError;
   dynamic get ready => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -29,9 +29,9 @@ abstract class $SessionCopyWith<$Res> {
   factory $SessionCopyWith(Session value, $Res Function(Session) then) =
       _$SessionCopyWithImpl<$Res, Session>;
   @useResult
-  $Res call({Token? token, AuthenticatedUser? user, dynamic ready});
+  $Res call({Token? token, MeUser? user, dynamic ready});
 
-  $AuthenticatedUserCopyWith<$Res>? get user;
+  $MeUserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -59,7 +59,7 @@ class _$SessionCopyWithImpl<$Res, $Val extends Session>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as AuthenticatedUser?,
+              as MeUser?,
       ready: null == ready
           ? _value.ready
           : ready // ignore: cast_nullable_to_non_nullable
@@ -69,12 +69,12 @@ class _$SessionCopyWithImpl<$Res, $Val extends Session>
 
   @override
   @pragma('vm:prefer-inline')
-  $AuthenticatedUserCopyWith<$Res>? get user {
+  $MeUserCopyWith<$Res>? get user {
     if (_value.user == null) {
       return null;
     }
 
-    return $AuthenticatedUserCopyWith<$Res>(_value.user!, (value) {
+    return $MeUserCopyWith<$Res>(_value.user!, (value) {
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
@@ -87,10 +87,10 @@ abstract class _$$_SessionCopyWith<$Res> implements $SessionCopyWith<$Res> {
       __$$_SessionCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Token? token, AuthenticatedUser? user, dynamic ready});
+  $Res call({Token? token, MeUser? user, dynamic ready});
 
   @override
-  $AuthenticatedUserCopyWith<$Res>? get user;
+  $MeUserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -115,7 +115,7 @@ class __$$_SessionCopyWithImpl<$Res>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as AuthenticatedUser?,
+              as MeUser?,
       ready: null == ready ? _value.ready : ready,
     ));
   }
@@ -129,7 +129,7 @@ class _$_Session extends _Session {
   @override
   final Token? token;
   @override
-  final AuthenticatedUser? user;
+  final MeUser? user;
   @override
   @JsonKey()
   final dynamic ready;
@@ -163,14 +163,14 @@ class _$_Session extends _Session {
 abstract class _Session extends Session {
   factory _Session(
       {final Token? token,
-      final AuthenticatedUser? user,
+      final MeUser? user,
       final dynamic ready}) = _$_Session;
   _Session._() : super._();
 
   @override
   Token? get token;
   @override
-  AuthenticatedUser? get user;
+  MeUser? get user;
   @override
   dynamic get ready;
   @override

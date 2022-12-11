@@ -1,4 +1,4 @@
-import 'package:houston_app/generated/assets.gen.dart';
+import '../generated/assets.gen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 enum _Environment {

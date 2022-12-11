@@ -18,7 +18,7 @@ bool isValidPassword(String password) {
 bool isValidPhoneNumber(String value) {
   String patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
   RegExp regExp = RegExp(patttern);
-  if (!regExp.hasMatch(value)) {
+  if (!regExp.hasMatch(value.replaceAll("+", ""))) {
     return false;
   }
 

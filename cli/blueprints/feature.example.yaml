@@ -1,0 +1,19 @@
+name: cool_feature
+properties:
+  -
+    name: title
+    type: char
+    max_length: 255
+    blank: true
+    null: false
+  -
+    name: description
+    type: text
+    blank: true
+    null: true
+  -
+    name: url
+    type: url
+    blank: true
+    null: true
+

@@ -1,8 +1,9 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:houston_app/core/utils/screen.dart';
-import 'package:houston_app/feature/theme/theme.dart';
+
+import '../theme/theme.dart';
+import '../utils/screen.dart';
 
 enum AppButtonType { Elevated, Outlined, Text }
 
@@ -31,7 +32,7 @@ class AppButton extends StatelessWidget {
   }) : super(key: key);
 
   ButtonStyle _styleElevated(BuildContext context) {
-    final isMobile = ScreenUtils.size == ScreenSize.sm;
+    final isMobile = ScreenUtils.size(context) == ScreenSize.sm;
     switch (variant) {
       case AppColorVariant.primary:
         return ElevatedButton.styleFrom(
@@ -252,6 +253,7 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final key = "$variant:$type:$size:$processing:$icon:$iconTrails:$disabled";
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -260,18 +262,21 @@ class AppButton extends StatelessWidget {
             switch (type) {
               case AppButtonType.Elevated:
                 return ElevatedButton(
+                  key: Key('elevated:$key'),
                   onPressed: processing || disabled ? () {} : onPressed,
                   style: _styleElevated(context),
                   child: _child(context),
                 );
               case AppButtonType.Outlined:
                 return OutlinedButton(
+                  key: Key('outlined:$key'),
                   onPressed: processing || disabled ? () {} : onPressed,
                   style: _styleOutlined(context),
                   child: _child(context),
                 );
               case AppButtonType.Text:
                 return TextButton(
+                  key: Key('text:$key'),
                   onPressed: processing || disabled ? () {} : onPressed,
                   style: _styleText(context),
                   child: _child(context),

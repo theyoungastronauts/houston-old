@@ -23,6 +23,10 @@ class UserSerializer(serializers.ModelSerializer):
         required=False,
     )
 
+    liked_posts = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    followers = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    following = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
     class Meta:
         model = User
         fields = [
@@ -32,6 +36,10 @@ class UserSerializer(serializers.ModelSerializer):
             "name",
             "email",
             "image",
+            "bio",
+            "liked_posts",
+            "followers",
+            "following",
             "is_setup",
             "metadata",
             "created_at",
@@ -40,15 +48,20 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "id",
             "uuid",
-            "number",
+            "followers",
+            "following",
             "is_setup",
             "metadata",
             "created_at",
             "updated_at",
         ]
+        extra_kwargs = {}
 
 
 class UserPublicSerializer(serializers.ModelSerializer):
+    followers = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    following = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
     class Meta:
         model = User
         fields = [
@@ -56,5 +69,17 @@ class UserPublicSerializer(serializers.ModelSerializer):
             "uuid",
             "name",
             "image",
+            "bio",
+            "followers",
+            "following",
             "created_at",
         ]
+
+        read_only_fields = [
+            "followers",
+            "following",
+        ]
+
+
+class UserFollowSerializer(serializers.Serializer):
+    owner = serializers.HiddenField(default=serializers.CurrentUserDefault())

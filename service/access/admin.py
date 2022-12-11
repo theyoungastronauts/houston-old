@@ -3,23 +3,34 @@ from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import Group
+from django.contrib.auth.forms import UserChangeForm
 from django.db.models import Q, Case, When, Value, BooleanField
-from django.forms.models import ModelForm
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from access.models import OneTimePassword
 from admin.mixins import OverridesMixin
 from admin.models import ModelAdmin
+from bitpack.widgets import BitpackUploadWidget
+
 
 User = get_user_model()
 
 admin.site.unregister(Group)
 
 
+class UserAdminForm(UserChangeForm):
+    class Meta:
+        model = User
+        widgets = {
+            "image": BitpackUploadWidget(),
+        }
+        fields = "__all__"
+
+
 @admin.register(User)
 class UserAdmin(OverridesMixin, BaseUserAdmin):
-    add_form = ModelForm
+    form = UserAdminForm
     save_on_top = True
 
     autocomplete_fields = []
@@ -55,6 +66,9 @@ class UserAdmin(OverridesMixin, BaseUserAdmin):
                     "name",
                     "email",
                     "image",
+                    "bio",
+                    "password1",
+                    "password2",
                 ]
             },
         ),
@@ -76,6 +90,7 @@ class UserAdmin(OverridesMixin, BaseUserAdmin):
                     "name",
                     "email",
                     "image",
+                    "bio",
                 ]
             },
         ),

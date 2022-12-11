@@ -1,9 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:houston_app/core/app.dart';
-import 'package:houston_app/feature/theme/theme.dart';
+import 'package:flutter/services.dart';
+
+import '../app.dart';
+import '../components/buttons.dart';
+import '../theme/theme.dart';
+import 'image.dart';
 
 class InfoDialog {
-  static show({
+  static Future<bool?> show({
     required String title,
     String? body,
     Widget? content,
@@ -40,7 +45,7 @@ class InfoDialog {
 }
 
 class ConfirmDialog {
-  static show({
+  static Future<bool?> show({
     required String title,
     Widget? content,
     String? body,
@@ -92,7 +97,7 @@ class ConfirmDialog {
 class PromptModal {
   static Future<List<String>?> show({
     required String title,
-    required String? Function(String?) validator,
+    String? Function(String?)? validator,
     required String labelText,
     bool obscureText = false,
     String? cancelText,
@@ -100,6 +105,8 @@ class PromptModal {
     String initialValue = "",
     bool destructive = false,
     bool seconaryInput = false,
+    bool readOnly = false,
+    bool withCopy = false,
     String secondaryLabel = "",
     String secondaryInitialValue = "",
     bool secondaryObscureText = false,
@@ -133,6 +140,7 @@ class PromptModal {
                   controller: _controller,
                   obscureText: obscureText,
                   autofocus: true,
+                  readOnly: readOnly,
                   decoration: InputDecoration(
                     label: Text(
                       labelText,
@@ -146,6 +154,18 @@ class PromptModal {
                   ),
                   validator: validator,
                 ),
+                if (withCopy)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 6),
+                    child: AppButton(
+                      label: "Copy",
+                      icon: Icons.copy,
+                      onPressed: () async {
+                        await Clipboard.setData(ClipboardData(text: initialValue));
+                      },
+                      type: AppButtonType.Text,
+                    ),
+                  ),
                 if (seconaryInput)
                   TextFormField(
                     controller: _secondaryController,
@@ -197,6 +217,37 @@ class PromptModal {
                 Navigator.of(context).pop(value.isNotEmpty ? value : null);
               },
               child: Text(confirmText ?? "Submit"),
+            )
+          ],
+        );
+      },
+    );
+  }
+}
+
+class ImagePreviewDialog {
+  static Future<bool?> show(String url, {double width = 512}) async {
+    final context = rootNavigatorKey.currentContext!;
+
+    return await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          contentPadding: const EdgeInsets.all(16.0),
+          content: SizedBox(
+            width: width,
+            child: CachedNetworkImage(
+              imageUrl: ImageUrlBuilder.resize(url, width: width),
+              fit: BoxFit.fitWidth,
+            ),
+          ),
+          actions: [
+            AppButton(
+              label: "Close",
+              type: AppButtonType.Text,
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             )
           ],
         );
