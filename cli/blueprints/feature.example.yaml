@@ -1,4 +1,5 @@
 name: cool_feature
+module: content
 properties:
   -
     name: title

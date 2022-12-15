@@ -13,13 +13,13 @@ Future<void> newFeature() async {
     required: true,
     validator: FeatureNameValidator(),
   );
+  moduleName = snakeCase(moduleName);
 
   String name = ask(
     "Feature Name:",
     required: true,
     validator: FeatureNameValidator(),
   );
-
   name = snakeCase(name);
 
   final dir = blueprintsDir();
@@ -30,6 +30,10 @@ Future<void> newFeature() async {
   }
 
   File(path).createSync();
+
+  final contents = "name: $name\nmodule: $moduleName\nproperties:";
+
+  await setTextInFile(path: path, value: contents);
 }
 
 Future<void> generateFeature([String? name]) async {
@@ -87,6 +91,14 @@ Future<void> generateFeature([String? name]) async {
   );
 
   print(green("$name service api generated in $serviceApiGeneratedPath"));
+
+  final urlInsert = 'path("$name/", include("api.$name.urls")),';
+
+  await insertTextInFileAtToken(
+    path: "${serviceDir()}/api/urls.py",
+    token: "#::HOUSTON-INSERT-FEATURE::",
+    value: urlInsert,
+  );
 
   // APP
 
