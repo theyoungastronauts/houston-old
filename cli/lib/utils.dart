@@ -71,9 +71,18 @@ Future<void> insertTextInFile({
   required String path,
   required String value,
   String spacer = "\n",
+  bool preventDuplicates = true,
 }) async {
   final f = File(path);
   final text = await f.readAsString();
+  if (text.isEmpty) {
+    spacer = "";
+  }
+
+  if (preventDuplicates && text.contains(value)) {
+    return;
+  }
+
   await f.writeAsString("$text$spacer$value");
 }
 

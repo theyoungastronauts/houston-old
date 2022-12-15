@@ -100,6 +100,16 @@ Future<void> generateFeature([String? name]) async {
     value: urlInsert,
   );
 
+  await insertTextInFile(
+    path: "${serviceDir()}/${snakeCase(blueprint.module)}/models/__init__.py",
+    value: "from .${snakeCase(blueprint.name)} import *",
+  );
+
+  await insertTextInFile(
+    path: "${serviceDir()}/${snakeCase(blueprint.module)}/admin/__init__.py",
+    value: "from .${snakeCase(blueprint.name)} import *",
+  );
+
   // APP
 
   print(white("Generating App Feature"));
@@ -125,5 +135,5 @@ Future<void> generateFeature([String? name]) async {
 
   print(white("Running generate function in flutter project..."));
   final process = await Process.start("fvm", args, workingDirectory: appDir());
-  process.stdout.transform(utf8.decoder).forEach((line) => print(yellow(line)));
+  await process.stdout.transform(utf8.decoder).forEach((line) => print(yellow(line)));
 }
