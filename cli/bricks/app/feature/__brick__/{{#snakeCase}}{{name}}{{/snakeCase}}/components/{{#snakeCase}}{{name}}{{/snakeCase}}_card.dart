@@ -11,7 +11,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Card extends BaseComponent {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Card(
-      child: Text({{#camelCase}}{{name}}{{/camelCase}}.uuid),
+      child: Text({{#camelCase}}{{name}}{{/camelCase}}.{{#camelCase}}{{uiHeading1}}{{/camelCase}}),
     );
   }
 }

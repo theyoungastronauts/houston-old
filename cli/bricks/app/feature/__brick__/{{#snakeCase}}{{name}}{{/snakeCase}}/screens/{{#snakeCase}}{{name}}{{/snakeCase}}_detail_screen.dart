@@ -23,7 +23,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}DetailScreen extends BaseScreen {
         title: const Text("{{#titleCase}}{{name}}{{/titleCase}}"),
       ),
       data: ({{#camelCase}}{{name}}{{/camelCase}}) => AppBar(
-        title: Text({{#camelCase}}{{name}}{{/camelCase}}.uuid),
+        title: Text({{#camelCase}}{{name}}{{/camelCase}}.{{#camelCase}}{{uiHeading1}}{{/camelCase}}),
       ),
       error: (_, __) => AppBar(
         title: const Text("Error"),
@@ -36,7 +36,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}DetailScreen extends BaseScreen {
     final _{{#camelCase}}{{name}}{{/camelCase}} = ref.watch({{#camelCase}}{{name}}{{/camelCase}}DetailProvider(uuid));
 
     return _{{#camelCase}}{{name}}{{/camelCase}}.when(
-      data: ({{#camelCase}}{{name}}{{/camelCase}}) => Text({{#camelCase}}{{name}}{{/camelCase}}.uuid),
+      data: ({{#camelCase}}{{name}}{{/camelCase}}) => Text({{#camelCase}}{{name}}{{/camelCase}}.{{#camelCase}}{{uiHeading1}}{{/camelCase}}),
       error: (_, __) => const EmptyPlaceholder(title: "Error"),
       loading: () => const Center(
         child: CircularProgressIndicator(),

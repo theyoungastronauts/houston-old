@@ -12,15 +12,17 @@ class BlueprintProperty {
   final bool allowBlank;
   final bool allowNull;
   final String module;
+  final int? uiHeading;
 
   const BlueprintProperty({
     required this.name,
     required this.type,
-    this.maxLength,
     required this.allowBlank,
     required this.allowNull,
-    this.defaultValue,
     required this.module,
+    this.maxLength,
+    this.defaultValue,
+    this.uiHeading,
   });
 
   factory BlueprintProperty.fromYaml(YamlMap data) {
@@ -47,10 +49,11 @@ class BlueprintProperty {
       name: data['name'],
       type: type.toString().toLowerCase(),
       maxLength: data['max_length'],
-      allowBlank: data['blank'] ?? true,
-      allowNull: data['null'] ?? true,
+      allowBlank: data['blank'] ?? false,
+      allowNull: data['null'] ?? false,
       defaultValue: data['default'],
       module: module,
+      uiHeading: data['ui_heading'],
     );
   }
 
@@ -102,6 +105,44 @@ class BlueprintProperty {
       default:
         return pascalCase(type);
     }
+  }
+
+  String? get appEmptyFactoryParam {
+    if (!allowNull) {
+      final defaultValueString = defaultValue.toString();
+
+      switch (type) {
+        case "char":
+        case "text":
+        case "url":
+        case "bitpack_image":
+        case "bitpack_file":
+          if (defaultValue != null) {
+            return '"$defaultValueString"';
+          } else {
+            return '""';
+          }
+
+        case "boolean":
+          if (defaultValue != null) {
+            return defaultValueString;
+          } else {
+            return 'false';
+          }
+
+        case "int":
+        case "double":
+          if (defaultValue != null) {
+            return defaultValueString;
+          } else {
+            return '0';
+          }
+
+        default:
+          return '${pascalCase(type)}.empty()';
+      }
+    }
+    return null;
   }
 
   String get appModelEntry {

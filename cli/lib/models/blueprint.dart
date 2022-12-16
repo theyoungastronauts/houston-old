@@ -6,6 +6,8 @@ import 'package:dcli/dcli.dart';
 import 'package:yaml/yaml.dart';
 import 'package:collection/collection.dart';
 
+const formElementTypes = ['char', 'text', 'url', 'int', 'double'];
+
 class BluePrint {
   final String name;
   final String module;
@@ -80,6 +82,114 @@ class BluePrint {
     return properties.firstWhereOrNull((p) => p.module == 'access' && p.type == 'user') != null;
   }
 
+  List<String> get appEmptyFactoryParams {
+    final List<String> items = [];
+
+    for (final property in properties) {
+      final value = property.appEmptyFactoryParam;
+      if (value != null) {
+        items.add('${camelCase(property.name)}: $value');
+      }
+    }
+    return items;
+  }
+
+  List<String> get appFormControllers {
+    final List<String> items = [];
+    for (final property in properties) {
+      if (formElementTypes.contains(property.type)) {
+        items.add("final TextEditingController ${camelCase(property.name)}Controller = TextEditingController();");
+      }
+    }
+    return items;
+  }
+
+  List<String> get appFormControllerListeners {
+    final List<String> items = [];
+    for (final property in properties) {
+      if (formElementTypes.contains(property.type)) {
+        String? parser;
+        if (property.type == 'int') {
+          parser = 'int.tryParse(';
+        }
+        if (property.type == 'double') {
+          parser = 'double.tryParse(';
+        }
+
+        final value = """
+${camelCase(property.name)}Controller.addListener(() {
+      changesMade = true;
+      state = state.copyWith(${camelCase(property.name)}: ${parser ?? ''}${camelCase(property.name)}Controller.text${parser != null ? ') ?? 0' : ''});
+    });
+""";
+
+        items.add(value);
+      }
+    }
+    return items;
+  }
+
+  List<String> get appFormSetters {
+    final List<String> items = [];
+    for (final property in properties) {
+      if (formElementTypes.contains(property.type)) {
+        final isString = ['char', 'text', 'url'].contains(property.type);
+        items.add("${camelCase(property.name)}Controller.text = state.${camelCase(property.name)}${isString ? '' : '.toString()'};");
+      }
+    }
+    return items;
+  }
+
+  List<String> get appFormValidators {
+    final List<String> items = [];
+
+    for (final property in properties) {
+      if (formElementTypes.contains(property.type)) {
+        if (!property.allowNull) {
+          items.add('String? ${camelCase(property.name)}Validator(String? value) => formValidatorNotEmpty(value, "${titleCase(property.name)}");');
+        }
+      }
+    }
+    return items;
+  }
+
+  List<String> get appFormClearers {
+    final List<String> items = [];
+    for (final property in properties) {
+      if (formElementTypes.contains(property.type)) {
+        items.add("${camelCase(property.name)}Controller.text = '';");
+      }
+    }
+    return items;
+  }
+
+  List<String> get appFormInputs {
+    final List<String> items = [];
+    for (final property in properties) {
+      if (formElementTypes.contains(property.type)) {
+        final value = property.type == 'text'
+            ? """
+TextFormField(
+                controller: provider.${camelCase(property.name)}Controller,
+                validator: provider.${camelCase(property.name)}Validator,
+                decoration: const InputDecoration(label: Text("${titleCase(property.name)}")),
+                minLines: 3,
+                maxLines: 3,
+              ),
+"""
+            : """
+TextFormField(
+                controller: provider.${camelCase(property.name)}Controller,
+                validator: provider.${camelCase(property.name)}Validator,
+                decoration: const InputDecoration(label: Text("${titleCase(property.name)}")),
+              ),
+""";
+        items.add(value);
+      }
+    }
+    return items;
+  }
+
   Map<String, dynamic> serialize() {
     return {
       'project': appName(),
@@ -92,6 +202,15 @@ class BluePrint {
       'appModelImports': appModelImports,
       'serviceModelImports': serviceModelImports.toSet().toList()..sort(),
       'shouldRegisterUser': shouldRegisterUser,
+      'uiHeading1': properties.firstWhereOrNull((p) => p.uiHeading == 1)?.name ?? 'uuid',
+      'uiHeading2': properties.firstWhereOrNull((p) => p.uiHeading == 2)?.name ?? 'uuid',
+      'emptyFactoryParams': appEmptyFactoryParams,
+      'appFormControllers': appFormControllers,
+      'appFormControllerListeners': appFormControllerListeners,
+      'appFormSetters': appFormSetters,
+      'appFormValidators': appFormValidators,
+      'appFormClearers': appFormClearers,
+      'appFormInputs': appFormInputs,
     };
   }
 }
