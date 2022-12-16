@@ -1,4 +1,5 @@
 .mason/
+.fvm/flutter_sdk
 
 
 # Miscellaneous
