@@ -1,11 +1,10 @@
-
+# Houston CLI
 
 
 ### Setup
 ```
 dart pub global activate dcli
 ```
-
 
 ### Running
 ```
@@ -36,4 +35,3 @@ Then edit the `cli/blueprints/{{new_feature}}.yaml` using the `feature.example.y
 ```
     generate_feature
 ```
-
