@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:{{project}}/core/screens/base_screen.dart';
-import 'package:{{project}}/core/components/empty_placeholder.dart';
-import 'package:{{project}}/{{#snakeCase}}{{module}}{{/snakeCase}}/{{#snakeCase}}{{name}}{{/snakeCase}}/providers/{{#snakeCase}}{{name}}{{/snakeCase}}_detail_provider.dart';
+import '../../../core/screens/base_screen.dart';
+import '../../../core/components/empty_placeholder.dart';
+import '../providers/{{#snakeCase}}{{name}}{{/snakeCase}}_detail_provider.dart';
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}DetailScreen extends BaseScreen {
   final String uuid;

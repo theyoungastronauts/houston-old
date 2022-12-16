@@ -1,8 +1,8 @@
-import 'package:{{project}}/core/services/base_service.dart';
-import 'package:{{project}}/core/models/paginated_response.dart';
-import 'package:{{project}}/{{#snakeCase}}{{module}}{{/snakeCase}}/{{#snakeCase}}{{name}}{{/snakeCase}}/models/{{#snakeCase}}{{name}}{{/snakeCase}}.dart';
-import 'package:{{project}}/core/utils/logging.dart';
-import 'package:{{project}}/core/utils/singletons.dart';
+import '../../../core/services/base_service.dart';
+import '../../../core/models/paginated_response.dart';
+import '../../../core/utils/logging.dart';
+import '../../../core/utils/singletons.dart';
+import '../models/{{#snakeCase}}{{name}}{{/snakeCase}}.dart';
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}Service extends BaseService {
   static const baseUrl = "/{{#paramCase}}{{name}}{{/paramCase}}";

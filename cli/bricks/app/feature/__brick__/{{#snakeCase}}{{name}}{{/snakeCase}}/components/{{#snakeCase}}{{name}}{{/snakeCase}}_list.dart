@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:{{project}}/core/components/base_component.dart';
-import 'package:{{project}}/core/components/infinite_list.dart';
-import 'package:{{project}}/{{#snakeCase}}{{module}}{{/snakeCase}}/{{#snakeCase}}{{name}}{{/snakeCase}}/components/{{#snakeCase}}{{name}}{{/snakeCase}}_card.dart';
-import 'package:{{project}}/{{#snakeCase}}{{module}}{{/snakeCase}}/{{#snakeCase}}{{name}}{{/snakeCase}}/models/{{#snakeCase}}{{name}}{{/snakeCase}}.dart';
-import 'package:{{project}}/{{#snakeCase}}{{module}}{{/snakeCase}}/{{#snakeCase}}{{name}}{{/snakeCase}}/providers/{{#snakeCase}}{{name}}{{/snakeCase}}_list_provider.dart';
+import '../../../core/components/base_component.dart';
+import '../../../core/components/infinite_list.dart';
+import '../components/{{#snakeCase}}{{name}}{{/snakeCase}}_card.dart';
+import '../models/{{#snakeCase}}{{name}}{{/snakeCase}}.dart';
+import '../providers/{{#snakeCase}}{{name}}{{/snakeCase}}_list_provider.dart';
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}List extends BaseComponent {
   const {{#pascalCase}}{{name}}{{/pascalCase}}List({Key? key}) : super(key: key);

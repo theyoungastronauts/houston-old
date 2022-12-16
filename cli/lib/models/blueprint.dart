@@ -43,7 +43,11 @@ class BluePrint {
     final List<String> importStrings = [];
     for (final p in properties) {
       if (!PRIMITIVE_TYPES.contains(p.type)) {
-        importStrings.add("import 'package:${appName()}/${snakeCase(p.module)}/${snakeCase(p.type)}/models/${snakeCase(p.type)}.dart';");
+        if (p.module == module) {
+          importStrings.add("import '../${snakeCase(p.type)}/models/${snakeCase(p.type)}.dart';");
+        } else {
+          importStrings.add("import '../../../${snakeCase(p.module)}/${snakeCase(p.type)}/models/${snakeCase(p.type)}.dart';");
+        }
       }
     }
 
