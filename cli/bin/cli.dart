@@ -8,8 +8,8 @@ import 'package:dcli/dcli.dart';
 
 Future<void> main(List<String> args) async {
   // newModule('media');
-  // generateFeature("video");
-  // return;
+  generateFeature("video_game");
+  return;
 
   // Loop, asking for user input and evaluating it
   for (;;) {

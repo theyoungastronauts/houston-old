@@ -1,12 +1,37 @@
 # Houston CLI
 
-### Setup
 
+### Setup
 ```
 dart pub global activate dcli
-dart pub get
 ```
 
+### Running
 ```
-dart run bin/cli.dart
+    make run
+```
+
+
+### Compile
+```
+    make compile
+```
+
+### CLI Commands
+
+#### Create Module
+```
+    new_module
+```
+
+### Init Feature
+```
+    new_feature
+```
+Then edit the `cli/blueprints/{{new_feature}}.yaml` using the `feature.example.yaml` as an example.
+
+### Generate Feature
+
+```
+    generate_feature
 ```

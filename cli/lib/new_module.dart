@@ -18,13 +18,22 @@ Future<void> newModule([String? name]) async {
   );
 
   name = snakeCase(name);
-  print(name);
+
+  if (["navigation", "media", "core"].contains(name)) {
+    print(red("Module `$name` is a reserved module name."));
+    return;
+  }
+
+  if (["admin", "api", "bitpack", "connect", "data", "project", "static", "venv", "houston"].contains(name)) {
+    print(red("Module `$name` is an module name."));
+    return;
+  }
+
   String serviceParentDir = serviceDir();
-  print(serviceParentDir);
   final serviceGeneratedPath = "$serviceParentDir/${snakeCase(name)}";
 
   if (Directory(serviceGeneratedPath).existsSync()) {
-    print(orange("Module already exists. Delete before continuing"));
+    print(red("Module already exists."));
     return;
   }
 
@@ -45,7 +54,7 @@ Future<void> newModule([String? name]) async {
 
   print(white("Adding Service Module to settings/apps.py"));
 
-  await insertTextInFile(
+  await insertTextInFileAtToken(
     path: "${serviceDir()}/project/settings/apps.py",
     token: SETTINGS_APP_INSERT_TOKEN,
     value: '"${snakeCase(name)}.apps.${pascalCase(name)}Config",',
