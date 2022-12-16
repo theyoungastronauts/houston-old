@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:simple_markdown_editor/widgets/markdown_form_field.dart';
-import 'package:simple_markdown_editor/widgets/markdown_toolbar.dart';
 
 import '../../../core/components/base_component.dart';
 import '../../../media/asset/components/multi_asset_manager.dart';
@@ -15,7 +12,6 @@ class PostForm extends BaseComponent {
   Widget body(BuildContext context, WidgetRef ref) {
     final provider = ref.read(postFormProvider.notifier);
     final post = ref.watch(postFormProvider);
-    FocusNode _focusNode = FocusNode();
 
     return SingleChildScrollView(
       child: Form(
