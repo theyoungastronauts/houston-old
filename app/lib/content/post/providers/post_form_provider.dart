@@ -15,11 +15,10 @@ import 'post_list_provider.dart';
 
 class PostFormProvider extends StateNotifier<Post> {
   final Ref ref;
-
   final GlobalKey<FormState> formKey = GlobalKey();
+  bool changesMade = false;
   final TextEditingController titleController = TextEditingController();
   final TextEditingController bodyController = TextEditingController();
-  bool changesMade = false;
 
   PostFormProvider(this.ref, Post model) : super(model) {
     load(state);
@@ -98,20 +97,22 @@ class PostFormProvider extends StateNotifier<Post> {
       title: 'Are you sure you want to delete this post?',
       destructive: true,
     );
-    ref.read(globalLoadingProvider.notifier).start();
 
-    if (confirmed != null && confirmed) {
+    if (confirmed == true) {
+      ref.read(globalLoadingProvider.notifier).start();
       final success = await PostService().delete(post);
-      ref.read(postListProvider(PostListType.all).notifier).refresh();
-      ref.read(postListProvider(PostListType.me).notifier).refresh();
+      ref.read(globalLoadingProvider.notifier).complete();
+
       if (success) {
+        ref.read(postListProvider(PostListType.all).notifier).refresh();
+        ref.read(postListProvider(PostListType.me).notifier).refresh();
         Toast.message('Post deleted');
+
         if (onDelete != null) onDelete.call();
       } else {
         Toast.error();
       }
     }
-    ref.read(globalLoadingProvider.notifier).complete();
   }
 
   Future<bool?> submit({bool shouldPublish = false}) async {

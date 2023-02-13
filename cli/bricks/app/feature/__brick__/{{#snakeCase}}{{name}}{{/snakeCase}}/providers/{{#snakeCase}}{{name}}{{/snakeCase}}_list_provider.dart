@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:{{project}}/{{#snakeCase}}{{module}}{{/snakeCase}}/{{#snakeCase}}{{name}}{{/snakeCase}}/models/{{#snakeCase}}{{name}}{{/snakeCase}}.dart';
-import 'package:{{project}}/{{#snakeCase}}{{module}}{{/snakeCase}}/{{#snakeCase}}{{name}}{{/snakeCase}}/services/{{#snakeCase}}{{name}}{{/snakeCase}}_service.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import '../models/{{#snakeCase}}{{name}}{{/snakeCase}}.dart';
+import '../services/{{#snakeCase}}{{name}}{{/snakeCase}}_service.dart';
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}ListProvider extends StateNotifier<List<{{#pascalCase}}{{name}}{{/pascalCase}}>> {
   final PagingController<int, {{#pascalCase}}{{name}}{{/pascalCase}}> pagingController =

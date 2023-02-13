@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:{{project}}/core/screens/base_screen.dart';
-import 'package:{{project}}/core/components/empty_placeholder.dart';
-import 'package:{{project}}/{{#snakeCase}}{{module}}{{/snakeCase}}/{{#snakeCase}}{{name}}{{/snakeCase}}/providers/{{#snakeCase}}{{name}}{{/snakeCase}}_detail_provider.dart';
+import '../../../core/screens/base_screen.dart';
+import '../../../core/components/empty_placeholder.dart';
+import '../providers/{{#snakeCase}}{{name}}{{/snakeCase}}_detail_provider.dart';
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}DetailScreen extends BaseScreen {
   final String uuid;
@@ -23,7 +23,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}DetailScreen extends BaseScreen {
         title: const Text("{{#titleCase}}{{name}}{{/titleCase}}"),
       ),
       data: ({{#camelCase}}{{name}}{{/camelCase}}) => AppBar(
-        title: Text({{#camelCase}}{{name}}{{/camelCase}}.uuid),
+        title: Text({{#camelCase}}{{name}}{{/camelCase}}.{{#camelCase}}{{uiHeading1}}{{/camelCase}}),
       ),
       error: (_, __) => AppBar(
         title: const Text("Error"),
@@ -36,7 +36,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}DetailScreen extends BaseScreen {
     final _{{#camelCase}}{{name}}{{/camelCase}} = ref.watch({{#camelCase}}{{name}}{{/camelCase}}DetailProvider(uuid));
 
     return _{{#camelCase}}{{name}}{{/camelCase}}.when(
-      data: ({{#camelCase}}{{name}}{{/camelCase}}) => Text({{#camelCase}}{{name}}{{/camelCase}}.uuid),
+      data: ({{#camelCase}}{{name}}{{/camelCase}}) => Text({{#camelCase}}{{name}}{{/camelCase}}.{{#camelCase}}{{uiHeading1}}{{/camelCase}}),
       error: (_, __) => const EmptyPlaceholder(title: "Error"),
       loading: () => const Center(
         child: CircularProgressIndicator(),

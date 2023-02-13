@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:{{project}}/core/screens/base_screen.dart';
-import 'package:{{project}}/{{#snakeCase}}{{module}}{{/snakeCase}}/{{#snakeCase}}{{name}}{{/snakeCase}}/components/{{#snakeCase}}{{name}}{{/snakeCase}}_list.dart';
+import '../../../core/screens/base_screen.dart';
+import '../components/{{#snakeCase}}{{name}}{{/snakeCase}}_list.dart';
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}ListScreen extends BaseScreen {
   const {{#pascalCase}}{{name}}{{/pascalCase}}ListScreen({Key? key})

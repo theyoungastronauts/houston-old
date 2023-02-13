@@ -13,13 +13,13 @@ Future<void> newFeature() async {
     required: true,
     validator: FeatureNameValidator(),
   );
+  moduleName = snakeCase(moduleName);
 
   String name = ask(
     "Feature Name:",
     required: true,
     validator: FeatureNameValidator(),
   );
-
   name = snakeCase(name);
 
   final dir = blueprintsDir();
@@ -30,6 +30,10 @@ Future<void> newFeature() async {
   }
 
   File(path).createSync();
+
+  final contents = "name: $name\nmodule: $moduleName\nproperties:";
+
+  await setTextInFile(path: path, value: contents);
 }
 
 Future<void> generateFeature([String? name]) async {
@@ -88,6 +92,24 @@ Future<void> generateFeature([String? name]) async {
 
   print(green("$name service api generated in $serviceApiGeneratedPath"));
 
+  final urlInsert = 'path("$name/", include("api.$name.urls")),';
+
+  await insertTextInFileAtToken(
+    path: "${serviceDir()}/api/urls.py",
+    token: "#::HOUSTON-INSERT-FEATURE::",
+    value: urlInsert,
+  );
+
+  await insertTextInFile(
+    path: "${serviceDir()}/${snakeCase(blueprint.module)}/models/__init__.py",
+    value: "from .${snakeCase(blueprint.name)} import *",
+  );
+
+  await insertTextInFile(
+    path: "${serviceDir()}/${snakeCase(blueprint.module)}/admin/__init__.py",
+    value: "from .${snakeCase(blueprint.name)} import *",
+  );
+
   // APP
 
   print(white("Generating App Feature"));
@@ -113,5 +135,5 @@ Future<void> generateFeature([String? name]) async {
 
   print(white("Running generate function in flutter project..."));
   final process = await Process.start("fvm", args, workingDirectory: appDir());
-  process.stdout.transform(utf8.decoder).forEach((line) => print(yellow(line)));
+  await process.stdout.transform(utf8.decoder).forEach((line) => print(yellow(line)));
 }

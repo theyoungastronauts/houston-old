@@ -1,8 +1,12 @@
+import 'package:cli/constants.dart';
+import 'package:cli/models/blueprint_property.dart';
 import 'package:cli/strings.dart';
 import 'package:cli/utils.dart';
 import 'package:dcli/dcli.dart';
 import 'package:yaml/yaml.dart';
 import 'package:collection/collection.dart';
+
+const formElementTypes = ['char', 'text', 'url', 'int', 'double'];
 
 class BluePrint {
   final String name;
@@ -43,7 +47,11 @@ class BluePrint {
     final List<String> importStrings = [];
     for (final p in properties) {
       if (!PRIMITIVE_TYPES.contains(p.type)) {
-        importStrings.add("import 'package:${appName()}/${snakeCase(p.module)}/${snakeCase(p.type)}/models/${snakeCase(p.type)}.dart';");
+        if (p.module == module) {
+          importStrings.add("import '../${snakeCase(p.type)}/models/${snakeCase(p.type)}.dart';");
+        } else {
+          importStrings.add("import '../../../${snakeCase(p.module)}/${snakeCase(p.type)}/models/${snakeCase(p.type)}.dart';");
+        }
       }
     }
 
@@ -60,6 +68,11 @@ class BluePrint {
           importStrings.add("from ${snakeCase(p.module)}.models import ${pascalCase(p.type)}");
         }
       }
+
+      if (p.type == "bitpack_image" || p.type == "bitpack_file") {
+        importStrings.add("from django.core.validators import RegexValidator");
+        importStrings.add("from django.conf import settings");
+      }
     }
 
     return importStrings;
@@ -67,6 +80,114 @@ class BluePrint {
 
   bool get shouldRegisterUser {
     return properties.firstWhereOrNull((p) => p.module == 'access' && p.type == 'user') != null;
+  }
+
+  List<String> get appEmptyFactoryParams {
+    final List<String> items = [];
+
+    for (final property in properties) {
+      final value = property.appEmptyFactoryParam;
+      if (value != null) {
+        items.add('${camelCase(property.name)}: $value');
+      }
+    }
+    return items;
+  }
+
+  List<String> get appFormControllers {
+    final List<String> items = [];
+    for (final property in properties) {
+      if (formElementTypes.contains(property.type)) {
+        items.add("final TextEditingController ${camelCase(property.name)}Controller = TextEditingController();");
+      }
+    }
+    return items;
+  }
+
+  List<String> get appFormControllerListeners {
+    final List<String> items = [];
+    for (final property in properties) {
+      if (formElementTypes.contains(property.type)) {
+        String? parser;
+        if (property.type == 'int') {
+          parser = 'int.tryParse(';
+        }
+        if (property.type == 'double') {
+          parser = 'double.tryParse(';
+        }
+
+        final value = """
+${camelCase(property.name)}Controller.addListener(() {
+      changesMade = true;
+      state = state.copyWith(${camelCase(property.name)}: ${parser ?? ''}${camelCase(property.name)}Controller.text${parser != null ? ') ?? 0' : ''});
+    });
+""";
+
+        items.add(value);
+      }
+    }
+    return items;
+  }
+
+  List<String> get appFormSetters {
+    final List<String> items = [];
+    for (final property in properties) {
+      if (formElementTypes.contains(property.type)) {
+        final isString = ['char', 'text', 'url'].contains(property.type);
+        items.add("${camelCase(property.name)}Controller.text = state.${camelCase(property.name)}${isString ? '' : '.toString()'};");
+      }
+    }
+    return items;
+  }
+
+  List<String> get appFormValidators {
+    final List<String> items = [];
+
+    for (final property in properties) {
+      if (formElementTypes.contains(property.type)) {
+        if (!property.allowNull) {
+          items.add('String? ${camelCase(property.name)}Validator(String? value) => formValidatorNotEmpty(value, "${titleCase(property.name)}");');
+        }
+      }
+    }
+    return items;
+  }
+
+  List<String> get appFormClearers {
+    final List<String> items = [];
+    for (final property in properties) {
+      if (formElementTypes.contains(property.type)) {
+        items.add("${camelCase(property.name)}Controller.text = '';");
+      }
+    }
+    return items;
+  }
+
+  List<String> get appFormInputs {
+    final List<String> items = [];
+    for (final property in properties) {
+      if (formElementTypes.contains(property.type)) {
+        final value = property.type == 'text'
+            ? """
+TextFormField(
+                controller: provider.${camelCase(property.name)}Controller,
+                validator: provider.${camelCase(property.name)}Validator,
+                decoration: const InputDecoration(label: Text("${titleCase(property.name)}")),
+                minLines: 3,
+                maxLines: 3,
+              ),
+"""
+            : """
+TextFormField(
+                controller: provider.${camelCase(property.name)}Controller,
+                validator: provider.${camelCase(property.name)}Validator,
+                decoration: const InputDecoration(label: Text("${titleCase(property.name)}")),
+              ),
+""";
+        items.add(value);
+      }
+    }
+    return items;
   }
 
   Map<String, dynamic> serialize() {
@@ -79,167 +200,17 @@ class BluePrint {
       'labelPlural': labelPlural,
       'properties': properties.map<Map<String, dynamic>>((p) => p.serialize()).toList(),
       'appModelImports': appModelImports,
-      'serviceModelImports': serviceModelImports,
+      'serviceModelImports': serviceModelImports.toSet().toList()..sort(),
       'shouldRegisterUser': shouldRegisterUser,
-    };
-  }
-}
-
-// ignore: constant_identifier_names
-const PRIMITIVE_TYPES = [
-  'char',
-  'text',
-  'url',
-  'boolean',
-  'int',
-  'double',
-];
-
-class BlueprintProperty {
-  final String name;
-  final String type;
-  final int? maxLength;
-  final dynamic defaultValue;
-  final bool allowBlank;
-  final bool allowNull;
-  final String module;
-
-  const BlueprintProperty({
-    required this.name,
-    required this.type,
-    this.maxLength,
-    required this.allowBlank,
-    required this.allowNull,
-    this.defaultValue,
-    required this.module,
-  });
-
-  factory BlueprintProperty.fromYaml(YamlMap data) {
-    String? type = data['type'];
-
-    // validate type
-    if (type == null) {
-      throw Exception(red("type required"));
-    }
-
-    String module = 'root';
-
-    if (type.contains('.')) {
-      final parts = type.split('.');
-      module = parts.first;
-      type = type.split('.').last;
-    }
-
-    // if (!PROPERTY_TYPES.contains(data['type'])) {
-    //   throw Exception(red("Invalid Property Type `$type`"));
-    // }
-
-    return BlueprintProperty(
-      name: data['name'],
-      type: type.toString().toLowerCase(),
-      maxLength: data['max_length'],
-      allowBlank: data['allowBlank'] ?? true,
-      allowNull: data['allowNull'] ?? true,
-      defaultValue: data['defaultValue'],
-      module: module,
-    );
-  }
-
-  List<Map<String, dynamic>> get _appAnnotations {
-    final List<Map<String, dynamic>> values = [];
-    if (snakeCase(name) != camelCase(name)) {
-      values.add({'name': snakeCase(name)});
-    }
-
-    if (defaultValue != null) {
-      values.add({"defaultValue": defaultValue});
-    }
-
-    return values;
-  }
-
-  String _appAnnotationValueToString(Map<String, dynamic> kv) {
-    final v = kv[kv.keys.first];
-    if (v.runtimeType == String) {
-      return '${kv.keys.first}: "$v"';
-    }
-    return '${kv.keys.first}: $v';
-  }
-
-  String get _appAnnotation {
-    final values = _appAnnotations;
-
-    if (_appAnnotations.isNotEmpty) {
-      return '@JsonKey(${values.map((item) => _appAnnotationValueToString(item)).toList().join(", ")}) ';
-    }
-
-    return '';
-  }
-
-  String get _appVariableType {
-    switch (type) {
-      case "char":
-      case "text":
-      case "url":
-        return 'String';
-      case "bool":
-        return 'bool';
-      case "int":
-        return 'int';
-      case "double":
-        return 'double';
-      default:
-        return pascalCase(type);
-    }
-  }
-
-  String get appModelEntry {
-    final value =
-        "$_appAnnotation${allowNull == true && defaultValue == null ? '' : 'required '}$_appVariableType${allowNull ? '?' : ''} ${camelCase(name)},";
-    return value;
-  }
-
-  String get _serviceVariableType {
-    switch (type) {
-      case "char":
-        return 'models.CharField';
-      case "text":
-        return 'models.TextField';
-      case "url":
-        return 'models.URLField';
-      case "bool":
-        return 'models.BooleanField';
-      case "int":
-        return 'models.IntegerField';
-      case "double":
-        return 'models.DecimalField';
-      default:
-        return "models.ForeignKey";
-    }
-  }
-
-  String get serviceModelEntry {
-    if (PRIMITIVE_TYPES.contains(type)) {
-      return '${snakeCase(name)} = $_serviceVariableType(_("${titleCase(name)}"))';
-    }
-
-    return '''${snakeCase(name)} = models.ForeignKey(
-      '${snakeCase(module)}.${pascalCase(type)}', 
-      verbose_name=_("${titleCase(name)}"),
-      on_delete=models.CASCADE,
-    )''';
-  }
-
-  Map<String, dynamic> serialize() {
-    return {
-      'name': name,
-      'type': type,
-      'maxLength': maxLength,
-      'default': defaultValue,
-      'allowBlank': allowBlank,
-      'allowNull': allowNull,
-      'appModelEntry': appModelEntry,
-      'serviceModelEntry': serviceModelEntry,
+      'uiHeading1': properties.firstWhereOrNull((p) => p.uiHeading == 1)?.name ?? 'uuid',
+      'uiHeading2': properties.firstWhereOrNull((p) => p.uiHeading == 2)?.name ?? 'uuid',
+      'emptyFactoryParams': appEmptyFactoryParams,
+      'appFormControllers': appFormControllers,
+      'appFormControllerListeners': appFormControllerListeners,
+      'appFormSetters': appFormSetters,
+      'appFormValidators': appFormValidators,
+      'appFormClearers': appFormClearers,
+      'appFormInputs': appFormInputs,
     };
   }
 }

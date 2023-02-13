@@ -59,7 +59,34 @@ BluePrint parseBlueprint(String path) {
   return BluePrint.fromYaml(yaml);
 }
 
+Future<void> setTextInFile({
+  required String path,
+  required String value,
+}) async {
+  final f = File(path);
+  await f.writeAsString(value);
+}
+
 Future<void> insertTextInFile({
+  required String path,
+  required String value,
+  String spacer = "\n",
+  bool preventDuplicates = true,
+}) async {
+  final f = File(path);
+  final text = await f.readAsString();
+  if (text.isEmpty) {
+    spacer = "";
+  }
+
+  if (preventDuplicates && text.contains(value)) {
+    return;
+  }
+
+  await f.writeAsString("$text$spacer$value");
+}
+
+Future<void> insertTextInFileAtToken({
   required String path,
   required String token,
   required String value,

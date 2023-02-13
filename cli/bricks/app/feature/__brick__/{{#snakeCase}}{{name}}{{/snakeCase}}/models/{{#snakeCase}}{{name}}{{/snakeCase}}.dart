@@ -17,5 +17,19 @@ class {{#pascalCase}}{{name}}{{/pascalCase}} with _${{#pascalCase}}{{name}}{{/pa
 
   factory {{#pascalCase}}{{name}}{{/pascalCase}}.fromJson(Map<String, dynamic> json) => _${{#pascalCase}}{{name}}{{/pascalCase}}FromJson(json);
   
+  factory {{#pascalCase}}{{name}}{{/pascalCase}}.empty() {
+    return {{#pascalCase}}{{name}}{{/pascalCase}}(
+      id: 0,
+      uuid: '',
+      {{#emptyFactoryParams}}{{{.}}},
+      {{/emptyFactoryParams}}
+    );
+  }
+
+  bool get exists {
+    return uuid.isNotEmpty;
+  }
+
+
 }
 
