@@ -17,8 +17,8 @@ class AssetService extends BaseService {
   static const basePath = '/asset';
 
   Future<NewAsset> _initAsset(MediaType mediaType) async {
-    final _params = {'content_type': mediaType.name};
-    final data = await postHttp("$basePath/${mediaType.type}", params: _params);
+    final builtParams = {'content_type': mediaType.name};
+    final data = await postHttp("$basePath/${mediaType.type}", params: builtParams);
 
     return NewAsset.fromJson(data);
   }

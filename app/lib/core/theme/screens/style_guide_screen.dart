@@ -21,7 +21,7 @@ class StyleGuideScreen extends BaseScreen {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
 
-    final List<IconData> _icons = [
+    final List<IconData> icons = [
       Icons.favorite,
       Icons.favorite_outline,
       Icons.bookmark,
@@ -79,14 +79,14 @@ class StyleGuideScreen extends BaseScreen {
             ],
           ),
           const _Heading("Headings"),
-          Text("Heading 1", style: textTheme.headline1),
-          Text("Heading 2", style: textTheme.headline2),
-          Text("Heading 3", style: textTheme.headline3),
-          Text("Heading 4", style: textTheme.headline4),
-          Text("Heading 5", style: textTheme.headline5),
-          Text("Heading 6", style: textTheme.headline6),
-          Text("Subtitle 1", style: textTheme.subtitle1),
-          Text("Subtitle 2", style: textTheme.subtitle2),
+          Text("Heading 1", style: textTheme.displayLarge),
+          Text("Heading 2", style: textTheme.displayMedium),
+          Text("Heading 3", style: textTheme.displaySmall),
+          Text("Heading 4", style: textTheme.headlineMedium),
+          Text("Heading 5", style: textTheme.headlineSmall),
+          Text("Heading 6", style: textTheme.titleLarge),
+          Text("Subtitle 1", style: textTheme.titleMedium),
+          Text("Subtitle 2", style: textTheme.titleSmall),
           const _Heading("Buttons"),
           Wrap(
             children: [
@@ -181,17 +181,17 @@ class StyleGuideScreen extends BaseScreen {
           const _Heading("Text"),
           Text(
             "Body Text 1: Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vivamus suscipit tortor eget felis porttitor volutpat. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit tortor eget felis porttitor volutpat.",
-            style: textTheme.bodyText1,
+            style: textTheme.bodyLarge,
           ),
           const _Spacer(),
           Text(
             "Body Text 2: Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vivamus suscipit tortor eget felis porttitor volutpat. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit tortor eget felis porttitor volutpat.",
-            style: textTheme.bodyText2,
+            style: textTheme.bodyMedium,
           ),
           const _Spacer(),
           Text(
             "Caption: Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vivamus suscipit tortor eget felis porttitor volutpat. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit tortor eget felis porttitor volutpat.",
-            style: textTheme.caption,
+            style: textTheme.bodySmall,
           ),
           const _Heading("List Tiles"),
           ListTile(
@@ -210,7 +210,7 @@ class StyleGuideScreen extends BaseScreen {
             onTap: () {},
           ),
           const _Heading("Icons"),
-          Wrap(children: _icons.map((icon) => _Icon(icon)).toList())
+          Wrap(children: icons.map((icon) => _Icon(icon)).toList())
         ],
       ),
     );

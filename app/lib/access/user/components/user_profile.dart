@@ -33,7 +33,7 @@ class UserProfile extends BaseComponent {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 user.name,
-                style: Theme.of(context).textTheme.headline3,
+                style: Theme.of(context).textTheme.displaySmall,
               ),
             ),
             if (user.bio.isNotEmpty)
@@ -43,7 +43,7 @@ class UserProfile extends BaseComponent {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     user.bio,
-                    style: Theme.of(context).textTheme.bodyText2,
+                    style: Theme.of(context).textTheme.bodyMedium,
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -93,7 +93,7 @@ class _FollowerCount extends BaseComponent {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     user.followers.length.toString(),
-                    style: Theme.of(context).textTheme.headline1,
+                    style: Theme.of(context).textTheme.displayLarge,
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -120,7 +120,7 @@ class _FollowerCount extends BaseComponent {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     user.following.length.toString(),
-                    style: Theme.of(context).textTheme.headline1,
+                    style: Theme.of(context).textTheme.displayLarge,
                     textAlign: TextAlign.center,
                   ),
                 ),

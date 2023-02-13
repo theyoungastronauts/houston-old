@@ -274,9 +274,9 @@ String formatPhone(String number) {
   // add back in the +
   String formattedPhone = number.replaceAll('+', '');
   if (formattedPhone.length < 11) {
-    formattedPhone = '1' + formattedPhone;
+    formattedPhone = '1$formattedPhone';
   }
-  formattedPhone = '+' + formattedPhone;
+  formattedPhone = '+$formattedPhone';
 
   return formattedPhone;
 }

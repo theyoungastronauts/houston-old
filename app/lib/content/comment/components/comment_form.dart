@@ -25,7 +25,7 @@ class CommentForm extends BaseComponent {
                 children: [
                   Text(
                     "Replying to ${model.parent!.owner.name}",
-                    style: Theme.of(context).textTheme.caption,
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                   InkWell(
                       onTap: () {

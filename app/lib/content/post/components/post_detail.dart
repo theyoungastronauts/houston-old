@@ -21,11 +21,11 @@ class PostDetail extends BaseComponent {
       children: [
         Text(
           post.title,
-          style: Theme.of(context).textTheme.headline3,
+          style: Theme.of(context).textTheme.displaySmall,
         ),
         Text(
           "by ${post.owner.name}",
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         if (post.assets.isNotEmpty)
           Padding(
