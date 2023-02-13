@@ -43,7 +43,7 @@ class CommentCard extends BaseComponent {
                     Text(comment.body, style: Theme.of(context).textTheme.bodyMedium),
                     RichText(
                       text: TextSpan(
-                        style: Theme.of(context).textTheme.caption,
+                        style: Theme.of(context).textTheme.bodySmall,
                         children: [
                           TextSpan(text: comment.createdAtLabel),
                           const TextSpan(text: " | "),

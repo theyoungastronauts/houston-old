@@ -51,7 +51,7 @@ class PostCard extends BaseComponent {
                           const SizedBox(width: 6),
                           Text(
                             post.owner.name,
-                            style: Theme.of(context).textTheme.caption,
+                            style: Theme.of(context).textTheme.bodySmall,
                           )
                         ],
                       ),
@@ -92,7 +92,7 @@ class PostCard extends BaseComponent {
                       children: [
                         Text(
                           post.title,
-                          style: Theme.of(context).textTheme.headline5,
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         Text(
                           post.excerpt(),

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../../../core/providers/session_provider.dart';
-import '../../../core/utils/logging.dart';
 import '../../../core/utils/singletons.dart';
 import '../../../core/utils/toast.dart';
 import '../../../core/utils/validation.dart';
+import '../../../navigation/app_router.gr.dart';
 import '../models/token.dart';
 import '../services/auth_service.dart';
-import '../../../navigation/app_router.gr.dart';
 
 part 'register_provider.freezed.dart';
 
@@ -99,7 +98,6 @@ class RegisterFormProvider extends StateNotifier<RegisterFormModel> {
       return;
     }
     Token? token = await AuthService().createToken(state.email, state.password);
-    print('token: $token');
 
     if (token != null) {
       ref.read(sessionProvider.notifier).setToken(token);

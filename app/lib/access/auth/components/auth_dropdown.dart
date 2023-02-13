@@ -33,7 +33,7 @@ class AuthDropdown extends BaseComponent {
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Text(
                   user.name,
-                  style: Theme.of(context).textTheme.caption,
+                  style: Theme.of(context).textTheme.bodySmall,
                 ),
               ),
             ],
@@ -41,8 +41,8 @@ class AuthDropdown extends BaseComponent {
           itemBuilder: (context) {
             return <PopupMenuEntry>[
               PopupMenuItem(
-                child: const Text("My Profile"),
                 onTap: onProfilePressed,
+                child: const Text("My Profile"),
               ),
               PopupMenuItem(
                 child: const Text("Settings"),

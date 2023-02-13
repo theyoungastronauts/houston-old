@@ -18,13 +18,13 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Service extends BaseService {
 
   Future<PaginatedResponse<{{#pascalCase}}{{name}}{{/pascalCase}}>> _list({int page = 1, int limit = 10, String url = baseUrl, Map<String, dynamic> params = const {},}) async {
     try {
-      final _params = {
+      final builtParams = {
         ...buildPage(page),
         ...buildLimit(limit),
         ...params,
       };
 
-      final response = await getHttp(url, params: _params);
+      final response = await getHttp(url, params: builtParams);
 
       List<{{#pascalCase}}{{name}}{{/pascalCase}}> results =
           response['results'].map<{{#pascalCase}}{{name}}{{/pascalCase}}>((item) => {{#pascalCase}}{{name}}{{/pascalCase}}.fromJson(item)).toList();

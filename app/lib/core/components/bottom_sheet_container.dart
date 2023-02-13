@@ -63,7 +63,7 @@ class BottomSheetContainer extends StatelessWidget {
                       child: Text(
                         title!,
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.subtitle1,
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
                     if (topRight != null) topRight!,

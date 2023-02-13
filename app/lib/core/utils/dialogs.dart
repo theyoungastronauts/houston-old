@@ -115,11 +115,11 @@ class PromptModal {
   }) async {
     final context = rootNavigatorKey.currentContext!;
 
-    final GlobalKey<FormState> _formKey = GlobalKey();
+    final GlobalKey<FormState> formKey = GlobalKey();
 
-    final TextEditingController _controller = TextEditingController(text: initialValue);
+    final TextEditingController controller = TextEditingController(text: initialValue);
 
-    final TextEditingController _secondaryController = TextEditingController(text: secondaryInitialValue);
+    final TextEditingController secondaryController = TextEditingController(text: secondaryInitialValue);
 
     return await showDialog(
       context: context,
@@ -132,19 +132,19 @@ class PromptModal {
           ),
           title: Text(title),
           content: Form(
-            key: _formKey,
+            key: formKey,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextFormField(
-                  controller: _controller,
+                  controller: controller,
                   obscureText: obscureText,
                   autofocus: true,
                   readOnly: readOnly,
                   decoration: InputDecoration(
                     label: Text(
                       labelText,
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     focusedBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(
@@ -168,7 +168,7 @@ class PromptModal {
                   ),
                 if (seconaryInput)
                   TextFormField(
-                    controller: _secondaryController,
+                    controller: secondaryController,
                     obscureText: secondaryObscureText,
                     decoration: InputDecoration(
                       label: Text(secondaryLabel),
@@ -205,9 +205,9 @@ class PromptModal {
                 textStyle: const TextStyle(fontWeight: FontWeight.bold),
               ),
               onPressed: () {
-                if (!_formKey.currentState!.validate()) return;
+                if (!formKey.currentState!.validate()) return;
 
-                final value = seconaryInput ? [_controller.value.text, _secondaryController.value.text] : [_controller.value.text];
+                final value = seconaryInput ? [controller.value.text, secondaryController.value.text] : [controller.value.text];
 
                 if (onValidSubmission != null) {
                   onValidSubmission(value);

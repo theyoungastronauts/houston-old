@@ -40,13 +40,13 @@ class UserService extends BaseService {
     Map<String, dynamic> params = const {},
   }) async {
     try {
-      final _params = {
+      final builtParams = {
         ...buildPage(page),
         ...buildLimit(limit),
         ...params,
       };
 
-      final response = await getHttp(url, params: _params);
+      final response = await getHttp(url, params: builtParams);
 
       List<User> results = response['results'].map<User>((item) => User.fromJson(item)).toList();
 

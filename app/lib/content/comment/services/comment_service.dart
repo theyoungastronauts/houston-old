@@ -14,13 +14,13 @@ class CommentService extends BaseService {
   }) async {
     final url = "/post/$postUuid/comment/";
     try {
-      final _params = {
+      final builtParams = {
         ...buildPage(page),
         ...buildLimit(limit),
         ...params,
       };
 
-      final response = await getHttp(url, params: _params);
+      final response = await getHttp(url, params: builtParams);
 
       List<Comment> results = response['results'].map<Comment>((item) => Comment.fromJson(item)).toList();
 

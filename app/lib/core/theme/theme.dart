@@ -84,7 +84,7 @@ class AppTheme {
   });
 
   factory AppTheme.light() {
-    final _themeData = ThemeData(
+    final themeData = ThemeData(
       colorScheme: ColorScheme.fromSwatch(
         brightness: Brightness.light,
         primarySwatch: createMaterialColor(_primaryColor),
@@ -100,11 +100,11 @@ class AppTheme {
       fontFamily: kIsWeb && HtmlUtils().getUserAgent().contains('OS 15_') ? '-apple-system' : null,
     );
 
-    return AppTheme(themeData: _themeData);
+    return AppTheme(themeData: themeData);
   }
 
   factory AppTheme.dark() {
-    final _themeData = ThemeData(
+    final themeData = ThemeData(
       colorScheme: ColorScheme.fromSwatch(
         brightness: Brightness.dark,
         primarySwatch: createMaterialColor(_primaryColor),
@@ -127,37 +127,37 @@ class AppTheme {
       fontFamily: kIsWeb && HtmlUtils().getUserAgent().contains('OS 15_') ? '-apple-system' : null,
     );
 
-    return AppTheme(themeData: _themeData);
+    return AppTheme(themeData: themeData);
   }
 
   static TextTheme _textTheme([bool isDark = false]) {
     return TextTheme(
-      headline1: TextStyle(
+      displayLarge: TextStyle(
         fontSize: 42,
         fontWeight: FontWeight.w700,
         color: isDark ? _textColorLight : _textColorDark,
       ),
-      headline2: TextStyle(
+      displayMedium: TextStyle(
         fontSize: 36,
         fontWeight: FontWeight.w600,
         color: isDark ? _textColorLight : _textColorDark,
       ),
-      headline3: TextStyle(
+      displaySmall: TextStyle(
         fontSize: 30,
         fontWeight: FontWeight.w500,
         color: isDark ? _textColorLight : _textColorDark,
       ),
-      headline4: TextStyle(
+      headlineMedium: TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.w500,
         color: (isDark ? _textColorLight : _textColorDark).withOpacity(0.8),
       ),
-      headline5: TextStyle(
+      headlineSmall: TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.w500,
         color: (isDark ? _textColorLight : _textColorDark).withOpacity(0.7),
       ),
-      headline6: TextStyle(
+      titleLarge: TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w500,
         color: (isDark ? _textColorLight : _textColorDark).withOpacity(0.6),

@@ -83,84 +83,84 @@ class AppButton extends StatelessWidget {
   }
 
   ButtonStyle _styleOutlined(BuildContext context) {
-    final _colorScheme = Theme.of(context).colorScheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     switch (variant) {
       case AppColorVariant.primary:
         return OutlinedButton.styleFrom(
-          foregroundColor: _colorScheme.primaryButtonBg,
+          foregroundColor: colorScheme.primaryButtonBg,
         );
       case AppColorVariant.secondary:
         return OutlinedButton.styleFrom(
-          foregroundColor: _colorScheme.secondaryButtonBg,
+          foregroundColor: colorScheme.secondaryButtonBg,
         );
       case AppColorVariant.info:
         return OutlinedButton.styleFrom(
-          backgroundColor: _colorScheme.infoButtonBg,
+          backgroundColor: colorScheme.infoButtonBg,
         );
       case AppColorVariant.danger:
         return OutlinedButton.styleFrom(
-          foregroundColor: _colorScheme.dangerButtonBg,
+          foregroundColor: colorScheme.dangerButtonBg,
         );
       case AppColorVariant.success:
         return OutlinedButton.styleFrom(
-          foregroundColor: _colorScheme.successButtonBg,
+          foregroundColor: colorScheme.successButtonBg,
         );
       case AppColorVariant.warning:
         return OutlinedButton.styleFrom(
-          foregroundColor: _colorScheme.warningButtonBg,
+          foregroundColor: colorScheme.warningButtonBg,
         );
       case AppColorVariant.light:
         return OutlinedButton.styleFrom(
-          foregroundColor: _colorScheme.lightButtonBg,
+          foregroundColor: colorScheme.lightButtonBg,
         );
       case AppColorVariant.dark:
         return OutlinedButton.styleFrom(
-          foregroundColor: _colorScheme.darkButtonBg,
+          foregroundColor: colorScheme.darkButtonBg,
         );
     }
   }
 
   ButtonStyle _styleText(BuildContext context) {
-    final _colorScheme = Theme.of(context).colorScheme;
+    final colorScheme = Theme.of(context).colorScheme;
     switch (variant) {
       case AppColorVariant.primary:
         return OutlinedButton.styleFrom(
-          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : _colorScheme.primaryButtonBg,
+          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : colorScheme.primaryButtonBg,
         );
       case AppColorVariant.secondary:
         return OutlinedButton.styleFrom(
-          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : _colorScheme.secondaryButtonBg,
+          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : colorScheme.secondaryButtonBg,
         );
       case AppColorVariant.info:
         return OutlinedButton.styleFrom(
-          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : _colorScheme.infoButtonBg,
+          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : colorScheme.infoButtonBg,
         );
       case AppColorVariant.danger:
         return OutlinedButton.styleFrom(
-          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : _colorScheme.dangerButtonBg,
+          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : colorScheme.dangerButtonBg,
         );
       case AppColorVariant.success:
         return OutlinedButton.styleFrom(
-          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : _colorScheme.successButtonBg,
+          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : colorScheme.successButtonBg,
         );
       case AppColorVariant.warning:
         return OutlinedButton.styleFrom(
-          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : _colorScheme.warningButtonBg,
+          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : colorScheme.warningButtonBg,
         );
       case AppColorVariant.light:
         return OutlinedButton.styleFrom(
-          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : _colorScheme.lightButtonBg,
+          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : colorScheme.lightButtonBg,
         );
       case AppColorVariant.dark:
         return OutlinedButton.styleFrom(
-          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : _colorScheme.darkButtonBg,
+          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : colorScheme.darkButtonBg,
         );
     }
   }
 
   Color _iconColor(context) {
-    final _colorScheme = Theme.of(context).colorScheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     if (onPressed == null || disabled) {
       return Theme.of(context).disabledColor;
@@ -170,41 +170,41 @@ class AppButton extends StatelessWidget {
       case AppButtonType.Elevated:
         switch (variant) {
           case AppColorVariant.primary:
-            return _colorScheme.primaryButtonFg;
+            return colorScheme.primaryButtonFg;
           case AppColorVariant.secondary:
-            return _colorScheme.secondaryButtonFg;
+            return colorScheme.secondaryButtonFg;
           case AppColorVariant.info:
-            return _colorScheme.infoButtonFg;
+            return colorScheme.infoButtonFg;
           case AppColorVariant.danger:
-            return _colorScheme.dangerButtonFg;
+            return colorScheme.dangerButtonFg;
           case AppColorVariant.success:
-            return _colorScheme.successButtonFg;
+            return colorScheme.successButtonFg;
           case AppColorVariant.warning:
-            return _colorScheme.warningButtonFg;
+            return colorScheme.warningButtonFg;
           case AppColorVariant.light:
-            return _colorScheme.lightButtonFg;
+            return colorScheme.lightButtonFg;
           case AppColorVariant.dark:
-            return _colorScheme.darkButtonFg;
+            return colorScheme.darkButtonFg;
         }
       case AppButtonType.Text:
       case AppButtonType.Outlined:
         switch (variant) {
           case AppColorVariant.primary:
-            return _colorScheme.primaryButtonBg;
+            return colorScheme.primaryButtonBg;
           case AppColorVariant.secondary:
-            return _colorScheme.secondaryButtonBg;
+            return colorScheme.secondaryButtonBg;
           case AppColorVariant.info:
-            return _colorScheme.infoButtonBg;
+            return colorScheme.infoButtonBg;
           case AppColorVariant.danger:
-            return _colorScheme.dangerButtonBg;
+            return colorScheme.dangerButtonBg;
           case AppColorVariant.success:
-            return _colorScheme.successButtonBg;
+            return colorScheme.successButtonBg;
           case AppColorVariant.warning:
-            return _colorScheme.warningButtonBg;
+            return colorScheme.warningButtonBg;
           case AppColorVariant.light:
-            return _colorScheme.lightButtonBg;
+            return colorScheme.lightButtonBg;
           case AppColorVariant.dark:
-            return _colorScheme.darkButtonBg;
+            return colorScheme.darkButtonBg;
         }
     }
   }
