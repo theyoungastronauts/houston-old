@@ -5,6 +5,7 @@ import 'package:simple_markdown_editor/widgets/markdown_parse.dart';
 
 import '../../../core/components/base_component.dart';
 import '../../../core/components/buttons.dart';
+import '../../../core/theme/theme.dart';
 import '../../../navigation/app_router.gr.dart';
 import '../models/post.dart';
 import 'post_thumbnail.dart';

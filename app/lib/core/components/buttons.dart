@@ -159,7 +159,7 @@ class AppButton extends StatelessWidget {
     }
   }
 
-  Color _iconColor(context) {
+  Color? _iconColor(context) {
     final colorScheme = Theme.of(context).colorScheme;
 
     if (onPressed == null || disabled) {
