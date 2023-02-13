@@ -26,6 +26,7 @@ class PostCard extends BaseComponent {
     return ConstrainedBox(
       constraints: BoxConstraints(maxWidth: width, maxHeight: width),
       child: Card(
+        color: Theme.of(context).colorScheme.background.withAlpha(100),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
           onTap: () {
@@ -35,29 +36,26 @@ class PostCard extends BaseComponent {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                color: Theme.of(context).colorScheme.background,
-                child: Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Avatar(
-                            post.owner,
-                            size: 24,
-                          ),
-                          const SizedBox(width: 6),
-                          Text(
-                            post.owner.name,
-                            style: Theme.of(context).textTheme.bodySmall,
-                          )
-                        ],
-                      ),
-                      PostListContextMenu(post: post)
-                    ],
-                  ),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Avatar(
+                          post.owner,
+                          size: 24,
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          post.owner.name,
+                          style: Theme.of(context).textTheme.bodySmall,
+                        )
+                      ],
+                    ),
+                    PostListContextMenu(post: post)
+                  ],
                 ),
               ),
               Expanded(

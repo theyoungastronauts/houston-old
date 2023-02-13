@@ -85,11 +85,12 @@ class AppTheme {
 
   factory AppTheme.light() {
     final themeData = ThemeData(
-      colorScheme: ColorScheme.fromSwatch(
-        brightness: Brightness.light,
-        primarySwatch: createMaterialColor(_primaryColor),
-        accentColor: _secondaryColor,
-      ),
+      useMaterial3: true,
+      // colorScheme: ColorScheme.fromSwatch(
+      //   brightness: Brightness.light,
+      //   // primarySwatch: createMaterialColor(_primaryColor),
+      //   // accentColor: _secondaryColor,
+      // ),
       inputDecorationTheme: const InputDecorationTheme(
         labelStyle: TextStyle(color: _secondaryColor),
         floatingLabelStyle: TextStyle(
@@ -105,11 +106,14 @@ class AppTheme {
 
   factory AppTheme.dark() {
     final themeData = ThemeData(
-      colorScheme: ColorScheme.fromSwatch(
-        brightness: Brightness.dark,
-        primarySwatch: createMaterialColor(_primaryColor),
-        accentColor: _secondaryColor,
-      ),
+      useMaterial3: true,
+      brightness: Brightness.dark,
+
+      // colorScheme: ColorScheme.fromSwatch(
+      //   brightness: Brightness.dark,
+      //   primarySwatch: createMaterialColor(_primaryColor),
+      //   accentColor: _secondaryColor,
+      // ),
       textSelectionTheme: const TextSelectionThemeData(cursorColor: _secondaryColor),
       inputDecorationTheme: const InputDecorationTheme(
         labelStyle: TextStyle(color: _secondaryColor),
@@ -170,24 +174,24 @@ class AppTheme {
     AppColorVariant variant, [
     double opacity = 1.0,
   ]) {
-    final _colors = Theme.of(context).colorScheme;
+    final colors = Theme.of(context).colorScheme;
     switch (variant) {
       case AppColorVariant.primary:
-        return _colors.primary.withOpacity(opacity);
+        return colors.primary.withOpacity(opacity);
       case AppColorVariant.secondary:
-        return _colors.secondary.withOpacity(opacity);
+        return colors.secondary.withOpacity(opacity);
       case AppColorVariant.info:
-        return _colors.info.withOpacity(opacity);
+        return colors.info.withOpacity(opacity);
       case AppColorVariant.success:
-        return _colors.success.withOpacity(opacity);
+        return colors.success.withOpacity(opacity);
       case AppColorVariant.warning:
-        return _colors.warning.withOpacity(opacity);
+        return colors.warning.withOpacity(opacity);
       case AppColorVariant.danger:
-        return _colors.danger.withOpacity(opacity);
+        return colors.danger.withOpacity(opacity);
       case AppColorVariant.light:
-        return _colors.light.withOpacity(opacity);
+        return colors.light.withOpacity(opacity);
       case AppColorVariant.dark:
-        return _colors.dark.withOpacity(opacity);
+        return colors.dark.withOpacity(opacity);
     }
   }
 }

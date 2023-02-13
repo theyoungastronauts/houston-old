@@ -65,7 +65,6 @@ class ConfirmDialog {
           actions: [
             TextButton(
               style: TextButton.styleFrom(
-                foregroundColor: Theme.of(context).colorScheme.primaryButtonBg.withOpacity(0.8),
                 textStyle: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
@@ -77,10 +76,11 @@ class ConfirmDialog {
                 cancelText ?? "Cancel",
               ),
             ),
-            TextButton(
+            ElevatedButton(
               style: TextButton.styleFrom(
-                foregroundColor: destructive ? Theme.of(context).colorScheme.danger : Theme.of(context).colorScheme.primaryButtonBg,
-                textStyle: const TextStyle(fontWeight: FontWeight.bold),
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                foregroundColor: destructive ? Theme.of(context).colorScheme.danger : Theme.of(context).colorScheme.background,
+                textStyle: const TextStyle(fontWeight: FontWeight.normal),
               ),
               onPressed: () {
                 Navigator.of(context).pop(true);
@@ -189,7 +189,7 @@ class PromptModal {
           actions: [
             TextButton(
               style: TextButton.styleFrom(
-                foregroundColor: Theme.of(context).colorScheme.primaryButtonBg.withOpacity(0.8),
+                // foregroundColor: Theme.of(context).colorScheme.primaryButtonBg.withOpacity(0.8),
                 textStyle: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
