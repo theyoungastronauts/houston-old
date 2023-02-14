@@ -55,13 +55,13 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Service extends BaseService {
   }
 
   Future<{{#pascalCase}}{{name}}{{/pascalCase}}?> _update({{#pascalCase}}{{name}}{{/pascalCase}} {{#camelCase}}{{name}}{{/camelCase}}) async {
-    final p = await patchHttp("$baseUrl/${{#camelCase}}{{name}}{{/camelCase}}.uuid}", params: {{#camelCase}}{{name}}{{/camelCase}}.toJson());
+    final p = await patchHttp("$baseUrl/${{{#camelCase}}{{name}}{{/camelCase}}.uuid}", params: {{#camelCase}}{{name}}{{/camelCase}}.toJson());
     return {{#pascalCase}}{{name}}{{/pascalCase}}.fromJson(p);
   }
 
   Future<bool> delete({{#pascalCase}}{{name}}{{/pascalCase}} {{#camelCase}}{{name}}{{/camelCase}}) async {
     try {
-      await deleteHttp("$baseUrl/${{#camelCase}}{{name}}{{/camelCase}}.uuid}");
+      await deleteHttp("$baseUrl/${{{#camelCase}}{{name}}{{/camelCase}}.uuid}");
       return true;
     } catch (e) {
       return false;
